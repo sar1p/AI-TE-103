@@ -1,0 +1,15 @@
+{
+  "id": "drive-encoder-multi-hop",
+  "title": "Drive and Encoder Feedback Chain",
+  "description": "A drive fault and absent encoder feedback combine into a chained simulated drive-and-encoder finding.",
+  "provenance": "Illustrative classroom simulation input; no physical drive or encoder is assessed.",
+  "facts": {
+    "motor_temperature": "normal",
+    "movement_status": "moving",
+    "sensor_lidar": "clear",
+    "drive_status": "fault",
+    "encoder_feedback": "absent"
+  },
+  "expected_status": "ok",
+  "expected_conditions": ["drive_encoder_fault"]
+}

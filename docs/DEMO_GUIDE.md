@@ -1,156 +1,112 @@
 # Demonstration and evidence guide
 
+The application is **Warehouse Operations**, a local simulation combining
+external-rule diagnostics with D* Lite route repair. All observation categories,
+rules, and scenarios are illustrative. They demonstrate software behavior rather
+than establish a physical robot's condition.
+
 ## Setup and checks
 
-Use Python 3.12 and run commands from the repository root. In PowerShell:
+Use Python 3.12 and run commands from the repository root. Reuse an existing
+project environment; on a new clone in PowerShell:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt -c constraints.txt
 .\.venv\Scripts\python.exe -m pip check
 .\.venv\Scripts\python.exe -m pytest -q
-```
-
-An existing environment can be reused. Do not recreate it before every run.
-On Linux/macOS, replace `.\.venv\Scripts\python.exe` with `.venv/bin/python`.
-Core search and replay use only the standard library; the visual app needs
-Streamlit and tests need pytest. `constraints.txt` records the tested versions.
-
-## Visual running sequence
-
-```powershell
 .\.venv\Scripts\python.exe -m streamlit run app.py --server.address 127.0.0.1
 ```
 
-Open the local URL printed in the terminal. Stop the server with Ctrl+C when
-finished. `run_demo.bat` is a Windows shortcut once the environment is installed.
+Wait for installation to finish before testing. Open the URL printed by
+Streamlit. Windows users can instead double-click `run_demo.bat` after setup.
+On Linux/macOS, use `.venv/bin/python`. Stop the server with Ctrl+C.
 
-1. Select **Warehouse Corridor Changes** and reset. Show the map, route cost,
-   robot, fixed goal, and the actual initial search metrics.
-2. Click **Apply next scenario event**. The central aisle closes and the route
-   repairs. Compare the new cost and valid detour with A*.
-3. Apply the movement event. The robot advances one cell. Open the incremental
-   state panel and show one initialization and an updated `k_m`.
-4. Continue the remaining events to reopen the aisle. A valid optimal route is
-   recomputed from the robot's current position.
-5. Select **Unreachable Goal Recovery**, reset, and apply its two events. Show
-   `unreachable`, then restoration after the only gap reopens. The goal itself
-   is never blocked.
-6. Try a manual cell change. Row and column are zero-based. Blocking the robot
-   or goal is rejected. Reset before replaying scripted events after manual edits.
-7. Demonstrate the integrated diagnostic starter using the sequence below.
-   Its two illustrative rules are working; external rule data and actual
-   forward chaining remain pending.
-8. Download actual session JSON from **Evidence & methods**. It contains maps,
-   events, computed routes, metrics, raw observations text, the diagnosis,
-   diagnostic gate setting, and source metadata.
+Search and the expert-system engine use the standard library; the visual app
+needs Streamlit and tests need pytest. Versions are pinned by the requirement
+and constraint files.
 
-The planner survives ordinary interface reruns, overlay changes, and downloads.
-A browser reload or Reset creates a new session. The live UI computes results;
-it does not display pretyped benchmark values.
+## Live demonstration
 
-## Diagnostic pause and correction
+1. Select **Warehouse Corridor Changes** and reset the simulation. The route
+   costs 10 moves, map revision is zero, and the robot starts at `(4, 1)`.
+2. Open **Diagnostics**. Select **Battery Power-Path Chain** and press
+   **Load preset**. The result lists `battery_power_path_issue` and
+   `battery_related_stall`, with firing order R03, R04, R05, R06.
+3. Expand **Inference trace and source proofs (4 steps)**. R03 and R04 independently
+   derive facts from raw power observations. R05 uses those derived facts;
+   R06 combines the derived power-path issue with the stalled movement observation.
+   The firing list is chronological; it does not imply R04 depends on R03.
+4. Enable **Apply diagnostic safety gate** and return to **Route planner**.
+   Movement controls are disabled. Apply the next scenario event to block the
+   central aisle: revision becomes one and route cost becomes 12. Map repair
+   remains available while movement is paused.
+5. In **Evidence & methods**, download the session JSON. It records the exact
+   raw observations, findings, fired rules, gate state, routes, source commit,
+   environment, and knowledge-base source hash.
+6. Return to **Diagnostics**. In **Observation draft**, change Movement status
+   to `moving`, Battery voltage to `normal`, and Battery connection to
+   `connected`. Press **Apply observations and evaluate**. The old findings
+   and trace disappear because inference starts from the corrected raw input.
+7. In **Route planner**, movement is enabled. Apply the next scenario event
+   to move one step. Position becomes `(3, 1)` and remaining route cost is 11.
+   Expand the retained-planner history: initialization count remains one.
+8. Download a second session JSON. Compare both exports: the findings changed,
+   while the map revision and retained search state reflect the real events.
 
-Reset **Warehouse Corridor Changes**, select **Diagnostics**, and enable
-**Apply diagnostic safety gate**. Editing the observations and leaving the text
-box triggers a fresh diagnosis; allow the result to finish updating.
+The **Corrected Observations** preset is another way to clear the initial
+fault case. **Partial Power Evidence** demonstrates a missing optional-group
+member; **Simultaneous Fault Findings** demonstrates several compatible findings.
+`Unknown` is JSON `null`, never a negative observation. An optional group becomes
+required only after at least one member is known.
 
-1. Enter `{}`. The status is `insufficient_evidence`, the three observations
-   are missing, and the gate prevents movement.
-2. Enter the motor case:
+The guided form is a separate draft. Manual edits in **Advanced observations
+(JSON)** are evaluated as the active input. Press **Load current JSON into draft**
+to synchronize the guided fields; only submitting the draft replaces that active
+input. Duplicate keys and non-finite numbers are rejected. With the gate enabled,
+invalid or incomplete input blocks movement. With the gate disabled, the route
+simulation operates independently of diagnosis.
 
-   ```json
-   {
-     "motor_temperature": "high",
-     "movement_status": "stalled",
-     "sensor_lidar": "clear"
-   }
-   ```
-
-   The result is `ok` with `suspected_motor_overheating`, rule `R01`, an
-   explanation grounded in the two motor observations, and `pause_robot`.
-   Select **Route planner** to show that the movement control is disabled.
-   Map changes remain available. Download this paused session from
-   **Evidence & methods**.
-3. Replace the raw observations with the corrected case:
-
-   ```json
-   {
-     "motor_temperature": "normal",
-     "movement_status": "moving",
-     "sensor_lidar": "clear"
-   }
-   ```
-
-   The previous finding and trace disappear. The result is `ok` with no
-   matching finding, and the gate allows simulated movement.
-4. Return to **Route planner**. Apply the aisle-closing event, then its movement
-   event. The route cost changes from 10 to 12 after closing the aisle, then
-   to 11 after one legal step. The map revision is 1 and the planner retains
-   one initialization. An equally optimal route may use a different first step.
-5. Download the corrected session. Compare its raw observations, empty
-   findings, enabled gate, movement event, and route history with the paused
-   export. Screenshots document the interface; the JSON records actual results.
-
-The `ok` status means the supplied observations meet this starter's input
-requirements. It does not certify that a physical robot is healthy. The gate
-uses a limited simulation policy: a valid diagnosis without `pause_robot`
-allows movement. See [EXPERT_SYSTEM.md](EXPERT_SYSTEM.md) for supported values,
-simultaneous findings, and incomplete or invalid observations.
-
-## Headless fallback and benchmark
+## Run each module without the interface
 
 ```powershell
+.\.venv\Scripts\python.exe -m expert_system --list-scenarios
+.\.venv\Scripts\python.exe -m expert_system --scenario battery-multi-hop --output artifacts/battery-diagnosis.json
+.\.venv\Scripts\python.exe -m expert_system --all --output artifacts/diagnostics.json
 .\.venv\Scripts\python.exe -m search_algorithm.main --output artifacts/single-replay.json
 .\.venv\Scripts\python.exe tools/replay_demo.py --output artifacts/demo
+.\.venv\Scripts\python.exe tools/combined_demo.py --output artifacts/combined-demo.json
 .\.venv\Scripts\python.exe tools/benchmark_search.py --output artifacts/benchmark --repeats 5
 ```
 
-Replay exports actual plan records for all four scenarios. The benchmark writes
-`raw.csv` and `summary.json` with initial, repair, and cumulative measurements.
-Both exports contain source SHA, worktree cleanliness, environment, versions,
-and scenario inputs. A dirty-worktree result is useful during development but
-must not be presented as proof of an unchanged committed revision.
+The eight diagnostic fixtures declare explicit expected statuses and conditions.
+`--all` succeeds only when every result matches those expectations, including
+the intentional invalid-input fixture. A single invalid scenario or invalid
+raw-facts input returns exit code 2 by design. These are fixture checks, not
+measurements of diagnostic accuracy. `python -m expert_system.main` is an
+equivalent CLI entry point. See [EXPERT_SYSTEM.md](EXPERT_SYSTEM.md) for all flags.
 
-## Presentation responsibilities
+The combined tool runs the real engine and planner. It verifies the battery
+chain, accepts a map change during the pause, attempts a move and checks rejection
+without mutation, corrects the observations, and resumes using the same planner.
+Its exported costs are checked against A*; its initialization count must remain one.
 
-The lead explains D* Lite's retained state, changed edges, A* comparison, the
-independent UCS oracle, suitable use cases, and limitations. The teammate explains
-the current rules, traceability, unknown observations, corrected facts, and
-multiple findings. See [TEAMMATE_TASKS.md](TEAMMATE_TASKS.md).
+Four search scenarios cover aisle closure/reopening, movement with retained
+state, unreachable-goal recovery, and widespread changes. Benchmarks report
+initial, repair, and cumulative work separately. Do not promise that D* Lite is
+always faster than A*: small maps or expensive initialization can favor A*.
 
-The starter merged through [PR #5](https://github.com/sar1p/AI-TE-303/pull/5).
-It evaluates two independent rules once. Its pause/correction integration has
-been exercised in a clean clone and live browser. This is distinct from the
-remaining forward-chaining engine and standalone diagnostic CLI.
+## Evidence and presentation
 
-After the expanded module is reviewed and merged, restart the app and show a
-derived conclusion enabling another rule. Run its independent CLI and repeat
-the relevant tests and combined evidence capture. Do not describe the starter's
-single-rule trace as a multi-step inference chain.
+Current and historical source revisions are identified separately in
+[the evidence index](evidence/README.md). Preserve actual JSON, test output,
+screenshots or recordings, source commit, environment, and file checksums.
+Development exports belong in ignored `artifacts/`. Old evidence is retained
+as historical measurement rather than relabeled as current output.
 
-## Submission evidence
-
-Preserve actual test output, GitHub Actions links, replay JSON, benchmark CSV/JSON,
-and real browser screenshots. Record the screen while presenting the live
-scenario changes; the recording is a team task and is not automatically completed
-by the screenshot exports. A successful headless run proves execution, while
-live input changes and the displayed route demonstrate interactive behavior.
-
-The final combined rehearsal must run from a fresh clone on the teammate's
-laptop. Local clean-clone reproduction by the lead is a separate check. Keep large
-recordings outside tracked source. Selected verified results live in
-[docs/evidence/](evidence/README.md), including the separate
-[integrated starter snapshot](evidence/integrated-starter-2026-10-11/README.md).
-Temporary development exports live in ignored `artifacts/`.
-
-## Recovery
-
-- Missing `streamlit` or `pytest`: install the pinned requirements into the same
-  interpreter used for the command.
-- Port occupied: add `--server.port 8502` and use the printed URL.
-- Invalid manual edit or scripted event conflict: reset the scenario.
-- Broken diagnostic import or result format: review the Diagnostics error and
-  the module contract. Search-only mode is an independent fallback.
-- Restore source from Git history or a verified external Git bundle; a virtual
-  environment can be rebuilt from the pinned requirement files.
+The lead explains route repair and integration. The teammate explains the
+knowledge base, raw versus derived facts, missing evidence, and correction.
+Before presenting, the teammate should pull current main, reproduce the commands
+on their laptop, review the rules, and rehearse the live sequence. A recorded
+software demonstration does not establish that this independent rehearsal occurred.
+See [TEAMMATE_TASKS.md](TEAMMATE_TASKS.md) for the remaining human handoff.

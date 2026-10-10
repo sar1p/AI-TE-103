@@ -33,8 +33,23 @@ jobs:
       - name: Check dependency consistency
         run: python -m pip check
       - name: Run automated tests
-        run: python -m pytest -q
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          python -m pytest -q | tee artifacts/tests.txt
+      - name: Replay diagnostic scenarios
+        run: python -m expert_system --all --output artifacts/diagnostics.json
+      - name: Validate combined diagnosis and route planning
+        run: python tools/combined_demo.py --output artifacts/combined-demo.json
       - name: Replay named scenarios
         run: python tools/replay_demo.py --output artifacts/demo
       - name: Validate benchmark execution
         run: python tools/benchmark_search.py --output artifacts/benchmark --repeats 1
+      - name: Save verification artifacts
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: verification-${{ github.sha }}
+          path: artifacts/
+          if-no-files-found: warn
+          retention-days: 30

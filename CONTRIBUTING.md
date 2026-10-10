@@ -3,43 +3,56 @@
 Use English for source code, comments, interface text, documentation, branch
 names, commits, pull requests, and workflow names.
 
-The lead owns search, the visual application, shared contracts, and CI. The
-teammate owns the expert system and its tests. See
-[TEAMMATE_TASKS.md](docs/TEAMMATE_TASKS.md) before beginning diagnostic work.
-For a worked setup and feature-branch sequence, see
-[GITHUB_GUIDE.md](docs/GITHUB_GUIDE.md).
+## Current collaboration
+
+The teammate's original commit a57eebd8e93cb00a899ee792146707f96e750046 by
+zaedalmusthofa introduced the initial R01 and R02 rules. Its original commit
+and contributor attribution were preserved by the normal merge through PR #5.
+The lead expanded and integrated the current engine, knowledge base, CLI, and
+fixtures using the lead's own Git identity. The teammate's current work is review
+and presentation rehearsal. Future work from either contributor should be
+recorded with that contributor's configured Git identity.
+
+Coordinate overlapping edits through review. Current diagnostic behavior and
+the remaining handoff checks are described in
+[TEAMMATE_TASKS.md](docs/TEAMMATE_TASKS.md). For branch setup, see
+[GITHUB_GUIDE.md](docs/GITHUB_GUIDE.md). Keep [issue #3](https://github.com/sar1p/AI-TE-303/issues/3)
+open until the required UI and CLI runs, fresh-clone reproduction, and rehearsal
+have been completed and recorded.
 
 ## Daily workflow
 
-1. Update your local `main`: `git switch main` then `git pull --ff-only`.
-2. Create one branch per coherent feature, such as `feature/expert-rules`.
-3. Make a working change and run the relevant tests.
-4. Stage only the files you intend to change. Use `git diff --staged` to inspect them.
-5. Commit one complete change, for example `feat: add forward-chaining inference`.
-6. Push your branch: `git push -u origin feature/expert-rules`.
-7. Open a pull request, describe the behavior and actual checks, and ask the other
-   member to review it. Fix feedback on the same branch.
-8. Merge with a merge commit after required checks pass. This preserves each
-   contributor's commits. Update local `main` before starting the next feature.
+1. Update local main with git switch main and git pull --ff-only.
+2. Create a branch for one coherent change.
+3. Make the change and run the checks that apply to it.
+4. Stage only intended files and inspect git diff --staged.
+5. Commit a complete change with a descriptive message.
+6. Push the branch and open a reviewable pull request.
+7. Address review comments on that branch.
+8. Merge after required checks pass, preserving contributor history through a
+   merge commit. Update main before starting the next change.
 
-A **commit** records a local version. A **push** uploads one or several commits.
-A **branch** isolates work. A **pull request** makes the change reviewable.
-A **merge commit** connects the feature history to `main`. Avoid arbitrary tiny
-commits, invented authors, force pushes, and rewriting shared history.
+A commit records a local version. A push uploads commits. A branch isolates
+work. A pull request makes a change reviewable. Avoid invented authors, force
+pushes, and rewriting shared history.
 
-Use collaborator access for this two-person project. A fork is useful when you
-cannot push branches to the original repository; it is optional here. A fork is
-not a replacement for an offline backup. The lead maintains a verified Git
-bundle outside this checkout.
+## Validation and evidence
 
-## Validation
+Use the project virtual environment and the pinned dependency files. Run the
+relevant behavior tests and report the exact commands and results. The
+diagnostic aggregate command is:
 
-Use Python 3.12 and the project virtual environment. Install
-`requirements-dev.txt`, then run `python -m pytest -q`. Core search also runs with
-the Python standard library. Tests must exercise behavior rather than copy the
-algorithm under test. Changes to shared contracts need both members' agreement.
+~~~powershell
+.\.venv\Scripts\python.exe -m expert_system --all
+~~~
 
-Keep credentials, virtual environments, generated temporary exports, lecture
-documents, and personal files out of Git. A diagnosis demonstration requires
-real inference from documented facts; screenshots and benchmark values must
-come from actual runs.
+It exits 0 when all eight hand-written fixture expectations match, including
+the intentional invalid-input fixture. A single invalid fixture or invalid raw
+facts input returns exit code 2 by design.
+
+For the current acceptance record, also run the expert-system and integration
+tests, the standalone combined demonstration, and a fresh-clone reproduction.
+Record the actual tested source revision and environment. Keep credentials,
+virtual environments, temporary exports, lecture documents, and personal files
+out of Git. Do not claim diagnosis accuracy or successful reproduction from
+screenshots, expected results, or the presence of implementation code alone.

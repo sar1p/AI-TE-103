@@ -1,0 +1,18 @@
+{
+  "id": "battery-multi-hop",
+  "title": "Battery Power-Path Chain",
+  "description": "A low battery category and disconnected battery connection derive a power-path condition, then a stalled movement derives a related finding.",
+  "provenance": "Illustrative classroom simulation input; categorical observations do not prove physical causation.",
+  "facts": {
+    "motor_temperature": "normal",
+    "movement_status": "stalled",
+    "sensor_lidar": "clear",
+    "battery_voltage": "low",
+    "battery_connection": "disconnected"
+  },
+  "expected_status": "ok",
+  "expected_conditions": [
+    "battery_power_path_issue",
+    "battery_related_stall"
+  ]
+}
