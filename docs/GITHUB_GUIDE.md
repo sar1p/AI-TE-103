@@ -11,7 +11,8 @@ shared repository. A separate fork is optional; it does not replace a backup.
 | Clone | Download a working copy and its Git history | Clone this repository once on your laptop |
 | Fetch | Download remote history without changing your files | Inspect new teammate commits |
 | Pull | Fetch and update the current branch | Update local `main` after a merge |
-| Branch | Keep a feature separate while it is being developed | `feature/diagnostic-rule-data` |
+| Branch | Keep a feature or review separate while it is being developed | `review/diagnostic-explanation` |
+| Fork | Create a personal GitHub copy of another repository | Optional here because both members can use this shared repository |
 | Stage | Select the exact changes for a commit | Stage the rule loader and its tests |
 | Commit | Record a complete local change | Add a validated rule loader |
 | Push | Upload one or more commits to GitHub | Share the tested feature branch |
@@ -63,23 +64,25 @@ Check for existing changes before switching branches:
 git status
 git switch main
 git pull --ff-only origin main
-git switch -c feature/diagnostic-rule-data
+git switch -c review/diagnostic-explanation
 ```
 
 `--ff-only` refuses to create an unexpected local merge. If it fails or you have
 uncommitted work, inspect the difference and preserve the work before proceeding.
 Do not use a hard reset or force push as a routine update method.
 
-Implement and test the agreed increment. These commands illustrate a completed
-rule-loader change; stage only the paths that actually belong to your change:
+The external loader and forward-chaining engine are already implemented.
+Review them, reproduce a case, and make a real correction or clarification if
+needed. The following example records a verified explanation change; stage only
+the paths that actually belong to your work:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest tests/expert_system -q
 git diff
-git add expert_system tests/expert_system
+git add docs/EXPERT_SYSTEM.md
 git diff --cached
-git commit -m "feat: add a validated diagnostic rule loader"
-git push -u origin feature/diagnostic-rule-data
+git commit -m "docs: clarify diagnostic observation examples"
+git push -u origin review/diagnostic-explanation
 ```
 
 Open a PR targeting `main`, explain the final behavior and actual validation,
@@ -100,11 +103,13 @@ commit remains in `main`, and the GitHub contributor API confirmed both
 `sar1p` and `zaedalmusthofa` after the merge. Corrections made by the lead keep
 the lead's own identity. A profile page may refresh later than the API.
 
-The expert-system task remains open in
-[issue #3](https://github.com/sar1p/AI-TE-303/issues/3). Begin further diagnostic
-work from current `main` on a new feature branch. Read
-[TEAMMATE_TASKS.md](TEAMMATE_TASKS.md) for the external rules, forward chaining,
-CLI, tests, and presentation work still required.
+The lead completed the external rules, forward chaining, CLI, tests, interface,
+and integration. That later work uses the lead's identity. The teammate's
+original contribution remains credited without needing an artificial commit.
+Further contributions should describe actual review findings, fixes, or
+documentation work. Read [TEAMMATE_TASKS.md](TEAMMATE_TASKS.md) and
+[issue #3](https://github.com/sar1p/AI-TE-303/issues/3) for independent review and
+presentation rehearsal. Begin any further change from current `main` on a new branch.
 
 ## Recovery
 

@@ -1,165 +1,51 @@
-# AI-TE-303 Teammate Handoff
+# AI-TE-303 Teammate Review and Handoff
 
-Status: partial implementation. The teammate added two illustrative diagnostic rules; an integration correction supplies contract validation and real behavior tests. External rule data, genuine forward chaining, an independent CLI, and final presentation evidence remain pending. See [EXPERT_SYSTEM.md](EXPERT_SYSTEM.md) for the starter's exact scope and [MODULE_CONTRACTS.md](MODULE_CONTRACTS.md) for the frozen dictionary interface. Working delivery target: Sunday, October 11, 2026; exact submission time is unconfirmed.
+Status updated Sunday, October 11, 2026. The lead has expanded and integrated the expert-system implementation. The source now contains an external schema-validated knowledge base, deterministic fixed-point inference, a standalone JSON CLI, and eight named diagnostic fixtures. Execution evidence, fresh-clone reproduction, end-to-end presentation checks, and rehearsal remain to be recorded; issue #3 stays open until the complete handoff and rehearsal are verified.
 
-The repaired starter merged through [PR #5](https://github.com/sar1p/AI-TE-303/pull/5).
-The teammate's original commit remains in `main`, and GitHub now records
-`zaedalmusthofa` as a contributor. The integrated starter passes 119 tests in
-main CI and a fresh clone; its live pause/correction demo is recorded in
-[the integrated evidence snapshot](evidence/integrated-starter-2026-10-11/README.md).
-These checks establish the starter milestone, not the expanded module's completion.
+## Contribution record
 
-## Your responsibility
+The teammate's original commit [a57eebd8e93cb00a899ee792146707f96e750046](https://github.com/sar1p/AI-TE-303/commit/a57eebd8e93cb00a899ee792146707f96e750046), by zaedalmusthofa, introduced the initial R01 motor-temperature/stall rule and R02 lidar rule. The normal merge through [PR #5](https://github.com/sar1p/AI-TE-303/pull/5) preserved the original commit and its contributor credit.
 
-Build the warehouse robot expert-system module. Your work includes code, knowledge-base data, meaningful tests, examples, and an explanation of the diagnosis process for the presentation.
+The lead later expanded the knowledge base and inference engine, corrected and integrated the module, and added the CLI and named fixtures under the lead's own Git identity. This current expansion does not change attribution for the teammate's starter. The teammate's next role is to review the current behavior and rehearse the diagnostic explanation. Any future code or documentation contribution from the teammate should be committed using that contributor's own configured identity so the history reflects the actual work.
 
-The lead builds D* Lite route planning, the visual application, and the integration adapter. Agree on the module contract before implementation so both people can work independently.
+## Current implementation
 
-All repository content uses English. Work on your own feature branch and use your own Git/GitHub identity for your actual contributions.
+| Area | Current source scope |
+|---|---|
+| Knowledge base | Schema version 1, 11 illustrative rules, nine categorical string observations |
+| Evidence policy | Three required observations plus three optional two-observation groups |
+| Exposed conditions | Six illustrative findings; internal derived facts support multi-step chains |
+| Inference | Deterministic rule-order sweeps to a fixed point; each rule ID fires at most once per call |
+| Result | Status, findings, ordered trace, recommendations, and missing observations |
+| Reproduction | Eight named JSON scenarios and an independent CLI |
+| Integration sequence | Headless combined demonstration with pause, map repair, corrected evidence, and retained planner checks |
 
-Track your deliverables in [issue #3](https://github.com/sar1p/AI-TE-303/issues/3). The `zaedalmusthofa` account has accepted collaborator access. Keep the issue open until its complete deliverables and integration checks are verified; a starter commit alone does not complete the assignment.
+All rules are illustrative classroom simulation rules. No physical fault accuracy, causal validity, reliability, or safety claim is established. Exact inputs, outputs, status behavior, fixture IDs, CLI options, and limitations are in [EXPERT_SYSTEM.md](EXPERT_SYSTEM.md) and the frozen [MODULE_CONTRACTS.md](MODULE_CONTRACTS.md).
 
-## Prerequisites
+## Review and rehearsal tasks
 
-- A GitHub account and accepted collaborator access to the shared `AI-TE-303` repository.
-- Python 3.12, matching the lead's tested environment and CI.
-- Git or GitHub Desktop. GitHub CLI is optional.
-- A local clone in its own folder, an editor or coding assistant, and a project virtual environment.
-- The repository's project plan, module contracts, pinned dependency files, and this handoff.
-- A short shared agreement on which observations mean known true, known false, or unknown.
+1. Review each rule's premises, intermediate facts, exposed condition, reason, and recommendation against the JSON knowledge base. Check that documentation calls all rules illustrative.
+2. Review missing and null evidence, partial optional groups, invalid values, simultaneous findings, and corrected observations. Confirm that a later diagnosis is recomputed from raw facts.
+3. Run the CLI's aggregate fixture command and inspect its exported raw facts, expected outcomes, metadata, and knowledge-base source hash. The aggregate includes the intentional invalid-input fixture.
+4. Run the combined demonstration and inspect its recorded sequence: movement pauses for a chained battery finding, a map edit is accepted during the pause, a move is rejected without mutating the session, corrected observations allow a step, and the planner remains initialized once.
+5. Reproduce from a fresh clone, record the actual source revision and environment, then rehearse the explanation and limitations for the presentation.
+6. If review finds a real issue or new implementation work is needed, make that change in an attributable commit and describe the behavior and checks actually performed.
 
-Authenticate normally through your chosen GitHub tool.
+## Commands
 
-## Owned files
+Run from the repository root after setting up the project environment:
 
-```text
-expert_system/
-tests/expert_system/
-data/diagnostic_scenarios/
-docs/EXPERT_SYSTEM.md
-```
+~~~powershell
+.\.venv\Scripts\python.exe -m expert_system --list-scenarios
+.\.venv\Scripts\python.exe -m expert_system --scenario battery-multi-hop
+.\.venv\Scripts\python.exe -m expert_system --all
+.\.venv\Scripts\python.exe -m pytest tests/expert_system tests/integration -q
+.\.venv\Scripts\python.exe tools/combined_demo.py --output artifacts/combined-demo.json
+.\.venv\Scripts\python.exe -m streamlit run app.py --server.address 127.0.0.1
+~~~
 
-Coordinate shared contract changes with the lead. Do not independently redesign `search_algorithm/`, `app.py`, dependency files, CI, or repository settings. Review those components through the agreed collaboration workflow when useful.
+For --all, exit code 0 means every fixture matches its hand-written expected status and condition list, including the intentional invalid-input case. A single invalid scenario or invalid facts input returns exit code 2 by design. Do not treat that individual code as the aggregate fixture convention.
 
-## Frozen diagnosis contract
+## Completion gate
 
-`expert_system.engine.diagnose(facts: dict[str, object]) -> dict`.
-The exact JSON-compatible fields and record shapes are defined in [MODULE_CONTRACTS.md](MODULE_CONTRACTS.md).
-
-The agreed result has:
-
-- `status`: `ok`, `insufficient_evidence`, or `invalid_input`.
-- `findings`: supported suspected conditions with contributing rule IDs.
-- `rule_trace`: ordered rule firings with the premises used, derived facts, and reasons.
-- `recommendations`: English advice and agreed action IDs where applicable.
-- `missing_facts`: relevant observations that were not supplied or are unknown.
-
-Treat an absent observation or `None` as unknown. Never interpret it as a negative observation. Start each diagnosis from the supplied raw observations, do not mutate the input, and keep derived facts inside that inference session.
-
-The application handles corrected observations by replacing the raw value and invoking a fresh diagnosis. Your engine must not retain an earlier conclusion that is no longer supported.
-
-Several findings may coexist. Validate contradictory representations of the same observation and unsupported data types; document exactly what is invalid. Do not force all unusual combinations into a single fault or silently invent evidence.
-
-Recommendations may use agreed action IDs such as `pause_robot`, `check_power`, `check_drive`, and `check_encoder`. The engine must not depend on Streamlit or import route-planner code.
-
-## Work increments
-
-| Increment | Deliverable | Acceptance |
-|---|---|---|
-| Rule data | `rules.json`, rule loader, and named scenario inputs | Rules have unique IDs, declared conditions/conclusions, English reasons, and provenance/validation labels; malformed data is rejected |
-| Inference | Forward chaining until no supported new facts remain | A multi-rule chain works; firing is deterministic; repeated conditions do not cause an infinite loop |
-| Explanation | Structured rule trace and supported findings | Every returned finding has a trace grounded in the supplied or derived facts |
-| Missing and corrected evidence | Unknown handling and fresh inference | Unknown data does not fire a rule as false/true; correcting a premise removes dependent obsolete findings |
-| Boundary tests | Tests for invalid and incomplete data, unsupported findings, and simultaneous findings | The documented result status and findings match explicit expected cases |
-| Standalone demo | `main.py`, module README, and expert-system guide | The module runs from the repo root without requiring the visual application |
-
-Initial target scope is four suspected conditions, around eight observation types, and 8-12 meaningful rules. This is a proposed size, not a lecturer requirement. The original suggested conditions were low battery, drive blockage, motor connection problems, and encoder signal problems. The teammate's current starter instead uses motor overheating and lidar obstruction. Agree on the expanded scope before adding conditions; check the diagnostic logic rather than adding rules only to reach a count.
-
-Knowledge records must distinguish sourced rules from illustrative simulation rules. Do not claim measured diagnostic accuracy or add probability percentages without a justified model and evidence.
-
-Bayesian inference is optional. Discuss it only after the required engine, explanations, cases, and integrated demo are working.
-
-## Scenario checklist
-
-1. Confirmed observations support a suspected condition, and the trace explains why.
-2. A conclusion derived by one rule enables another rule.
-3. Missing observations produce relevant missing-evidence information.
-4. A corrected observation removes the previous dependent diagnosis on the next call.
-5. Known negative observations do not behave like missing observations.
-6. Invalid values or a documented contradictory representation return `invalid_input`.
-7. Facts outside the supported rule set do not produce an invented definitive finding.
-8. Compatible simultaneous findings are retained without assuming a single fault.
-9. Repeating a diagnosis with the same input produces the same findings and trace.
-10. Rule cycles or repeated conclusions terminate without an infinite loop.
-
-Use hand-written expected outcomes derived from the rule definitions, not the engine's own outputs as its only test oracle. The final count of passing tests comes from an actual run.
-
-## Commit, push, and review
-
-Suggested messages for real completed increments:
-
-```text
-feat: add diagnostic rules and scenario fixtures
-feat: implement forward chaining and rule explanations
-fix: recalculate diagnoses after corrected observations
-test: cover incomplete and invalid diagnostic evidence
-docs: document diagnostic scenarios and limitations
-```
-
-Include relevant behavior tests with each implementation increment. Push tested commits to your feature branch. Open a draft PR early if you need review, then mark it ready when its stated acceptance checks pass. One feature PR may contain several commits.
-
-Use a normal merge commit when the lead merges reviewed work so your original feature commits remain in the shared history. Update from `main` before starting another feature. Each member reviews the other module's assumptions and recorded demo behavior.
-
-The following commands are examples for use after the repository and files exist. They have not been run for this project. Use the actual clone URL supplied by the lead, and run from your actual repository root.
-
-```powershell
-git switch main
-git pull --ff-only origin main
-git switch -c feature/expert-system
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt -c constraints.txt
-.\.venv\Scripts\python.exe -m pytest tests/expert_system -q
-git status
-git diff
-git add expert_system tests/expert_system data/diagnostic_scenarios docs/EXPERT_SYSTEM.md
-git diff --cached
-git commit -m "feat: implement forward chaining and rule explanations"
-git push -u origin feature/expert-system
-```
-
-Use `git switch -c` only when creating a new branch; use `git switch feature/expert-system` to revisit one that exists. Stage only paths that exist and belong to the increment being committed. Later pushes can use `git push` once the branch has an upstream.
-
-## Evidence and presentation
-
-On Sunday, reproduce the project from a fresh clone on your own laptop. Capture the actual Python/dependency versions, source commit SHA, test results, and named scenario output. Run both modules and the visual application using the documented commands.
-
-For your presentation, explain:
-
-- Why a knowledge base and rule engine are appropriate for the bounded diagnosis problem.
-- What facts the system takes and how unknown values differ from known negatives.
-- One chain of fired rules and its English explanation.
-- What changes when an observation is corrected.
-- Which rule sources are established and which are illustrative.
-- Where the system can fail: missing rules, inaccurate observations, unsupported faults, or an unvalidated knowledge base.
-
-A real screen recording and exported outputs complement the live demo. An interface screenshot alone does not establish that the algorithms executed correctly.
-
-## Portable prompt for your coding assistant
-
-Copy this prompt into your own coding assistant after opening the real local clone. The assistant should inspect the actual repository before assuming any file exists.
-
-> Work on my assigned expert-system module in the AI-TE-303 group repository. First read the project plan, module contracts, and teammate tasks. Confirm the active feature branch and current files. Implement one reviewable increment at a time within expert_system/, tests/expert_system/, data/diagnostic_scenarios/, and docs/EXPERT_SYSTEM.md. Use English throughout. The module performs deterministic forward chaining from raw observations and returns structured findings, rule explanations, recommendations, and missing facts. Treat missing/None evidence as unknown. Recompute from raw facts after corrections, and do not retain unsupported conclusions. Validate input and rule data. Mark illustrative domain rules as illustrative. Keep the module independent of the UI and route planner. Add meaningful behavioral tests and run them; report commands and actual results. Do not invent benchmark or diagnosis results. Coordinate shared interface changes before editing other components. Show the staged diff before committing a completed increment, use my configured Git identity, and push to my feature branch when authorized. Leave merging to the group review workflow. Reserve Bayesian reasoning until the required module passes.
-
-## Delivery checklist
-
-- [ ] Contracts agreed with the lead.
-- [ ] Rule data, sources, and input types documented.
-- [ ] Inference, explanations, and correction behavior implemented.
-- [ ] Meaningful module tests pass.
-- [ ] Standalone scenario demo runs.
-- [ ] Changes committed and pushed through the teammate's account.
-- [ ] PR review and shared integration completed.
-- [ ] Fresh-clone reproduction and actual evidence captured.
-- [ ] Presentation and limitations rehearsed.
-
-No item is marked complete before the corresponding work and verification occur.
+Keep issue #3 open until current tests and CLI expectations have been run, the integrated UI and combined demonstration have been reproduced, a fresh-clone run is recorded, and the teammate has reviewed and rehearsed the presentation. Record actual outputs and revisions. Source code, expected fixture results, or this handoff alone do not establish that those checks have passed.

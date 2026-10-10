@@ -2,7 +2,7 @@
 
 Planning date: Friday, October 9, 2026. Working delivery target: Sunday, October 11, 2026, Asia/Jakarta. The exact submission time is unconfirmed.
 
-Status: accepted implementation plan. Project setup has begun. The README and evidence guide track implemented and verified features; future work below does not claim completed results.
+Status: accepted planning document, updated for implementation scope as of Sunday, October 11, 2026. The October 9 sections below retain the original proposal. Code and expected fixture results are not evidence that current tests, clean-clone reproduction, UI/combined-demo execution, or presentation rehearsal have passed. Issue #3 stays open until those acceptance items are checked.
 
 ## Project and scope
 
@@ -10,7 +10,7 @@ Proposed application title: **Warehouse Robot Diagnostics and Dynamic Route Plan
 
 Repository name: `AI-TE-303`. Owner: `sar1p`. Use a dedicated checkout of this repository rather than the parent folder containing course materials.
 
-The team has two members. The lead owns route planning, the application, and integration. The teammate owns the expert system, its knowledge base, tests, and diagnostic explanations. All repository text, identifiers, comments, interface labels, documentation, commits, PRs, and workflow names use English.
+The team has two members. The lead currently owns route planning, the application, and the expanded diagnostic engine, knowledge base, CLI, fixtures, and integration. The teammate contributed the original two-rule starter and now reviews the expanded implementation and rehearses the diagnostic presentation. Future contributions should be recorded under the actual contributor's own Git identity. All repository text, identifiers, comments, interface labels, documentation, commits, PRs, and workflow names use English.
 
 The application runs locally in Python and simulates one warehouse robot. It has two separately runnable modules and one shared visual demonstration. No physical robot is required.
 
@@ -33,15 +33,15 @@ D* Lite, the warehouse theme, the module split, the interface, and the acceptanc
 
 ## Module ownership
 
-| Owner | Files and responsibilities | Presentation responsibility |
+| Contributor | Current contribution | Next shared work |
 |---|---|---|
-| Lead, working with the assistant | Project bootstrap, `search_algorithm/`, `tests/search_algorithm/`, `data/search_scenarios/`, `app.py`, CI, shared contracts, and integrated replay/export tools | D* Lite, A* comparison, route correctness, and application integration |
-| Teammate | `expert_system/`, `tests/expert_system/`, `data/diagnostic_scenarios/`, and `docs/EXPERT_SYSTEM.md` | Rules, inference trace, missing evidence, limitations, and corrected-fact demonstration |
-| Both | Cross-review, integration acceptance, README accuracy, and a final rehearsal on the teammate's laptop | Each explains their own work and answers questions about the shared demo |
+| Teammate, zaedalmusthofa | Original R01/R02 starter, preserved as commit a57eebd8e93cb00a899ee792146707f96e750046 through normal merge PR #5 | Review current rules and traces; fresh-clone reproduction and presentation rehearsal; record any further work in the teammate's own commits |
+| Lead | Route planning, application, shared contracts, and the expanded diagnostic engine, knowledge base, CLI, fixtures, and integration under the lead's own Git identity | Finish and record the remaining acceptance evidence |
+| Both | Cross-review, integration acceptance, README accuracy, and final rehearsal | Confirm the results and limitations against actual current outputs |
 
-Reserve the teammate's implementation for the teammate. The lead supplies contracts, examples of the expected data shape, and review support. While that module is pending, the interface must state that status rather than return simulated completed diagnoses.
+The initial starter credit remains attached to its author. Current source ownership follows actual contributions and Git identities; coordinate shared-file changes through review.
 
-Use feature branches in one shared repository. The teammate accepts a collaborator invitation and commits/pushes through their own GitHub account. A fork is optional and adds synchronization work; the proposed group workflow uses collaborator access and branches.
+Use feature branches in one shared repository. Preserve contributor identity in actual commits and review. A fork is optional and adds synchronization work.
 
 ## Module contract summary
 
@@ -61,7 +61,7 @@ The implementation boundary is frozen in [MODULE_CONTRACTS.md](MODULE_CONTRACTS.
 - Contradictory representations of the same observation and invalid values produce a clear validation result. Document the exact combinations that are invalid; do not treat every unusual sensor combination as a contradiction.
 - Recommendations can include English action IDs such as `pause_robot`, `check_power`, `check_drive`, and `check_encoder`. The module never imports the route planner or interface.
 
-Initial proposed scope: four suspected conditions, approximately eight observation types, and 8-12 meaningful rules. The teammate may refine that scope before implementation. Initial conditions are low battery, drive blockage, motor connection problems, and encoder signal problems. These are simulation cases until domain sources or expert review support the rules and thresholds.
+The current implementation scope is 11 illustrative rules, nine categorical observation fields, and six exposed suspected conditions. Three observations are required; six more are grouped into three optional pairs. The six findings are suspected motor overheating, lidar obstruction, battery power-path issue, battery-related stall, drive/encoder fault, and motor-connection fault. These remain software simulation cases until domain sources or expert review support the rules and thresholds. The count describes the current code, not a lecturer requirement or a measure of diagnostic quality.
 
 ### Route planning
 
@@ -84,7 +84,9 @@ Test incremental reuse explicitly: instrument the initialization entry point and
 
 For comparisons, use the same map, start, goal, and map-event sequence. Compare valid route costs with the oracle, not necessarily the exact route geometry: multiple shortest routes may exist.
 
-## Proposed repository layout
+## Initial proposed repository layout
+
+This is the October 9 outline, not a current file inventory; see the expert-system guide for the current module scope.
 
 ```text
 AI-TE-303/
@@ -98,10 +100,10 @@ AI-TE-303/
     __init__.py
     README.md
     main.py
-    models.py
+    __main__.py
     engine.py
-    knowledge_base/
-      rules.json
+    knowledge_base.json
+    scenarios.py
   search_algorithm/
     __init__.py
     README.md
@@ -119,6 +121,7 @@ AI-TE-303/
       oracle.py
     integration/
   tools/
+    combined_demo.py
     replay_demo.py
     benchmark_search.py
   docs/
@@ -150,20 +153,20 @@ Suggested checkpoints below are work boundaries, not a requirement to fabricate 
 | Baseline search | Lead | `feat: add validated grid maps and A-star baseline` | A static map produces a validated route with tests and an independent oracle |
 | Initial D* Lite search | Lead | `feat: implement D-star Lite initial planning` | Initial routes match optimal oracle costs |
 | Incremental search | Lead | `feat: repair routes after map and start changes` | Blocking, reopening, and moving-start cases reuse search state and pass tests |
-| Diagnostic knowledge | Teammate | `feat: add diagnostic rule data and scenario fixtures` | Rule data and scenario inputs load with documented sources and validation |
-| Diagnostic inference | Teammate | `feat: implement forward chaining and rule explanations` | Confirmed observations produce an inspectable inference trace |
-| Evidence correction | Teammate | `fix: recalculate diagnoses after corrected observations` | Unknown observations remain unknown and obsolete conclusions disappear |
-| Diagnostic boundary audit | Teammate | `test: cover incomplete and invalid diagnostic evidence` | Invalid, incomplete, multi-finding, and unsupported cases behave as documented |
+| Original diagnostic starter | Teammate | feat: add diagnostic rules and scenario fixtures | Original R01/R02 contribution remains in history under its author |
+| Diagnostic engine expansion | Lead | feat: implement forward chaining and rule explanations | External rule data, chained inference, traces, scenarios, and CLI are present in source |
+| Diagnostic review and correction audit | Teammate | docs: review diagnostic scenarios and limitations | Review current inputs, unknown/corrected behavior, explanations, and limits; record actual findings |
+| Diagnostic integration and evidence | Lead and teammate | docs: record diagnostic integration evidence | Current UI/combined demo, fresh-clone run, and rehearsal are recorded after execution |
 | Visual planning demo | Lead | `feat: visualize dynamic routes and planner metrics` | The presenter can move the start, edit obstacles, and view route results |
-| Shared demonstration | Both, separate owned changes | `feat: connect diagnostic results to the simulation` | A completed diagnosis can visibly pause simulated movement and show a recommendation |
-| Reproduction and explanation | Teammate | `docs: document diagnostic scenarios and limitations` | A teammate-written guide matches actual observed output |
+| Shared demonstration | Lead implementation, teammate review | `feat: connect diagnostic results to the simulation` | A completed diagnosis can visibly pause simulated movement and show a recommendation |
+| Review and presentation rehearsal | Teammate | `docs: document diagnostic scenarios and limitations` | The teammate reviews the guide against actual output and rehearses the explanation |
 | Final evidence | Both, owned artifacts | `docs: add verified demo evidence and comparison results` | Outputs reference the actual tested source revision and scenario IDs |
 
 A practical PR grouping is bootstrap, baseline search, D* Lite, expert-system increments, visual demo, integration, and evidence. Each PR can contain several meaningful commits. The review scope should be small enough to inspect before merging.
 
 Protect `main` after the initial repository bootstrap: require PRs, passing Python test checks once present, and prevent force pushes/deletion. With two contributors, cross-review feature PRs. Enable normal merge commits so individual feature commits remain visible in main's history. Squash merging combines them into one commit and is not the selected method for this assignment.
 
-After a merge, start the next feature from updated `main`. Do not have both people edit the same knowledge-base or route-planner files simultaneously.
+After a merge, start the next feature from updated main. Coordinate concurrent edits to shared knowledge-base, engine, and route-planner files through review.
 
 ## Running evidence and acceptance
 
@@ -201,13 +204,15 @@ First inspect each member's existing Python and Git installations. Target one mu
 
 Required dependencies are Streamlit for the interface and pytest for tests. The core diagnosis and search modules should otherwise use Python's standard library. GitHub CLI is optional for the teammate; Git or GitHub Desktop can perform their collaboration workflow.
 
-The following are intended commands after the repository and program exist. They have not been executed for this project. Run them from the actual cloned repository root.
+Use these as reproduction commands from the repository root. Record their actual exit codes and outputs before reporting a result.
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt -c constraints.txt
 .\.venv\Scripts\python.exe -m pytest -q
-.\.venv\Scripts\python.exe -m expert_system.main --scenario data/diagnostic_scenarios/drive_blockage.json
+.\.venv\Scripts\python.exe -m expert_system --scenario battery-multi-hop
+.\.venv\Scripts\python.exe -m expert_system --all
+.\.venv\Scripts\python.exe tools/combined_demo.py --output artifacts/combined-demo.json
 .\.venv\Scripts\python.exe -m search_algorithm.main --scenario data/search_scenarios/corridor_changes.json
 .\.venv\Scripts\python.exe tools/replay_demo.py --output artifacts/demo
 .\.venv\Scripts\python.exe -m streamlit run app.py
@@ -215,7 +220,9 @@ python -m venv .venv
 
 `requirements-dev.txt` should include `requirements.txt` plus pinned test dependencies. Directly invoking the virtual environment's Python avoids a PowerShell activation-policy change. UI access will be local, and the CLI commands provide a fallback if interface rendering is disrupted.
 
-## Two-day schedule and fallback
+## Original two-day schedule and fallback
+
+The table records the October 9 planning schedule, not current completion evidence or a new ownership restriction.
 
 | Period | Lead | Teammate | Shared completion gate |
 |---|---|---|---|
