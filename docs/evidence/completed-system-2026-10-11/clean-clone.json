@@ -1,0 +1,128 @@
+{
+  "metadata": {
+    "timestamp_utc": "2026-10-10T21:56:52.824165+00:00",
+    "source_commit": "118e95b50c2aa3196980435075a21ed6be789603",
+    "worktree_dirty": false,
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "dependencies": {
+      "streamlit": "1.65.0",
+      "pytest": "9.1.1"
+    },
+    "implementation": "cpython"
+  },
+  "environment": "fresh remote clone and fresh virtual environment",
+  "commands": [
+    {
+      "name": "dependencies",
+      "command": [
+        "python",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0,
+      "log": "dependencies.txt"
+    },
+    {
+      "name": "tests",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exit_code": 0,
+      "log": "tests.txt"
+    },
+    {
+      "name": "diagnostics",
+      "command": [
+        "python",
+        "-m",
+        "expert_system",
+        "--all",
+        "--output",
+        "artifacts\\completion-validation\\diagnostics.json"
+      ],
+      "exit_code": 0,
+      "log": "diagnostics.txt"
+    },
+    {
+      "name": "diagnostics_stdlib",
+      "command": [
+        "python",
+        "-S",
+        "-m",
+        "expert_system",
+        "--all",
+        "--output",
+        "artifacts\\completion-validation\\diagnostics-stdlib.json"
+      ],
+      "exit_code": 0,
+      "log": "diagnostics_stdlib.txt"
+    },
+    {
+      "name": "battery_cli",
+      "command": [
+        "python",
+        "-m",
+        "expert_system.main",
+        "--scenario",
+        "battery-multi-hop",
+        "--output",
+        "artifacts\\completion-validation\\battery-diagnosis.json"
+      ],
+      "exit_code": 0,
+      "log": "battery_cli.txt"
+    },
+    {
+      "name": "search_cli",
+      "command": [
+        "python",
+        "-m",
+        "search_algorithm.main",
+        "--output",
+        "artifacts\\completion-validation\\single-replay.json"
+      ],
+      "exit_code": 0,
+      "log": "search_cli.txt"
+    },
+    {
+      "name": "replays",
+      "command": [
+        "python",
+        "tools/replay_demo.py",
+        "--output",
+        "artifacts\\completion-validation\\replays"
+      ],
+      "exit_code": 0,
+      "log": "replays.txt"
+    },
+    {
+      "name": "combined",
+      "command": [
+        "python",
+        "tools/combined_demo.py",
+        "--output",
+        "artifacts\\completion-validation\\combined-demo.json"
+      ],
+      "exit_code": 0,
+      "log": "combined.txt"
+    },
+    {
+      "name": "benchmark",
+      "command": [
+        "python",
+        "tools/benchmark_search.py",
+        "--output",
+        "artifacts\\completion-validation\\benchmark",
+        "--repeats",
+        "5"
+      ],
+      "exit_code": 0,
+      "log": "benchmark.txt"
+    }
+  ],
+  "scope": "External-rule forward chaining, CLI scenarios, combined diagnostic gate and retained route planner, all search replays and benchmarks"
+}

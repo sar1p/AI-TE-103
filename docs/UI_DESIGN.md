@@ -53,10 +53,12 @@ external image asset is required.
 ## Verification
 
 Automated checks cover session persistence, safe map edits, observation parsing,
-diagnostic gating, and corrected observations. Live browser checks must cover
-scenario loading, guided input, the rule chain, pause/correction, route repair,
-export downloads, and both narrow and wide layouts. Actual screenshots and
-exported results are recorded with their source revision in the evidence guide.
+diagnostic gating, and corrected observations. Live browser checks at source
+`118e95b50c2aa3196980435075a21ed6be789603` exercised preset loading, guided
+correction, the four-rule chain, pause/resume, route repair, and actual JSON
+downloads. Layouts were inspected at 420, 698, and 1366 pixels; temporary
+viewport overrides were reset. [Screenshots, exports, and a silent recording](evidence/completed-system-2026-10-11/README.md)
+record the actual result and source revision.
 
 These checks establish behavior and presentation in the simulation. They do not
 validate a physical robot.

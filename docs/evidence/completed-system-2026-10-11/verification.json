@@ -1,0 +1,49 @@
+{
+  "checked_at_utc": "2026-10-10T22:05:34.374500+00:00",
+  "source_commit": "118e95b50c2aa3196980435075a21ed6be789603",
+  "knowledge_base_raw_file_sha256": "e293fc70b6dfdeacb1db32a8acba26885594ec3ddb1ef62ee0b8dc2d99286cc3",
+  "knowledge_base_canonical_json_sha256": "94fea3927f742f24f99ca72d8988aafb48d27a59b57c2b6cf53540a032386146",
+  "clean_clone_commands": 9,
+  "tests_passed": 167,
+  "diagnostic_scenarios_matching_expectations": 8,
+  "search_replay_records": 22,
+  "benchmark_rows": 110,
+  "benchmark_repeats_per_scenario": 5,
+  "browser_session_costs": [
+    10,
+    12,
+    11
+  ],
+  "retained_planner_initialization_counts": [
+    1,
+    1,
+    1
+  ],
+  "browser_viewports_inspected": [
+    {
+      "width": 420,
+      "height": 900
+    },
+    {
+      "width": 698,
+      "height": 900
+    },
+    {
+      "width": 1366,
+      "height": 900
+    }
+  ],
+  "ci": {
+    "conclusion": "success",
+    "headSha": "118e95b50c2aa3196980435075a21ed6be789603",
+    "status": "completed",
+    "url": "https://github.com/sar1p/AI-TE-303/actions/runs/38089401923"
+  },
+  "preserved_teammate_commit": "a57eebd8e93cb00a899ee792146707f96e750046",
+  "not_verified": [
+    "Teammate laptop reproduction",
+    "Teammate independent review",
+    "Two-person presentation rehearsal",
+    "Physical robot diagnosis or control"
+  ]
+}

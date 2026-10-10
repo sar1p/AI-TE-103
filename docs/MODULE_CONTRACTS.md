@@ -181,8 +181,9 @@ The combined demonstration in tools/combined_demo.py checks that a map edit is
 allowed while movement is paused, an attempted move is rejected without changing
 the simulation, and corrected observations permit one step with the same planner
 instance and initialization count of one. The script also checks its expected
-10, 12, 11 route costs against A*. These are implemented checks; successful
-execution and presentation rehearsal still need to be recorded.
+10, 12, 11 route costs against A*. [The clean-clone combined export](evidence/completed-system-2026-10-11/combined-demo.json)
+records all seven checks passing. The teammate's independent review and
+two-person presentation rehearsal remain unverified.
 
 The diagnostics module is suitable for demonstrating a bounded, explainable rule
 system. It is unsuitable for field diagnosis, safety certification, or claims of

@@ -1,0 +1,6 @@
+Replay JSON: C:\Users\Syaif\Documents\ChatGPT\AI\.codex-analysis\ai-te-303-completed-clone-20261011\artifacts\completion-validation\replays\replay.json
+corridor-changes: 5 recorded plans; final status=found, cost=10
+movement-reuse: 11 recorded plans; final status=found, cost=20
+unreachable-recovery: 3 recorded plans; final status=found, cost=6
+widespread-changes: 3 recorded plans; final status=found, cost=46
+Diagnostic inference: not run; this artifact contains search results only.

@@ -1,0 +1,849 @@
+{
+  "metadata": {
+    "timestamp_utc": "2026-10-10T21:57:34.057801+00:00",
+    "source_commit": "118e95b50c2aa3196980435075a21ed6be789603",
+    "worktree_dirty": false,
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "dependencies": {
+      "streamlit": "1.65.0",
+      "pytest": "9.1.1"
+    },
+    "implementation": "cpython"
+  },
+  "schema_version": 1,
+  "scope": "search-only route planning",
+  "created_at": "2026-10-10T21:57:33.887173+00:00",
+  "scenario": {
+    "id": "corridor-changes",
+    "title": "Warehouse Corridor Changes",
+    "description": "Synthetic warehouse shelves frame a central aisle. Close one central cell, move along the replanned route, reopen the aisle, and continue.",
+    "rows": [
+      ".............",
+      ".###...###...",
+      ".###...###...",
+      ".............",
+      ".............",
+      "...###.###...",
+      "...###.###...",
+      "............."
+    ],
+    "start": [
+      4,
+      1
+    ],
+    "goal": [
+      4,
+      11
+    ],
+    "events": [
+      {
+        "id": "corridor-close-center-aisle",
+        "type": "map",
+        "label": "Block the central aisle",
+        "changes": [
+          {
+            "cell": [
+              4,
+              6
+            ],
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "id": "corridor-step-around-shelves",
+        "type": "move",
+        "label": "Move one legal step on the replanned route"
+      },
+      {
+        "id": "corridor-reopen-center-aisle",
+        "type": "map",
+        "label": "Reopen the central aisle",
+        "changes": [
+          {
+            "cell": [
+              4,
+              6
+            ],
+            "blocked": false
+          }
+        ]
+      },
+      {
+        "id": "corridor-continue-route",
+        "type": "move",
+        "label": "Continue one legal route step"
+      }
+    ]
+  },
+  "applied_events": [
+    {
+      "changes": [
+        {
+          "blocked": true,
+          "cell": [
+            4,
+            6
+          ]
+        }
+      ],
+      "id": "corridor-close-center-aisle",
+      "label": "Block the central aisle",
+      "type": "map"
+    },
+    {
+      "id": "corridor-step-around-shelves",
+      "label": "Move one legal step on the replanned route",
+      "type": "move"
+    },
+    {
+      "changes": [
+        {
+          "blocked": false,
+          "cell": [
+            4,
+            6
+          ]
+        }
+      ],
+      "id": "corridor-reopen-center-aisle",
+      "label": "Reopen the central aisle",
+      "type": "map"
+    },
+    {
+      "id": "corridor-continue-route",
+      "label": "Continue one legal route step",
+      "type": "move"
+    }
+  ],
+  "records": [
+    {
+      "event_id": "initial",
+      "label": "Initial planning",
+      "map_revision": 0,
+      "rows": [
+        ".............",
+        ".###...###...",
+        ".###...###...",
+        ".............",
+        ".............",
+        "...###.###...",
+        "...###.###...",
+        "............."
+      ],
+      "start": [
+        4,
+        1
+      ],
+      "goal": [
+        4,
+        11
+      ],
+      "k_m": 0,
+      "initialization_count": 1,
+      "dstar_lite": {
+        "status": "found",
+        "path": [
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            4,
+            10
+          ],
+          [
+            4,
+            11
+          ]
+        ],
+        "cost": 10,
+        "metrics": {
+          "processed_states": 11,
+          "queue_pops": 11,
+          "queue_pushes": 29,
+          "elapsed_ms": 0.7503999804612249
+        },
+        "message": ""
+      },
+      "astar": {
+        "status": "found",
+        "path": [
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            4,
+            10
+          ],
+          [
+            4,
+            11
+          ]
+        ],
+        "cost": 10,
+        "metrics": {
+          "processed_states": 11,
+          "queue_pops": 11,
+          "queue_pushes": 26,
+          "elapsed_ms": 0.22760001593269408
+        },
+        "message": ""
+      }
+    },
+    {
+      "event_id": "corridor-close-center-aisle",
+      "label": "Block the central aisle",
+      "map_revision": 1,
+      "rows": [
+        ".............",
+        ".###...###...",
+        ".###...###...",
+        ".............",
+        "......#......",
+        "...###.###...",
+        "...###.###...",
+        "............."
+      ],
+      "start": [
+        4,
+        1
+      ],
+      "goal": [
+        4,
+        11
+      ],
+      "k_m": 0,
+      "initialization_count": 1,
+      "dstar_lite": {
+        "status": "found",
+        "path": [
+          [
+            4,
+            1
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            4,
+            11
+          ]
+        ],
+        "cost": 12,
+        "metrics": {
+          "processed_states": 25,
+          "queue_pops": 49,
+          "queue_pushes": 46,
+          "elapsed_ms": 1.556900009745732
+        },
+        "message": ""
+      },
+      "astar": {
+        "status": "found",
+        "path": [
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            4,
+            11
+          ]
+        ],
+        "cost": 12,
+        "metrics": {
+          "processed_states": 24,
+          "queue_pops": 24,
+          "queue_pushes": 35,
+          "elapsed_ms": 0.27409999165683985
+        },
+        "message": ""
+      }
+    },
+    {
+      "event_id": "corridor-step-around-shelves",
+      "label": "Move one legal step on the replanned route",
+      "map_revision": 1,
+      "rows": [
+        ".............",
+        ".###...###...",
+        ".###...###...",
+        ".............",
+        "......#......",
+        "...###.###...",
+        "...###.###...",
+        "............."
+      ],
+      "start": [
+        3,
+        1
+      ],
+      "goal": [
+        4,
+        11
+      ],
+      "k_m": 1,
+      "initialization_count": 1,
+      "dstar_lite": {
+        "status": "found",
+        "path": [
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            4,
+            11
+          ]
+        ],
+        "cost": 11,
+        "metrics": {
+          "processed_states": 0,
+          "queue_pops": 0,
+          "queue_pushes": 0,
+          "elapsed_ms": 0.12500002048909664
+        },
+        "message": ""
+      },
+      "astar": {
+        "status": "found",
+        "path": [
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            4,
+            11
+          ]
+        ],
+        "cost": 11,
+        "metrics": {
+          "processed_states": 21,
+          "queue_pops": 21,
+          "queue_pushes": 32,
+          "elapsed_ms": 0.24900000425986946
+        },
+        "message": ""
+      }
+    },
+    {
+      "event_id": "corridor-reopen-center-aisle",
+      "label": "Reopen the central aisle",
+      "map_revision": 2,
+      "rows": [
+        ".............",
+        ".###...###...",
+        ".###...###...",
+        ".............",
+        ".............",
+        "...###.###...",
+        "...###.###...",
+        "............."
+      ],
+      "start": [
+        3,
+        1
+      ],
+      "goal": [
+        4,
+        11
+      ],
+      "k_m": 1,
+      "initialization_count": 1,
+      "dstar_lite": {
+        "status": "found",
+        "path": [
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            4,
+            11
+          ]
+        ],
+        "cost": 11,
+        "metrics": {
+          "processed_states": 6,
+          "queue_pops": 6,
+          "queue_pushes": 10,
+          "elapsed_ms": 0.443900004029274
+        },
+        "message": ""
+      },
+      "astar": {
+        "status": "found",
+        "path": [
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            4,
+            11
+          ]
+        ],
+        "cost": 11,
+        "metrics": {
+          "processed_states": 22,
+          "queue_pops": 22,
+          "queue_pushes": 34,
+          "elapsed_ms": 0.24999998277053237
+        },
+        "message": ""
+      }
+    },
+    {
+      "event_id": "corridor-continue-route",
+      "label": "Continue one legal route step",
+      "map_revision": 2,
+      "rows": [
+        ".............",
+        ".###...###...",
+        ".###...###...",
+        ".............",
+        ".............",
+        "...###.###...",
+        "...###.###...",
+        "............."
+      ],
+      "start": [
+        3,
+        2
+      ],
+      "goal": [
+        4,
+        11
+      ],
+      "k_m": 2,
+      "initialization_count": 1,
+      "dstar_lite": {
+        "status": "found",
+        "path": [
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            4,
+            11
+          ]
+        ],
+        "cost": 10,
+        "metrics": {
+          "processed_states": 0,
+          "queue_pops": 0,
+          "queue_pushes": 0,
+          "elapsed_ms": 0.11329998960718513
+        },
+        "message": ""
+      },
+      "astar": {
+        "status": "found",
+        "path": [
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            4,
+            11
+          ]
+        ],
+        "cost": 10,
+        "metrics": {
+          "processed_states": 20,
+          "queue_pops": 20,
+          "queue_pushes": 31,
+          "elapsed_ms": 0.22929999977350235
+        },
+        "message": ""
+      }
+    }
+  ]
+}

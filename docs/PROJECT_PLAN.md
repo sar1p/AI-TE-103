@@ -2,7 +2,7 @@
 
 Planning date: Friday, October 9, 2026. Working delivery target: Sunday, October 11, 2026, Asia/Jakarta. The exact submission time is unconfirmed.
 
-Status: accepted planning document, updated for implementation scope as of Sunday, October 11, 2026. The October 9 sections below retain the original proposal. Code and expected fixture results are not evidence that current tests, clean-clone reproduction, UI/combined-demo execution, or presentation rehearsal have passed. Issue #3 stays open until those acceptance items are checked.
+Status: software implementation and running verification completed Sunday, October 11, 2026. [The current evidence](evidence/completed-system-2026-10-11/README.md) records 167 passing tests, eight matching diagnostic fixtures, nine clean-clone checks, real UI exports and a browser recording, combined integration, and passing main CI at source `118e95b50c2aa3196980435075a21ed6be789603`. The October 9 sections below retain the original proposal. Issue #3 stays open for the teammate's independent review, laptop reproduction, and two-person presentation rehearsal, which have not been verified.
 
 ## Project and scope
 

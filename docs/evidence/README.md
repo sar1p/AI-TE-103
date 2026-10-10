@@ -1,10 +1,16 @@
-# Verified running evidence: historical search snapshot
+# Verified running evidence
 
-This folder's original artifacts record the search-only revision below. The
-later integrated two-rule diagnostic starter is recorded separately in
-[integrated-starter-2026-10-11/](integrated-starter-2026-10-11/README.md), with
-119 passing tests, actual pause/correction exports, and current contributor
-evidence. Historical artifacts and measurements are retained unchanged.
+The latest [completed-system snapshot](completed-system-2026-10-11/README.md)
+records source `118e95b`, 167 passing tests, eight matching external-rule
+diagnostic fixtures, nine successful clean-clone checks, real UI pause/correction
+exports, a silent browser recording, benchmark results, and preserved teammate
+credit. The teammate's independent review and laptop rehearsal remain unverified.
+
+This folder's original artifacts record the historical search-only revision
+below. The later integrated two-rule diagnostic starter is recorded separately
+in [integrated-starter-2026-10-11/](integrated-starter-2026-10-11/README.md), with
+119 passing tests and its original pause/correction and contributor evidence.
+Historical artifacts and measurements are retained unchanged.
 
 Recorded source: [`9a724d6`](https://github.com/sar1p/AI-TE-303/commit/9a724d68378242e4587b7536bffe66889c9bc86e).
 Recorded on October 9, 2026, using Python 3.12.14,
