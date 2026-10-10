@@ -1,0 +1,13 @@
+{
+  "id": "corrected-observations",
+  "title": "Corrected Baseline Observations",
+  "description": "The original categorical observations are set to normal, moving, and clear after correcting a prior simulated fault input.",
+  "provenance": "Illustrative classroom simulation input; it does not establish the absence of faults outside this knowledge base.",
+  "facts": {
+    "motor_temperature": "normal",
+    "movement_status": "moving",
+    "sensor_lidar": "clear"
+  },
+  "expected_status": "ok",
+  "expected_conditions": []
+}

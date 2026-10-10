@@ -1,0 +1,9 @@
+{
+  "id": "empty-input",
+  "title": "No Observations Supplied",
+  "description": "An empty raw-facts object leaves the three original observations unknown.",
+  "provenance": "Illustrative classroom simulation input; expected output documents missing evidence only.",
+  "facts": {},
+  "expected_status": "insufficient_evidence",
+  "expected_conditions": []
+}

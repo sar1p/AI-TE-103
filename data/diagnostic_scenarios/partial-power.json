@@ -1,0 +1,14 @@
+{
+  "id": "partial-power",
+  "title": "Incomplete Power Group",
+  "description": "A supplied low battery category requests the missing battery connection observation while retaining the complete original baseline.",
+  "provenance": "Illustrative classroom simulation input; missing evidence remains unknown.",
+  "facts": {
+    "motor_temperature": "normal",
+    "movement_status": "moving",
+    "sensor_lidar": "clear",
+    "battery_voltage": "low"
+  },
+  "expected_status": "insufficient_evidence",
+  "expected_conditions": []
+}

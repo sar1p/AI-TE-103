@@ -1,0 +1,13 @@
+{
+  "id": "invalid-observation",
+  "title": "Unsupported Observation Value",
+  "description": "An unsupported temperature category is rejected without producing findings.",
+  "provenance": "Illustrative classroom simulation input used to demonstrate strict categorical validation.",
+  "facts": {
+    "motor_temperature": "warm",
+    "movement_status": "moving",
+    "sensor_lidar": "clear"
+  },
+  "expected_status": "invalid_input",
+  "expected_conditions": []
+}

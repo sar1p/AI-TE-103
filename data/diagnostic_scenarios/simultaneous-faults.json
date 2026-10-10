@@ -1,0 +1,26 @@
+{
+  "id": "simultaneous-faults",
+  "title": "Simultaneous Illustrative Fault Inputs",
+  "description": "Combines the original motor and lidar cases with complete battery, drive/encoder, and motor-path groups.",
+  "provenance": "Illustrative classroom simulation input; combined findings are independent rule examples, not a physical robot assessment.",
+  "facts": {
+    "motor_temperature": "high",
+    "movement_status": "stalled",
+    "sensor_lidar": "blocked",
+    "battery_voltage": "low",
+    "battery_connection": "disconnected",
+    "drive_status": "fault",
+    "encoder_feedback": "absent",
+    "motor_connection": "disconnected",
+    "motor_enable": "enabled"
+  },
+  "expected_status": "ok",
+  "expected_conditions": [
+    "suspected_motor_overheating",
+    "lidar_obstruction",
+    "battery_power_path_issue",
+    "battery_related_stall",
+    "drive_encoder_fault",
+    "motor_connection_fault"
+  ]
+}

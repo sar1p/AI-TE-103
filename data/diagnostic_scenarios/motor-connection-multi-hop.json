@@ -1,0 +1,15 @@
+{
+  "id": "motor-connection-multi-hop",
+  "title": "Motor Connection Chain",
+  "description": "A disconnected motor connection and enabled motor state combine into a chained connection finding.",
+  "provenance": "Illustrative classroom simulation input; no physical motor circuit is assessed.",
+  "facts": {
+    "motor_temperature": "normal",
+    "movement_status": "idle",
+    "sensor_lidar": "clear",
+    "motor_connection": "disconnected",
+    "motor_enable": "enabled"
+  },
+  "expected_status": "ok",
+  "expected_conditions": ["motor_connection_fault"]
+}

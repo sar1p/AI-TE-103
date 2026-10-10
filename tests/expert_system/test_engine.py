@@ -144,7 +144,7 @@ def test_partial_evidence_retains_a_supported_finding_but_stays_incomplete(
         None,
         [],
         {1: "normal"},
-        {"battery_voltage": "low"},
+        {"unexpected_observation": "low"},
         HEALTHY | {"unexpected_observation": "normal"},
         HEALTHY | {"motor_temperature": "warm"},
         HEALTHY | {"motor_temperature": 42},
@@ -199,3 +199,34 @@ def test_returned_trace_cannot_mutate_rules_or_later_results():
     modified["findings"][0]["rule_ids"].append("invented_rule")
 
     assert diagnose(facts) == expected
+
+
+def test_newly_supported_battery_observations_retain_the_full_chain():
+    facts = HEALTHY | {
+        "movement_status": "stalled",
+        "battery_voltage": "low",
+        "battery_connection": "disconnected",
+    }
+
+    result = diagnose(facts)
+
+    assert result["status"] == "ok"
+    assert result["findings"] == [
+        {
+            "condition": "battery_power_path_issue",
+            "rule_ids": ["R03", "R04", "R05"],
+        },
+        {
+            "condition": "battery_related_stall",
+            "rule_ids": ["R03", "R04", "R05", "R06"],
+        },
+    ]
+    assert [entry["rule_id"] for entry in result["rule_trace"]] == [
+        "R03", "R04", "R05", "R06"
+    ]
+    assert {item["action"] for item in result["recommendations"]} == {
+        "pause_robot",
+        "check_power",
+        "check_drive",
+    }
+    assert result["missing_facts"] == []
