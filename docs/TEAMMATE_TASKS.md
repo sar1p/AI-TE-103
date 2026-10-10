@@ -1,6 +1,6 @@
 # AI-TE-303 Teammate Handoff
 
-Status: work reserved for the second team member. Repository setup has begun; the diagnostic engine remains pending. Use [MODULE_CONTRACTS.md](MODULE_CONTRACTS.md) for the frozen dictionary interface. Working delivery target: Sunday, October 11, 2026; exact submission time is unconfirmed.
+Status: partial implementation. The teammate added two illustrative diagnostic rules; an integration correction supplies contract validation and real behavior tests. External rule data, genuine forward chaining, an independent CLI, and final presentation evidence remain pending. See [EXPERT_SYSTEM.md](EXPERT_SYSTEM.md) for the starter's exact scope and [MODULE_CONTRACTS.md](MODULE_CONTRACTS.md) for the frozen dictionary interface. Working delivery target: Sunday, October 11, 2026; exact submission time is unconfirmed.
 
 ## Your responsibility
 
@@ -10,7 +10,7 @@ The lead builds D* Lite route planning, the visual application, and the integrat
 
 All repository content uses English. Work on your own feature branch and use your own Git/GitHub identity for your actual contributions.
 
-Track your deliverables in [issue #3](https://github.com/sar1p/AI-TE-303/issues/3). Collaborator access is pending confirmation of your GitHub username. You can already clone the public repository to read the contracts and begin local work.
+Track your deliverables in [issue #3](https://github.com/sar1p/AI-TE-303/issues/3). The `zaedalmusthofa` account has accepted collaborator access. Keep the issue open until its complete deliverables and integration checks are verified; a starter commit alone does not complete the assignment.
 
 ## Prerequisites
 
@@ -66,7 +66,7 @@ Recommendations may use agreed action IDs such as `pause_robot`, `check_power`, 
 | Boundary tests | Tests for invalid and incomplete data, unsupported findings, and simultaneous findings | The documented result status and findings match explicit expected cases |
 | Standalone demo | `main.py`, module README, and expert-system guide | The module runs from the repo root without requiring the visual application |
 
-Initial target scope is four suspected conditions, around eight observation types, and 8-12 meaningful rules. This is a proposed size, not a lecturer requirement. Start with low battery, drive blockage, motor connection problems, and encoder signal problems. Check the diagnostic logic rather than adding rules only to reach a count.
+Initial target scope is four suspected conditions, around eight observation types, and 8-12 meaningful rules. This is a proposed size, not a lecturer requirement. The original suggested conditions were low battery, drive blockage, motor connection problems, and encoder signal problems. The teammate's current starter instead uses motor overheating and lidar obstruction. Agree on the expanded scope before adding conditions; check the diagnostic logic rather than adding rules only to reach a count.
 
 Knowledge records must distinguish sourced rules from illustrative simulation rules. Do not claim measured diagnostic accuracy or add probability percentages without a justified model and evidence.
 

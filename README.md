@@ -6,14 +6,14 @@
 
 A two-member Artificial Intelligence coursework project. D* Lite repairs a
 warehouse robot's route after map changes and movement. Repeated A* provides a
-baseline. A separate rule-based expert system will explain suspected robot faults.
+baseline. A separate rule-based expert-system starter explains suspected robot faults.
 
 ## Implementation status
 
 - Project layout, ownership, and module contracts: established.
 - D* Lite, A*, validated maps, and independent search tests: implemented.
 - Streamlit demonstration, scenario replay, benchmark exports, and diagnostic adapter: implemented.
-- Expert system: reserved for the second team member; not implemented yet.
+- Expert system: two illustrative teammate-authored rules with validated integration; external rule data and forward chaining remain pending.
 
 See [PROJECT_PLAN.md](docs/PROJECT_PLAN.md) for scope and
 [TEAMMATE_TASKS.md](docs/TEAMMATE_TASKS.md) for the reserved work.
@@ -61,7 +61,7 @@ checks are in [docs/evidence/](docs/evidence/README.md).
 | D* Lite | Repair routes while the start moves toward a fixed goal and map connectivity changes | Initialization and extensive changes can cost more than reuse saves |
 | A* | Fresh shortest-path baseline for the current map | Repeats search after each update |
 | UCS / Dijkstra | Independent optimal-cost oracle in tests | Used for correctness, not the interactive planner |
-| Forward-chaining expert system | Teammate's pending fault explanation module | Depends on documented rules and evidence; no measured accuracy claimed |
+| Rule-based diagnostic starter | Two illustrative rules for motor temperature and lidar observations; forward chaining remains pending | Depends on a very small, unvalidated knowledge base; no measured accuracy claimed |
 
 The grid supports four-neighbor unit-cost movement. Weighted terrain, diagonal
 motion, multiple robots, and physical control are outside this implementation.
@@ -71,7 +71,9 @@ metric definitions, benchmark boundaries, and suitable/unsuitable uses.
 The diagnostic safety gate requires a valid `ok` diagnosis without `pause_robot`
 before allowing movement. A missing engine is shown as pending. The search-only
 simulation remains independently usable. Adapter tests use synthetic contract
-fixtures; they do not constitute the real expert-system implementation.
+fixtures; separate engine and Streamlit integration tests exercise the actual
+two-rule starter. See [EXPERT_SYSTEM.md](docs/EXPERT_SYSTEM.md) for supported
+observations, the pause/resume demonstration, and unfinished teammate deliverables.
 
 ## Collaboration
 
@@ -81,8 +83,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) and
 [MODULE_CONTRACTS.md](docs/MODULE_CONTRACTS.md).
 
 The reserved teammate task is tracked in
-[issue #3](https://github.com/sar1p/AI-TE-303/issues/3). Collaborator access will be
-added after the teammate's GitHub username is confirmed.
+[issue #3](https://github.com/sar1p/AI-TE-303/issues/3). The teammate's
+`zaedalmusthofa` account has collaborator access and an attributed starter commit.
 
 The classroom materials establish the assignment background. The warehouse
 theme and advanced algorithm are this team's design choices. Simulation results
