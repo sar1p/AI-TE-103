@@ -17,8 +17,9 @@ Coordinate overlapping edits through review. Current diagnostic behavior and
 the remaining handoff checks are described in
 [TEAMMATE_TASKS.md](docs/TEAMMATE_TASKS.md). For branch setup, see
 [GITHUB_GUIDE.md](docs/GITHUB_GUIDE.md). Keep [issue #3](https://github.com/sar1p/AI-TE-303/issues/3)
-open until the required UI and CLI runs, fresh-clone reproduction, and rehearsal
-have been completed and recorded.
+open for the teammate's independent review, laptop reproduction, and rehearsal.
+The [completed-system snapshot](docs/evidence/completed-system-2026-10-11/README.md)
+already records the lead's clean-clone checks, CLI/UI runs, and screen recording.
 
 ## Daily workflow
 

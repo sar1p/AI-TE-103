@@ -66,7 +66,12 @@ planner. Exports include the raw inputs and knowledge-base provenance/hash.
 Verified running results, source metadata, real screenshots, and clean-clone
 checks are in [docs/evidence/](docs/evidence/README.md).
 
-![Live route repair](docs/evidence/route-demo.jpg)
+The [completed-system snapshot](docs/evidence/completed-system-2026-10-11/README.md)
+records 167 passing tests, eight matching diagnostic fixtures, an actual
+pause/correction browser demo, and a silent screen recording from a clean clone.
+The teammate's independent review and laptop rehearsal remain the human handoff.
+
+![Warehouse route after diagnosis correction](docs/evidence/completed-system-2026-10-11/warehouse-overview-wide.jpg)
 
 ## Why these methods
 
