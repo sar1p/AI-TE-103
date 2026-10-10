@@ -1,0 +1,19 @@
+{
+  "checked_at_utc": "2026-10-10T20:50:31.657001+00:00",
+  "source_commit": "8e09254fac105335fd3ea5658f6e208de3cfc203",
+  "api": "https://api.github.com/repos/sar1p/AI-TE-303/contributors",
+  "contributors": [
+    {
+      "login": "sar1p",
+      "contributions": 16,
+      "html_url": "https://github.com/sar1p"
+    },
+    {
+      "login": "zaedalmusthofa",
+      "contributions": 1,
+      "html_url": "https://github.com/zaedalmusthofa"
+    }
+  ],
+  "preserved_teammate_commit": "a57eebd8e93cb00a899ee792146707f96e750046",
+  "pull_request": "https://github.com/sar1p/AI-TE-303/pull/5"
+}

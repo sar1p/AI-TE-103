@@ -38,15 +38,65 @@ finished. `run_demo.bat` is a Windows shortcut once the environment is installed
    is never blocked.
 6. Try a manual cell change. Row and column are zero-based. Blocking the robot
    or goal is rejected. Reset before replaying scripted events after manual edits.
-7. Inspect **Diagnostics**. While the teammate's engine is absent, the app shows
-   **Expert system pending**. Enable the diagnostic safety gate to show that
-   missing evidence cannot authorize movement. Search-only mode remains usable.
+7. Demonstrate the integrated diagnostic starter using the sequence below.
+   Its two illustrative rules are working; external rule data and actual
+   forward chaining remain pending.
 8. Download actual session JSON from **Evidence & methods**. It contains maps,
-   events, computed routes, metrics, raw observations text, and source metadata.
+   events, computed routes, metrics, raw observations text, the diagnosis,
+   diagnostic gate setting, and source metadata.
 
 The planner survives ordinary interface reruns, overlay changes, and downloads.
 A browser reload or Reset creates a new session. The live UI computes results;
 it does not display pretyped benchmark values.
+
+## Diagnostic pause and correction
+
+Reset **Warehouse Corridor Changes**, select **Diagnostics**, and enable
+**Apply diagnostic safety gate**. Editing the observations and leaving the text
+box triggers a fresh diagnosis; allow the result to finish updating.
+
+1. Enter `{}`. The status is `insufficient_evidence`, the three observations
+   are missing, and the gate prevents movement.
+2. Enter the motor case:
+
+   ```json
+   {
+     "motor_temperature": "high",
+     "movement_status": "stalled",
+     "sensor_lidar": "clear"
+   }
+   ```
+
+   The result is `ok` with `suspected_motor_overheating`, rule `R01`, an
+   explanation grounded in the two motor observations, and `pause_robot`.
+   Select **Route planner** to show that the movement control is disabled.
+   Map changes remain available. Download this paused session from
+   **Evidence & methods**.
+3. Replace the raw observations with the corrected case:
+
+   ```json
+   {
+     "motor_temperature": "normal",
+     "movement_status": "moving",
+     "sensor_lidar": "clear"
+   }
+   ```
+
+   The previous finding and trace disappear. The result is `ok` with no
+   matching finding, and the gate allows simulated movement.
+4. Return to **Route planner**. Apply the aisle-closing event, then its movement
+   event. The route cost changes from 10 to 12 after closing the aisle, then
+   to 11 after one legal step. The map revision is 1 and the planner retains
+   one initialization. An equally optimal route may use a different first step.
+5. Download the corrected session. Compare its raw observations, empty
+   findings, enabled gate, movement event, and route history with the paused
+   export. Screenshots document the interface; the JSON records actual results.
+
+The `ok` status means the supplied observations meet this starter's input
+requirements. It does not certify that a physical robot is healthy. The gate
+uses a limited simulation policy: a valid diagnosis without `pause_robot`
+allows movement. See [EXPERT_SYSTEM.md](EXPERT_SYSTEM.md) for supported values,
+simultaneous findings, and incomplete or invalid observations.
 
 ## Headless fallback and benchmark
 
@@ -66,14 +116,18 @@ must not be presented as proof of an unchanged committed revision.
 
 The lead explains D* Lite's retained state, changed edges, A* comparison, the
 independent UCS oracle, suitable use cases, and limitations. The teammate explains
-rule sources, forward chaining, traceability, unknown observations, corrected
-facts, and multiple findings. See [TEAMMATE_TASKS.md](TEAMMATE_TASKS.md).
+the current rules, traceability, unknown observations, corrected facts, and
+multiple findings. See [TEAMMATE_TASKS.md](TEAMMATE_TASKS.md).
 
-After the teammate's module is merged, restart the app, input documented
-observations, and demonstrate a real rule chain and its trace. Show `pause_robot`
-preventing movement and a corrected input triggering fresh inference. Run their
-independent CLI and repeat the full test suite. Do not claim this combined demo
-has passed while that module is pending.
+The starter merged through [PR #5](https://github.com/sar1p/AI-TE-303/pull/5).
+It evaluates two independent rules once. Its pause/correction integration has
+been exercised in a clean clone and live browser. This is distinct from the
+remaining forward-chaining engine and standalone diagnostic CLI.
+
+After the expanded module is reviewed and merged, restart the app and show a
+derived conclusion enabling another rule. Run its independent CLI and repeat
+the relevant tests and combined evidence capture. Do not describe the starter's
+single-rule trace as a multi-step inference chain.
 
 ## Submission evidence
 
@@ -86,7 +140,9 @@ live input changes and the displayed route demonstrate interactive behavior.
 The final combined rehearsal must run from a fresh clone on the teammate's
 laptop. Local clean-clone reproduction by the lead is a separate check. Keep large
 recordings outside tracked source. Selected verified results live in
-`docs/evidence/`; temporary development exports live in ignored `artifacts/`.
+[docs/evidence/](evidence/README.md), including the separate
+[integrated starter snapshot](evidence/integrated-starter-2026-10-11/README.md).
+Temporary development exports live in ignored `artifacts/`.
 
 ## Recovery
 

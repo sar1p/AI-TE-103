@@ -6,6 +6,8 @@ names, commits, pull requests, and workflow names.
 The lead owns search, the visual application, shared contracts, and CI. The
 teammate owns the expert system and its tests. See
 [TEAMMATE_TASKS.md](docs/TEAMMATE_TASKS.md) before beginning diagnostic work.
+For a worked setup and feature-branch sequence, see
+[GITHUB_GUIDE.md](docs/GITHUB_GUIDE.md).
 
 ## Daily workflow
 

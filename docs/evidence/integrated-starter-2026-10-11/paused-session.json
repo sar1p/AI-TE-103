@@ -1,0 +1,259 @@
+{
+  "metadata": {
+    "timestamp_utc": "2026-10-10T20:42:05.919243+00:00",
+    "source_commit": "8e09254fac105335fd3ea5658f6e208de3cfc203",
+    "worktree_dirty": false,
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "dependencies": {
+      "streamlit": "1.65.0",
+      "pytest": "9.1.1"
+    },
+    "implementation": "cpython"
+  },
+  "schema_version": 1,
+  "scope": "search-only route planning",
+  "created_at": "2026-10-10T20:41:32.073939+00:00",
+  "scenario": {
+    "id": "corridor-changes",
+    "title": "Warehouse Corridor Changes",
+    "description": "Synthetic warehouse shelves frame a central aisle. Close one central cell, move along the replanned route, reopen the aisle, and continue.",
+    "rows": [
+      ".............",
+      ".###...###...",
+      ".###...###...",
+      ".............",
+      ".............",
+      "...###.###...",
+      "...###.###...",
+      "............."
+    ],
+    "start": [
+      4,
+      1
+    ],
+    "goal": [
+      4,
+      11
+    ],
+    "events": [
+      {
+        "id": "corridor-close-center-aisle",
+        "type": "map",
+        "label": "Block the central aisle",
+        "changes": [
+          {
+            "cell": [
+              4,
+              6
+            ],
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "id": "corridor-step-around-shelves",
+        "type": "move",
+        "label": "Move one legal step on the replanned route"
+      },
+      {
+        "id": "corridor-reopen-center-aisle",
+        "type": "map",
+        "label": "Reopen the central aisle",
+        "changes": [
+          {
+            "cell": [
+              4,
+              6
+            ],
+            "blocked": false
+          }
+        ]
+      },
+      {
+        "id": "corridor-continue-route",
+        "type": "move",
+        "label": "Continue one legal route step"
+      }
+    ]
+  },
+  "applied_events": [],
+  "records": [
+    {
+      "event_id": "initial",
+      "label": "Initial planning",
+      "map_revision": 0,
+      "rows": [
+        ".............",
+        ".###...###...",
+        ".###...###...",
+        ".............",
+        ".............",
+        "...###.###...",
+        "...###.###...",
+        "............."
+      ],
+      "start": [
+        4,
+        1
+      ],
+      "goal": [
+        4,
+        11
+      ],
+      "k_m": 0,
+      "initialization_count": 1,
+      "dstar_lite": {
+        "status": "found",
+        "path": [
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            4,
+            10
+          ],
+          [
+            4,
+            11
+          ]
+        ],
+        "cost": 10,
+        "metrics": {
+          "processed_states": 11,
+          "queue_pops": 11,
+          "queue_pushes": 29,
+          "elapsed_ms": 1.2150000111432746
+        },
+        "message": ""
+      },
+      "astar": {
+        "status": "found",
+        "path": [
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            4,
+            10
+          ],
+          [
+            4,
+            11
+          ]
+        ],
+        "cost": 10,
+        "metrics": {
+          "processed_states": 11,
+          "queue_pops": 11,
+          "queue_pushes": 26,
+          "elapsed_ms": 0.2142000012099743
+        },
+        "message": ""
+      }
+    }
+  ],
+  "diagnostics": {
+    "adapter_status": "ready",
+    "result": {
+      "status": "ok",
+      "findings": [
+        {
+          "condition": "suspected_motor_overheating",
+          "rule_ids": [
+            "R01"
+          ]
+        }
+      ],
+      "rule_trace": [
+        {
+          "rule_id": "R01",
+          "premises": {
+            "motor_temperature": "high",
+            "movement_status": "stalled"
+          },
+          "conclusion": {
+            "condition": "suspected_motor_overheating",
+            "pause_robot": true
+          },
+          "reason": "Illustrative rule: a high motor temperature and stalled movement support suspected motor overheating; they do not establish the cause."
+        }
+      ],
+      "recommendations": [
+        {
+          "action": "pause_robot",
+          "reason": "Pause the robot and inspect motor temperature and drive load."
+        }
+      ],
+      "missing_facts": []
+    },
+    "safety_gate_enabled": true,
+    "raw_observations_json": "{\n  \"motor_temperature\": \"high\",\n  \"movement_status\": \"stalled\",\n  \"sensor_lidar\": \"clear\"\n}"
+  }
+}

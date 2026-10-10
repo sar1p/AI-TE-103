@@ -80,7 +80,8 @@ observations, the pause/resume demonstration, and unfinished teammate deliverabl
 Use feature branches, tested commits, pull requests, and merge commits.
 The teammate should use their own account and implement their reserved module.
 See [CONTRIBUTING.md](CONTRIBUTING.md) and
-[MODULE_CONTRACTS.md](docs/MODULE_CONTRACTS.md).
+[MODULE_CONTRACTS.md](docs/MODULE_CONTRACTS.md). New GitHub users can follow
+[GITHUB_GUIDE.md](docs/GITHUB_GUIDE.md) for setup, commits, pushes, PRs, and recovery.
 
 The reserved teammate task is tracked in
 [issue #3](https://github.com/sar1p/AI-TE-303/issues/3). The teammate's

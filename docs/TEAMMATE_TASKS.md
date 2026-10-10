@@ -2,6 +2,13 @@
 
 Status: partial implementation. The teammate added two illustrative diagnostic rules; an integration correction supplies contract validation and real behavior tests. External rule data, genuine forward chaining, an independent CLI, and final presentation evidence remain pending. See [EXPERT_SYSTEM.md](EXPERT_SYSTEM.md) for the starter's exact scope and [MODULE_CONTRACTS.md](MODULE_CONTRACTS.md) for the frozen dictionary interface. Working delivery target: Sunday, October 11, 2026; exact submission time is unconfirmed.
 
+The repaired starter merged through [PR #5](https://github.com/sar1p/AI-TE-303/pull/5).
+The teammate's original commit remains in `main`, and GitHub now records
+`zaedalmusthofa` as a contributor. The integrated starter passes 119 tests in
+main CI and a fresh clone; its live pause/correction demo is recorded in
+[the integrated evidence snapshot](evidence/integrated-starter-2026-10-11/README.md).
+These checks establish the starter milestone, not the expanded module's completion.
+
 ## Your responsibility
 
 Build the warehouse robot expert-system module. Your work includes code, knowledge-base data, meaningful tests, examples, and an explanation of the diagnosis process for the presentation.
