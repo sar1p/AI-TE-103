@@ -1,0 +1,213 @@
+{
+  "metadata": {
+    "timestamp_utc": "2026-10-10T20:41:17.460217+00:00",
+    "source_commit": "8e09254fac105335fd3ea5658f6e208de3cfc203",
+    "worktree_dirty": false,
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "dependencies": {
+      "streamlit": "1.65.0",
+      "pytest": "9.1.1"
+    },
+    "implementation": "cpython"
+  },
+  "records": [
+    {
+      "case": "empty_observations",
+      "facts": {},
+      "adapter_status": "ready",
+      "result": {
+        "status": "insufficient_evidence",
+        "findings": [],
+        "rule_trace": [],
+        "recommendations": [],
+        "missing_facts": [
+          "motor_temperature",
+          "movement_status",
+          "sensor_lidar"
+        ]
+      },
+      "can_move": false
+    },
+    {
+      "case": "motor_fault",
+      "facts": {
+        "motor_temperature": "high",
+        "movement_status": "stalled",
+        "sensor_lidar": "clear"
+      },
+      "adapter_status": "ready",
+      "result": {
+        "status": "ok",
+        "findings": [
+          {
+            "condition": "suspected_motor_overheating",
+            "rule_ids": [
+              "R01"
+            ]
+          }
+        ],
+        "rule_trace": [
+          {
+            "rule_id": "R01",
+            "premises": {
+              "motor_temperature": "high",
+              "movement_status": "stalled"
+            },
+            "conclusion": {
+              "condition": "suspected_motor_overheating",
+              "pause_robot": true
+            },
+            "reason": "Illustrative rule: a high motor temperature and stalled movement support suspected motor overheating; they do not establish the cause."
+          }
+        ],
+        "recommendations": [
+          {
+            "action": "pause_robot",
+            "reason": "Pause the robot and inspect motor temperature and drive load."
+          }
+        ],
+        "missing_facts": []
+      },
+      "can_move": false
+    },
+    {
+      "case": "lidar_fault",
+      "facts": {
+        "motor_temperature": "normal",
+        "movement_status": "moving",
+        "sensor_lidar": "blocked"
+      },
+      "adapter_status": "ready",
+      "result": {
+        "status": "ok",
+        "findings": [
+          {
+            "condition": "lidar_obstruction",
+            "rule_ids": [
+              "R02"
+            ]
+          }
+        ],
+        "rule_trace": [
+          {
+            "rule_id": "R02",
+            "premises": {
+              "sensor_lidar": "blocked"
+            },
+            "conclusion": {
+              "condition": "lidar_obstruction",
+              "pause_robot": true
+            },
+            "reason": "Illustrative rule: a reported lidar obstruction supports inspecting the sensor before resuming simulated movement."
+          }
+        ],
+        "recommendations": [
+          {
+            "action": "pause_robot",
+            "reason": "Pause the robot and inspect the lidar sensor for an obstruction."
+          }
+        ],
+        "missing_facts": []
+      },
+      "can_move": false
+    },
+    {
+      "case": "simultaneous_faults",
+      "facts": {
+        "motor_temperature": "high",
+        "movement_status": "stalled",
+        "sensor_lidar": "blocked"
+      },
+      "adapter_status": "ready",
+      "result": {
+        "status": "ok",
+        "findings": [
+          {
+            "condition": "suspected_motor_overheating",
+            "rule_ids": [
+              "R01"
+            ]
+          },
+          {
+            "condition": "lidar_obstruction",
+            "rule_ids": [
+              "R02"
+            ]
+          }
+        ],
+        "rule_trace": [
+          {
+            "rule_id": "R01",
+            "premises": {
+              "motor_temperature": "high",
+              "movement_status": "stalled"
+            },
+            "conclusion": {
+              "condition": "suspected_motor_overheating",
+              "pause_robot": true
+            },
+            "reason": "Illustrative rule: a high motor temperature and stalled movement support suspected motor overheating; they do not establish the cause."
+          },
+          {
+            "rule_id": "R02",
+            "premises": {
+              "sensor_lidar": "blocked"
+            },
+            "conclusion": {
+              "condition": "lidar_obstruction",
+              "pause_robot": true
+            },
+            "reason": "Illustrative rule: a reported lidar obstruction supports inspecting the sensor before resuming simulated movement."
+          }
+        ],
+        "recommendations": [
+          {
+            "action": "pause_robot",
+            "reason": "Pause the robot and inspect motor temperature and drive load."
+          },
+          {
+            "action": "pause_robot",
+            "reason": "Pause the robot and inspect the lidar sensor for an obstruction."
+          }
+        ],
+        "missing_facts": []
+      },
+      "can_move": false
+    },
+    {
+      "case": "corrected_observations",
+      "facts": {
+        "motor_temperature": "normal",
+        "movement_status": "moving",
+        "sensor_lidar": "clear"
+      },
+      "adapter_status": "ready",
+      "result": {
+        "status": "ok",
+        "findings": [],
+        "rule_trace": [],
+        "recommendations": [],
+        "missing_facts": []
+      },
+      "can_move": true
+    },
+    {
+      "case": "invalid_values",
+      "facts": {
+        "motor_temperature": [],
+        "movement_status": 17,
+        "sensor_lidar": true
+      },
+      "adapter_status": "ready",
+      "result": {
+        "status": "invalid_input",
+        "findings": [],
+        "rule_trace": [],
+        "recommendations": [],
+        "missing_facts": []
+      },
+      "can_move": false
+    }
+  ]
+}

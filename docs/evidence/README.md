@@ -1,4 +1,10 @@
-# Verified running evidence
+# Verified running evidence: historical search snapshot
+
+This folder's original artifacts record the search-only revision below. The
+later integrated two-rule diagnostic starter is recorded separately in
+[integrated-starter-2026-10-11/](integrated-starter-2026-10-11/README.md), with
+119 passing tests, actual pause/correction exports, and current contributor
+evidence. Historical artifacts and measurements are retained unchanged.
 
 Recorded source: [`9a724d6`](https://github.com/sar1p/AI-TE-303/commit/9a724d68378242e4587b7536bffe66889c9bc86e).
 Recorded on October 9, 2026, using Python 3.12.14,
@@ -21,9 +27,9 @@ publication do not change the measured search algorithms.
   12, map revision 1.
 
 These checks cover the lead-owned search, application, adapter, and export tools.
-The actual expert-system engine is pending. Adapter test functions are synthetic
-contract fixtures. A screen recording and the final combined rehearsal on the
-teammate's laptop are still team deliverables.
+At this recorded revision, the actual expert-system engine was pending and
+adapter test functions were synthetic contract fixtures. A screen recording and
+the final combined rehearsal on the teammate's laptop remain team deliverables.
 
 ## Measured comparison
 
@@ -71,4 +77,5 @@ to one. This screenshot was captured from the running application.
 
 ![Pending expert-system module](diagnostics-pending.jpg)
 
-No diagnosis is claimed for the pending teammate module.
+This historical screenshot shows the pending module at the recorded revision.
+The later starter evidence is linked above.

@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "timestamp_utc": "2026-10-10T20:41:17.460217+00:00",
+    "source_commit": "8e09254fac105335fd3ea5658f6e208de3cfc203",
+    "worktree_dirty": false,
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "dependencies": {
+      "streamlit": "1.65.0",
+      "pytest": "9.1.1"
+    },
+    "implementation": "cpython"
+  },
+  "environment": "fresh remote clone and fresh virtual environment",
+  "commands": [
+    {
+      "name": "dependencies",
+      "command": [
+        "C:\\Users\\Syaif\\Documents\\ChatGPT\\AI\\.codex-analysis\\ai-te-303-clean-clone-20261011\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0,
+      "log": "dependencies.txt"
+    },
+    {
+      "name": "tests",
+      "command": [
+        "C:\\Users\\Syaif\\Documents\\ChatGPT\\AI\\.codex-analysis\\ai-te-303-clean-clone-20261011\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exit_code": 0,
+      "log": "tests.txt"
+    },
+    {
+      "name": "search_cli",
+      "command": [
+        "C:\\Users\\Syaif\\Documents\\ChatGPT\\AI\\.codex-analysis\\ai-te-303-clean-clone-20261011\\.venv\\Scripts\\python.exe",
+        "-m",
+        "search_algorithm.main",
+        "--output",
+        "artifacts\\integrated-validation\\single-replay.json"
+      ],
+      "exit_code": 0,
+      "log": "search_cli.txt"
+    },
+    {
+      "name": "replays",
+      "command": [
+        "C:\\Users\\Syaif\\Documents\\ChatGPT\\AI\\.codex-analysis\\ai-te-303-clean-clone-20261011\\.venv\\Scripts\\python.exe",
+        "tools/replay_demo.py",
+        "--output",
+        "artifacts\\integrated-validation\\replays"
+      ],
+      "exit_code": 0,
+      "log": "replays.txt"
+    },
+    {
+      "name": "benchmark",
+      "command": [
+        "C:\\Users\\Syaif\\Documents\\ChatGPT\\AI\\.codex-analysis\\ai-te-303-clean-clone-20261011\\.venv\\Scripts\\python.exe",
+        "tools/benchmark_search.py",
+        "--output",
+        "artifacts\\integrated-validation\\benchmark",
+        "--repeats",
+        "1"
+      ],
+      "exit_code": 0,
+      "log": "benchmark.txt"
+    }
+  ],
+  "diagnostic_cases": 6,
+  "scope": "Search and integrated two-rule diagnostic starter; forward chaining remains pending"
+}
