@@ -1,0 +1,6021 @@
+{
+  "schema_version": 1,
+  "scope": "search-only; diagnostic inference not run",
+  "diagnostic_inference_included": false,
+  "metadata": {
+    "timestamp_utc": "2026-10-10T21:57:35.200411+00:00",
+    "source_commit": "118e95b50c2aa3196980435075a21ed6be789603",
+    "worktree_dirty": false,
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "dependencies": {
+      "streamlit": "1.65.0",
+      "pytest": "9.1.1"
+    },
+    "implementation": "cpython"
+  },
+  "selection": "all_named_scenarios",
+  "scenario_count": 4,
+  "runs": [
+    {
+      "schema_version": 1,
+      "scope": "search-only; diagnostic inference not run",
+      "created_at": "2026-10-10T21:57:34.925705+00:00",
+      "scenario": {
+        "id": "corridor-changes",
+        "title": "Warehouse Corridor Changes",
+        "description": "Synthetic warehouse shelves frame a central aisle. Close one central cell, move along the replanned route, reopen the aisle, and continue.",
+        "rows": [
+          ".............",
+          ".###...###...",
+          ".###...###...",
+          ".............",
+          ".............",
+          "...###.###...",
+          "...###.###...",
+          "............."
+        ],
+        "start": [
+          4,
+          1
+        ],
+        "goal": [
+          4,
+          11
+        ],
+        "events": [
+          {
+            "id": "corridor-close-center-aisle",
+            "type": "map",
+            "label": "Block the central aisle",
+            "changes": [
+              {
+                "cell": [
+                  4,
+                  6
+                ],
+                "blocked": true
+              }
+            ]
+          },
+          {
+            "id": "corridor-step-around-shelves",
+            "type": "move",
+            "label": "Move one legal step on the replanned route"
+          },
+          {
+            "id": "corridor-reopen-center-aisle",
+            "type": "map",
+            "label": "Reopen the central aisle",
+            "changes": [
+              {
+                "cell": [
+                  4,
+                  6
+                ],
+                "blocked": false
+              }
+            ]
+          },
+          {
+            "id": "corridor-continue-route",
+            "type": "move",
+            "label": "Continue one legal route step"
+          }
+        ]
+      },
+      "applied_events": [
+        {
+          "changes": [
+            {
+              "blocked": true,
+              "cell": [
+                4,
+                6
+              ]
+            }
+          ],
+          "id": "corridor-close-center-aisle",
+          "label": "Block the central aisle",
+          "type": "map"
+        },
+        {
+          "id": "corridor-step-around-shelves",
+          "label": "Move one legal step on the replanned route",
+          "type": "move"
+        },
+        {
+          "changes": [
+            {
+              "blocked": false,
+              "cell": [
+                4,
+                6
+              ]
+            }
+          ],
+          "id": "corridor-reopen-center-aisle",
+          "label": "Reopen the central aisle",
+          "type": "map"
+        },
+        {
+          "id": "corridor-continue-route",
+          "label": "Continue one legal route step",
+          "type": "move"
+        }
+      ],
+      "records": [
+        {
+          "event_id": "initial",
+          "label": "Initial planning",
+          "map_revision": 0,
+          "rows": [
+            ".............",
+            ".###...###...",
+            ".###...###...",
+            ".............",
+            ".............",
+            "...###.###...",
+            "...###.###...",
+            "............."
+          ],
+          "start": [
+            4,
+            1
+          ],
+          "goal": [
+            4,
+            11
+          ],
+          "k_m": 0,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                4,
+                1
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                4,
+                4
+              ],
+              [
+                4,
+                5
+              ],
+              [
+                4,
+                6
+              ],
+              [
+                4,
+                7
+              ],
+              [
+                4,
+                8
+              ],
+              [
+                4,
+                9
+              ],
+              [
+                4,
+                10
+              ],
+              [
+                4,
+                11
+              ]
+            ],
+            "cost": 10,
+            "metrics": {
+              "processed_states": 11,
+              "queue_pops": 11,
+              "queue_pushes": 29,
+              "elapsed_ms": 0.9098000009544194
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                4,
+                1
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                4,
+                4
+              ],
+              [
+                4,
+                5
+              ],
+              [
+                4,
+                6
+              ],
+              [
+                4,
+                7
+              ],
+              [
+                4,
+                8
+              ],
+              [
+                4,
+                9
+              ],
+              [
+                4,
+                10
+              ],
+              [
+                4,
+                11
+              ]
+            ],
+            "cost": 10,
+            "metrics": {
+              "processed_states": 11,
+              "queue_pops": 11,
+              "queue_pushes": 26,
+              "elapsed_ms": 0.1579000090714544
+            },
+            "message": ""
+          }
+        },
+        {
+          "event_id": "corridor-close-center-aisle",
+          "label": "Block the central aisle",
+          "map_revision": 1,
+          "rows": [
+            ".............",
+            ".###...###...",
+            ".###...###...",
+            ".............",
+            "......#......",
+            "...###.###...",
+            "...###.###...",
+            "............."
+          ],
+          "start": [
+            4,
+            1
+          ],
+          "goal": [
+            4,
+            11
+          ],
+          "k_m": 0,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                4,
+                1
+              ],
+              [
+                3,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                3,
+                7
+              ],
+              [
+                3,
+                8
+              ],
+              [
+                3,
+                9
+              ],
+              [
+                3,
+                10
+              ],
+              [
+                3,
+                11
+              ],
+              [
+                4,
+                11
+              ]
+            ],
+            "cost": 12,
+            "metrics": {
+              "processed_states": 25,
+              "queue_pops": 49,
+              "queue_pushes": 46,
+              "elapsed_ms": 1.6497999895364046
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                4,
+                1
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                4,
+                4
+              ],
+              [
+                4,
+                5
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                3,
+                7
+              ],
+              [
+                3,
+                8
+              ],
+              [
+                3,
+                9
+              ],
+              [
+                3,
+                10
+              ],
+              [
+                3,
+                11
+              ],
+              [
+                4,
+                11
+              ]
+            ],
+            "cost": 12,
+            "metrics": {
+              "processed_states": 24,
+              "queue_pops": 24,
+              "queue_pushes": 35,
+              "elapsed_ms": 0.31060000765137374
+            },
+            "message": ""
+          }
+        },
+        {
+          "event_id": "corridor-step-around-shelves",
+          "label": "Move one legal step on the replanned route",
+          "map_revision": 1,
+          "rows": [
+            ".............",
+            ".###...###...",
+            ".###...###...",
+            ".............",
+            "......#......",
+            "...###.###...",
+            "...###.###...",
+            "............."
+          ],
+          "start": [
+            3,
+            1
+          ],
+          "goal": [
+            4,
+            11
+          ],
+          "k_m": 1,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                3,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                3,
+                7
+              ],
+              [
+                3,
+                8
+              ],
+              [
+                3,
+                9
+              ],
+              [
+                3,
+                10
+              ],
+              [
+                3,
+                11
+              ],
+              [
+                4,
+                11
+              ]
+            ],
+            "cost": 11,
+            "metrics": {
+              "processed_states": 0,
+              "queue_pops": 0,
+              "queue_pushes": 0,
+              "elapsed_ms": 0.13410000246949494
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                3,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                3,
+                7
+              ],
+              [
+                3,
+                8
+              ],
+              [
+                3,
+                9
+              ],
+              [
+                3,
+                10
+              ],
+              [
+                3,
+                11
+              ],
+              [
+                4,
+                11
+              ]
+            ],
+            "cost": 11,
+            "metrics": {
+              "processed_states": 21,
+              "queue_pops": 21,
+              "queue_pushes": 32,
+              "elapsed_ms": 0.29319999157451093
+            },
+            "message": ""
+          }
+        },
+        {
+          "event_id": "corridor-reopen-center-aisle",
+          "label": "Reopen the central aisle",
+          "map_revision": 2,
+          "rows": [
+            ".............",
+            ".###...###...",
+            ".###...###...",
+            ".............",
+            ".............",
+            "...###.###...",
+            "...###.###...",
+            "............."
+          ],
+          "start": [
+            3,
+            1
+          ],
+          "goal": [
+            4,
+            11
+          ],
+          "k_m": 1,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                3,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                3,
+                7
+              ],
+              [
+                3,
+                8
+              ],
+              [
+                3,
+                9
+              ],
+              [
+                3,
+                10
+              ],
+              [
+                3,
+                11
+              ],
+              [
+                4,
+                11
+              ]
+            ],
+            "cost": 11,
+            "metrics": {
+              "processed_states": 6,
+              "queue_pops": 6,
+              "queue_pushes": 10,
+              "elapsed_ms": 0.5444000125862658
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                3,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                3,
+                7
+              ],
+              [
+                3,
+                8
+              ],
+              [
+                3,
+                9
+              ],
+              [
+                3,
+                10
+              ],
+              [
+                3,
+                11
+              ],
+              [
+                4,
+                11
+              ]
+            ],
+            "cost": 11,
+            "metrics": {
+              "processed_states": 22,
+              "queue_pops": 22,
+              "queue_pushes": 34,
+              "elapsed_ms": 0.364200008334592
+            },
+            "message": ""
+          }
+        },
+        {
+          "event_id": "corridor-continue-route",
+          "label": "Continue one legal route step",
+          "map_revision": 2,
+          "rows": [
+            ".............",
+            ".###...###...",
+            ".###...###...",
+            ".............",
+            ".............",
+            "...###.###...",
+            "...###.###...",
+            "............."
+          ],
+          "start": [
+            3,
+            2
+          ],
+          "goal": [
+            4,
+            11
+          ],
+          "k_m": 2,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                3,
+                2
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                3,
+                7
+              ],
+              [
+                3,
+                8
+              ],
+              [
+                3,
+                9
+              ],
+              [
+                3,
+                10
+              ],
+              [
+                3,
+                11
+              ],
+              [
+                4,
+                11
+              ]
+            ],
+            "cost": 10,
+            "metrics": {
+              "processed_states": 0,
+              "queue_pops": 0,
+              "queue_pushes": 0,
+              "elapsed_ms": 0.12599999899975955
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                3,
+                2
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                3,
+                7
+              ],
+              [
+                3,
+                8
+              ],
+              [
+                3,
+                9
+              ],
+              [
+                3,
+                10
+              ],
+              [
+                3,
+                11
+              ],
+              [
+                4,
+                11
+              ]
+            ],
+            "cost": 10,
+            "metrics": {
+              "processed_states": 20,
+              "queue_pops": 20,
+              "queue_pushes": 31,
+              "elapsed_ms": 0.23509998572990298
+            },
+            "message": ""
+          }
+        }
+      ],
+      "diagnostic_inference_included": false,
+      "source_file": "data/search_scenarios/corridor_changes.json"
+    },
+    {
+      "schema_version": 1,
+      "scope": "search-only; diagnostic inference not run",
+      "created_at": "2026-10-10T21:57:34.933231+00:00",
+      "scenario": {
+        "id": "movement-reuse",
+        "title": "Movement and Local Map Reuse",
+        "description": "A medium synthetic warehouse has shelf blocks and open cross-aisles. The robot advances several steps while two local aisle closures are applied and reversed.",
+        "rows": [
+          "........................",
+          "..###..###...###...###..",
+          "..###..###...###...###..",
+          "..###..###...###...###..",
+          "..###..###...###...###..",
+          "........................",
+          "..###..###...###...###..",
+          "..###..###...###...###..",
+          "..###..###...###...###..",
+          "..###..###...###...###..",
+          "........................",
+          "..###..###...###...###..",
+          "..###..###...###...###..",
+          "..###..###...###...###..",
+          "..###..###...###...###..",
+          "........................"
+        ],
+        "start": [
+          5,
+          1
+        ],
+        "goal": [
+          10,
+          22
+        ],
+        "events": [
+          {
+            "id": "movement-step-one",
+            "type": "move",
+            "label": "Advance one legal route step"
+          },
+          {
+            "id": "movement-close-east-cell",
+            "type": "map",
+            "label": "Close a cell in the cross-aisle",
+            "changes": [
+              {
+                "cell": [
+                  5,
+                  18
+                ],
+                "blocked": true
+              }
+            ]
+          },
+          {
+            "id": "movement-step-two",
+            "type": "move",
+            "label": "Advance one legal route step"
+          },
+          {
+            "id": "movement-step-three",
+            "type": "move",
+            "label": "Advance one more legal route step"
+          },
+          {
+            "id": "movement-reopen-east-cell",
+            "type": "map",
+            "label": "Reopen the cross-aisle cell",
+            "changes": [
+              {
+                "cell": [
+                  5,
+                  18
+                ],
+                "blocked": false
+              }
+            ]
+          },
+          {
+            "id": "movement-step-four",
+            "type": "move",
+            "label": "Advance one legal route step"
+          },
+          {
+            "id": "movement-close-center-cell",
+            "type": "map",
+            "label": "Close another cross-aisle cell",
+            "changes": [
+              {
+                "cell": [
+                  5,
+                  12
+                ],
+                "blocked": true
+              }
+            ]
+          },
+          {
+            "id": "movement-step-five",
+            "type": "move",
+            "label": "Advance one legal route step"
+          },
+          {
+            "id": "movement-reopen-center-cell",
+            "type": "map",
+            "label": "Reopen the cross-aisle cell",
+            "changes": [
+              {
+                "cell": [
+                  5,
+                  12
+                ],
+                "blocked": false
+              }
+            ]
+          },
+          {
+            "id": "movement-step-six",
+            "type": "move",
+            "label": "Advance one final legal route step"
+          }
+        ]
+      },
+      "applied_events": [
+        {
+          "id": "movement-step-one",
+          "label": "Advance one legal route step",
+          "type": "move"
+        },
+        {
+          "changes": [
+            {
+              "blocked": true,
+              "cell": [
+                5,
+                18
+              ]
+            }
+          ],
+          "id": "movement-close-east-cell",
+          "label": "Close a cell in the cross-aisle",
+          "type": "map"
+        },
+        {
+          "id": "movement-step-two",
+          "label": "Advance one legal route step",
+          "type": "move"
+        },
+        {
+          "id": "movement-step-three",
+          "label": "Advance one more legal route step",
+          "type": "move"
+        },
+        {
+          "changes": [
+            {
+              "blocked": false,
+              "cell": [
+                5,
+                18
+              ]
+            }
+          ],
+          "id": "movement-reopen-east-cell",
+          "label": "Reopen the cross-aisle cell",
+          "type": "map"
+        },
+        {
+          "id": "movement-step-four",
+          "label": "Advance one legal route step",
+          "type": "move"
+        },
+        {
+          "changes": [
+            {
+              "blocked": true,
+              "cell": [
+                5,
+                12
+              ]
+            }
+          ],
+          "id": "movement-close-center-cell",
+          "label": "Close another cross-aisle cell",
+          "type": "map"
+        },
+        {
+          "id": "movement-step-five",
+          "label": "Advance one legal route step",
+          "type": "move"
+        },
+        {
+          "changes": [
+            {
+              "blocked": false,
+              "cell": [
+                5,
+                12
+              ]
+            }
+          ],
+          "id": "movement-reopen-center-cell",
+          "label": "Reopen the cross-aisle cell",
+          "type": "map"
+        },
+        {
+          "id": "movement-step-six",
+          "label": "Advance one final legal route step",
+          "type": "move"
+        }
+      ],
+      "records": [
+        {
+          "event_id": "initial",
+          "label": "Initial planning",
+          "map_revision": 0,
+          "rows": [
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................"
+          ],
+          "start": [
+            5,
+            1
+          ],
+          "goal": [
+            10,
+            22
+          ],
+          "k_m": 0,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                2
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                5,
+                12
+              ],
+              [
+                5,
+                13
+              ],
+              [
+                5,
+                14
+              ],
+              [
+                5,
+                15
+              ],
+              [
+                5,
+                16
+              ],
+              [
+                5,
+                17
+              ],
+              [
+                5,
+                18
+              ],
+              [
+                5,
+                19
+              ],
+              [
+                5,
+                20
+              ],
+              [
+                5,
+                21
+              ],
+              [
+                5,
+                22
+              ],
+              [
+                6,
+                22
+              ],
+              [
+                7,
+                22
+              ],
+              [
+                8,
+                22
+              ],
+              [
+                9,
+                22
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 26,
+            "metrics": {
+              "processed_states": 84,
+              "queue_pops": 113,
+              "queue_pushes": 145,
+              "elapsed_ms": 6.584399990970269
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                2
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                5,
+                12
+              ],
+              [
+                5,
+                13
+              ],
+              [
+                5,
+                14
+              ],
+              [
+                5,
+                15
+              ],
+              [
+                5,
+                16
+              ],
+              [
+                5,
+                17
+              ],
+              [
+                5,
+                18
+              ],
+              [
+                5,
+                19
+              ],
+              [
+                5,
+                20
+              ],
+              [
+                5,
+                21
+              ],
+              [
+                5,
+                22
+              ],
+              [
+                6,
+                22
+              ],
+              [
+                7,
+                22
+              ],
+              [
+                8,
+                22
+              ],
+              [
+                9,
+                22
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 26,
+            "metrics": {
+              "processed_states": 84,
+              "queue_pops": 84,
+              "queue_pushes": 114,
+              "elapsed_ms": 1.2400999839883298
+            },
+            "message": ""
+          }
+        },
+        {
+          "event_id": "movement-step-one",
+          "label": "Advance one legal route step",
+          "map_revision": 0,
+          "rows": [
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................"
+          ],
+          "start": [
+            5,
+            2
+          ],
+          "goal": [
+            10,
+            22
+          ],
+          "k_m": 1,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                2
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                5,
+                12
+              ],
+              [
+                5,
+                13
+              ],
+              [
+                5,
+                14
+              ],
+              [
+                5,
+                15
+              ],
+              [
+                5,
+                16
+              ],
+              [
+                5,
+                17
+              ],
+              [
+                5,
+                18
+              ],
+              [
+                5,
+                19
+              ],
+              [
+                5,
+                20
+              ],
+              [
+                5,
+                21
+              ],
+              [
+                5,
+                22
+              ],
+              [
+                6,
+                22
+              ],
+              [
+                7,
+                22
+              ],
+              [
+                8,
+                22
+              ],
+              [
+                9,
+                22
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 25,
+            "metrics": {
+              "processed_states": 0,
+              "queue_pops": 0,
+              "queue_pushes": 0,
+              "elapsed_ms": 0.3103999770246446
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                2
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                5,
+                12
+              ],
+              [
+                5,
+                13
+              ],
+              [
+                5,
+                14
+              ],
+              [
+                5,
+                15
+              ],
+              [
+                5,
+                16
+              ],
+              [
+                5,
+                17
+              ],
+              [
+                5,
+                18
+              ],
+              [
+                5,
+                19
+              ],
+              [
+                5,
+                20
+              ],
+              [
+                5,
+                21
+              ],
+              [
+                5,
+                22
+              ],
+              [
+                6,
+                22
+              ],
+              [
+                7,
+                22
+              ],
+              [
+                8,
+                22
+              ],
+              [
+                9,
+                22
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 25,
+            "metrics": {
+              "processed_states": 75,
+              "queue_pops": 75,
+              "queue_pushes": 99,
+              "elapsed_ms": 0.9433999948669225
+            },
+            "message": ""
+          }
+        },
+        {
+          "event_id": "movement-close-east-cell",
+          "label": "Close a cell in the cross-aisle",
+          "map_revision": 1,
+          "rows": [
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..................#.....",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................"
+          ],
+          "start": [
+            5,
+            2
+          ],
+          "goal": [
+            10,
+            22
+          ],
+          "k_m": 1,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                2
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                5,
+                12
+              ],
+              [
+                5,
+                13
+              ],
+              [
+                5,
+                14
+              ],
+              [
+                5,
+                15
+              ],
+              [
+                5,
+                16
+              ],
+              [
+                5,
+                17
+              ],
+              [
+                6,
+                17
+              ],
+              [
+                6,
+                18
+              ],
+              [
+                7,
+                18
+              ],
+              [
+                8,
+                18
+              ],
+              [
+                9,
+                18
+              ],
+              [
+                10,
+                18
+              ],
+              [
+                10,
+                19
+              ],
+              [
+                10,
+                20
+              ],
+              [
+                10,
+                21
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 25,
+            "metrics": {
+              "processed_states": 1,
+              "queue_pops": 1,
+              "queue_pushes": 1,
+              "elapsed_ms": 0.3701999958138913
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                2
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                5,
+                12
+              ],
+              [
+                5,
+                13
+              ],
+              [
+                5,
+                14
+              ],
+              [
+                5,
+                15
+              ],
+              [
+                5,
+                16
+              ],
+              [
+                5,
+                17
+              ],
+              [
+                6,
+                17
+              ],
+              [
+                6,
+                18
+              ],
+              [
+                7,
+                18
+              ],
+              [
+                8,
+                18
+              ],
+              [
+                9,
+                18
+              ],
+              [
+                10,
+                18
+              ],
+              [
+                10,
+                19
+              ],
+              [
+                10,
+                20
+              ],
+              [
+                10,
+                21
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 25,
+            "metrics": {
+              "processed_states": 66,
+              "queue_pops": 66,
+              "queue_pushes": 83,
+              "elapsed_ms": 0.8348000119440258
+            },
+            "message": ""
+          }
+        },
+        {
+          "event_id": "movement-step-two",
+          "label": "Advance one legal route step",
+          "map_revision": 1,
+          "rows": [
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..................#.....",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................"
+          ],
+          "start": [
+            5,
+            3
+          ],
+          "goal": [
+            10,
+            22
+          ],
+          "k_m": 2,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                3
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                5,
+                12
+              ],
+              [
+                5,
+                13
+              ],
+              [
+                5,
+                14
+              ],
+              [
+                5,
+                15
+              ],
+              [
+                5,
+                16
+              ],
+              [
+                5,
+                17
+              ],
+              [
+                6,
+                17
+              ],
+              [
+                6,
+                18
+              ],
+              [
+                7,
+                18
+              ],
+              [
+                8,
+                18
+              ],
+              [
+                9,
+                18
+              ],
+              [
+                10,
+                18
+              ],
+              [
+                10,
+                19
+              ],
+              [
+                10,
+                20
+              ],
+              [
+                10,
+                21
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 24,
+            "metrics": {
+              "processed_states": 0,
+              "queue_pops": 0,
+              "queue_pushes": 0,
+              "elapsed_ms": 0.4228000179864466
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                3
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                5,
+                12
+              ],
+              [
+                5,
+                13
+              ],
+              [
+                5,
+                14
+              ],
+              [
+                5,
+                15
+              ],
+              [
+                5,
+                16
+              ],
+              [
+                5,
+                17
+              ],
+              [
+                6,
+                17
+              ],
+              [
+                6,
+                18
+              ],
+              [
+                7,
+                18
+              ],
+              [
+                8,
+                18
+              ],
+              [
+                9,
+                18
+              ],
+              [
+                10,
+                18
+              ],
+              [
+                10,
+                19
+              ],
+              [
+                10,
+                20
+              ],
+              [
+                10,
+                21
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 24,
+            "metrics": {
+              "processed_states": 65,
+              "queue_pops": 65,
+              "queue_pushes": 82,
+              "elapsed_ms": 1.124100002925843
+            },
+            "message": ""
+          }
+        },
+        {
+          "event_id": "movement-step-three",
+          "label": "Advance one more legal route step",
+          "map_revision": 1,
+          "rows": [
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..................#.....",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................"
+          ],
+          "start": [
+            5,
+            4
+          ],
+          "goal": [
+            10,
+            22
+          ],
+          "k_m": 3,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                4
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                5,
+                12
+              ],
+              [
+                5,
+                13
+              ],
+              [
+                5,
+                14
+              ],
+              [
+                5,
+                15
+              ],
+              [
+                5,
+                16
+              ],
+              [
+                5,
+                17
+              ],
+              [
+                6,
+                17
+              ],
+              [
+                6,
+                18
+              ],
+              [
+                7,
+                18
+              ],
+              [
+                8,
+                18
+              ],
+              [
+                9,
+                18
+              ],
+              [
+                10,
+                18
+              ],
+              [
+                10,
+                19
+              ],
+              [
+                10,
+                20
+              ],
+              [
+                10,
+                21
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 23,
+            "metrics": {
+              "processed_states": 0,
+              "queue_pops": 0,
+              "queue_pushes": 0,
+              "elapsed_ms": 0.2871000033337623
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                4
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                5,
+                12
+              ],
+              [
+                5,
+                13
+              ],
+              [
+                5,
+                14
+              ],
+              [
+                5,
+                15
+              ],
+              [
+                5,
+                16
+              ],
+              [
+                5,
+                17
+              ],
+              [
+                6,
+                17
+              ],
+              [
+                6,
+                18
+              ],
+              [
+                7,
+                18
+              ],
+              [
+                8,
+                18
+              ],
+              [
+                9,
+                18
+              ],
+              [
+                10,
+                18
+              ],
+              [
+                10,
+                19
+              ],
+              [
+                10,
+                20
+              ],
+              [
+                10,
+                21
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 23,
+            "metrics": {
+              "processed_states": 64,
+              "queue_pops": 64,
+              "queue_pushes": 81,
+              "elapsed_ms": 0.9406000026501715
+            },
+            "message": ""
+          }
+        },
+        {
+          "event_id": "movement-reopen-east-cell",
+          "label": "Reopen the cross-aisle cell",
+          "map_revision": 2,
+          "rows": [
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................"
+          ],
+          "start": [
+            5,
+            4
+          ],
+          "goal": [
+            10,
+            22
+          ],
+          "k_m": 3,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                4
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                5,
+                12
+              ],
+              [
+                5,
+                13
+              ],
+              [
+                5,
+                14
+              ],
+              [
+                5,
+                15
+              ],
+              [
+                5,
+                16
+              ],
+              [
+                5,
+                17
+              ],
+              [
+                5,
+                18
+              ],
+              [
+                5,
+                19
+              ],
+              [
+                5,
+                20
+              ],
+              [
+                5,
+                21
+              ],
+              [
+                5,
+                22
+              ],
+              [
+                6,
+                22
+              ],
+              [
+                7,
+                22
+              ],
+              [
+                8,
+                22
+              ],
+              [
+                9,
+                22
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 23,
+            "metrics": {
+              "processed_states": 1,
+              "queue_pops": 1,
+              "queue_pushes": 2,
+              "elapsed_ms": 0.48889999743551016
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                4
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                5,
+                12
+              ],
+              [
+                5,
+                13
+              ],
+              [
+                5,
+                14
+              ],
+              [
+                5,
+                15
+              ],
+              [
+                5,
+                16
+              ],
+              [
+                5,
+                17
+              ],
+              [
+                5,
+                18
+              ],
+              [
+                5,
+                19
+              ],
+              [
+                5,
+                20
+              ],
+              [
+                5,
+                21
+              ],
+              [
+                5,
+                22
+              ],
+              [
+                6,
+                22
+              ],
+              [
+                7,
+                22
+              ],
+              [
+                8,
+                22
+              ],
+              [
+                9,
+                22
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 23,
+            "metrics": {
+              "processed_states": 73,
+              "queue_pops": 73,
+              "queue_pushes": 97,
+              "elapsed_ms": 1.3217999949119985
+            },
+            "message": ""
+          }
+        },
+        {
+          "event_id": "movement-step-four",
+          "label": "Advance one legal route step",
+          "map_revision": 2,
+          "rows": [
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................"
+          ],
+          "start": [
+            5,
+            5
+          ],
+          "goal": [
+            10,
+            22
+          ],
+          "k_m": 4,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                5
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                5,
+                12
+              ],
+              [
+                5,
+                13
+              ],
+              [
+                5,
+                14
+              ],
+              [
+                5,
+                15
+              ],
+              [
+                5,
+                16
+              ],
+              [
+                5,
+                17
+              ],
+              [
+                5,
+                18
+              ],
+              [
+                5,
+                19
+              ],
+              [
+                5,
+                20
+              ],
+              [
+                5,
+                21
+              ],
+              [
+                5,
+                22
+              ],
+              [
+                6,
+                22
+              ],
+              [
+                7,
+                22
+              ],
+              [
+                8,
+                22
+              ],
+              [
+                9,
+                22
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 22,
+            "metrics": {
+              "processed_states": 0,
+              "queue_pops": 0,
+              "queue_pushes": 0,
+              "elapsed_ms": 0.38380001205950975
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                5
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                5,
+                12
+              ],
+              [
+                5,
+                13
+              ],
+              [
+                5,
+                14
+              ],
+              [
+                5,
+                15
+              ],
+              [
+                5,
+                16
+              ],
+              [
+                5,
+                17
+              ],
+              [
+                5,
+                18
+              ],
+              [
+                5,
+                19
+              ],
+              [
+                5,
+                20
+              ],
+              [
+                5,
+                21
+              ],
+              [
+                5,
+                22
+              ],
+              [
+                6,
+                22
+              ],
+              [
+                7,
+                22
+              ],
+              [
+                8,
+                22
+              ],
+              [
+                9,
+                22
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 22,
+            "metrics": {
+              "processed_states": 72,
+              "queue_pops": 72,
+              "queue_pushes": 96,
+              "elapsed_ms": 1.3117000053171068
+            },
+            "message": ""
+          }
+        },
+        {
+          "event_id": "movement-close-center-cell",
+          "label": "Close another cross-aisle cell",
+          "map_revision": 3,
+          "rows": [
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "............#...........",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................"
+          ],
+          "start": [
+            5,
+            5
+          ],
+          "goal": [
+            10,
+            22
+          ],
+          "k_m": 4,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                5
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                6,
+                11
+              ],
+              [
+                6,
+                12
+              ],
+              [
+                7,
+                12
+              ],
+              [
+                8,
+                12
+              ],
+              [
+                9,
+                12
+              ],
+              [
+                10,
+                12
+              ],
+              [
+                10,
+                13
+              ],
+              [
+                10,
+                14
+              ],
+              [
+                10,
+                15
+              ],
+              [
+                10,
+                16
+              ],
+              [
+                10,
+                17
+              ],
+              [
+                10,
+                18
+              ],
+              [
+                10,
+                19
+              ],
+              [
+                10,
+                20
+              ],
+              [
+                10,
+                21
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 22,
+            "metrics": {
+              "processed_states": 1,
+              "queue_pops": 1,
+              "queue_pushes": 1,
+              "elapsed_ms": 0.47649999032728374
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                5
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                6,
+                11
+              ],
+              [
+                6,
+                12
+              ],
+              [
+                7,
+                12
+              ],
+              [
+                8,
+                12
+              ],
+              [
+                9,
+                12
+              ],
+              [
+                10,
+                12
+              ],
+              [
+                10,
+                13
+              ],
+              [
+                10,
+                14
+              ],
+              [
+                10,
+                15
+              ],
+              [
+                10,
+                16
+              ],
+              [
+                10,
+                17
+              ],
+              [
+                10,
+                18
+              ],
+              [
+                10,
+                19
+              ],
+              [
+                10,
+                20
+              ],
+              [
+                10,
+                21
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 22,
+            "metrics": {
+              "processed_states": 45,
+              "queue_pops": 45,
+              "queue_pushes": 62,
+              "elapsed_ms": 0.8550000202376395
+            },
+            "message": ""
+          }
+        },
+        {
+          "event_id": "movement-step-five",
+          "label": "Advance one legal route step",
+          "map_revision": 3,
+          "rows": [
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "............#...........",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................"
+          ],
+          "start": [
+            5,
+            6
+          ],
+          "goal": [
+            10,
+            22
+          ],
+          "k_m": 5,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                6,
+                11
+              ],
+              [
+                6,
+                12
+              ],
+              [
+                7,
+                12
+              ],
+              [
+                8,
+                12
+              ],
+              [
+                9,
+                12
+              ],
+              [
+                10,
+                12
+              ],
+              [
+                10,
+                13
+              ],
+              [
+                10,
+                14
+              ],
+              [
+                10,
+                15
+              ],
+              [
+                10,
+                16
+              ],
+              [
+                10,
+                17
+              ],
+              [
+                10,
+                18
+              ],
+              [
+                10,
+                19
+              ],
+              [
+                10,
+                20
+              ],
+              [
+                10,
+                21
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 21,
+            "metrics": {
+              "processed_states": 0,
+              "queue_pops": 0,
+              "queue_pushes": 0,
+              "elapsed_ms": 0.36800000816583633
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                6,
+                11
+              ],
+              [
+                6,
+                12
+              ],
+              [
+                7,
+                12
+              ],
+              [
+                8,
+                12
+              ],
+              [
+                9,
+                12
+              ],
+              [
+                10,
+                12
+              ],
+              [
+                10,
+                13
+              ],
+              [
+                10,
+                14
+              ],
+              [
+                10,
+                15
+              ],
+              [
+                10,
+                16
+              ],
+              [
+                10,
+                17
+              ],
+              [
+                10,
+                18
+              ],
+              [
+                10,
+                19
+              ],
+              [
+                10,
+                20
+              ],
+              [
+                10,
+                21
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 21,
+            "metrics": {
+              "processed_states": 39,
+              "queue_pops": 39,
+              "queue_pushes": 58,
+              "elapsed_ms": 0.5410000158008188
+            },
+            "message": ""
+          }
+        },
+        {
+          "event_id": "movement-reopen-center-cell",
+          "label": "Reopen the cross-aisle cell",
+          "map_revision": 4,
+          "rows": [
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................"
+          ],
+          "start": [
+            5,
+            6
+          ],
+          "goal": [
+            10,
+            22
+          ],
+          "k_m": 5,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                5,
+                12
+              ],
+              [
+                5,
+                13
+              ],
+              [
+                5,
+                14
+              ],
+              [
+                5,
+                15
+              ],
+              [
+                5,
+                16
+              ],
+              [
+                5,
+                17
+              ],
+              [
+                5,
+                18
+              ],
+              [
+                5,
+                19
+              ],
+              [
+                5,
+                20
+              ],
+              [
+                5,
+                21
+              ],
+              [
+                5,
+                22
+              ],
+              [
+                6,
+                22
+              ],
+              [
+                7,
+                22
+              ],
+              [
+                8,
+                22
+              ],
+              [
+                9,
+                22
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 21,
+            "metrics": {
+              "processed_states": 1,
+              "queue_pops": 1,
+              "queue_pushes": 2,
+              "elapsed_ms": 0.3454000107012689
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                5,
+                12
+              ],
+              [
+                5,
+                13
+              ],
+              [
+                5,
+                14
+              ],
+              [
+                5,
+                15
+              ],
+              [
+                5,
+                16
+              ],
+              [
+                5,
+                17
+              ],
+              [
+                5,
+                18
+              ],
+              [
+                5,
+                19
+              ],
+              [
+                5,
+                20
+              ],
+              [
+                5,
+                21
+              ],
+              [
+                5,
+                22
+              ],
+              [
+                6,
+                22
+              ],
+              [
+                7,
+                22
+              ],
+              [
+                8,
+                22
+              ],
+              [
+                9,
+                22
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 21,
+            "metrics": {
+              "processed_states": 66,
+              "queue_pops": 66,
+              "queue_pushes": 92,
+              "elapsed_ms": 0.8712999988347292
+            },
+            "message": ""
+          }
+        },
+        {
+          "event_id": "movement-step-six",
+          "label": "Advance one final legal route step",
+          "map_revision": 4,
+          "rows": [
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "..###..###...###...###..",
+            "........................"
+          ],
+          "start": [
+            5,
+            7
+          ],
+          "goal": [
+            10,
+            22
+          ],
+          "k_m": 6,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                5,
+                12
+              ],
+              [
+                5,
+                13
+              ],
+              [
+                5,
+                14
+              ],
+              [
+                5,
+                15
+              ],
+              [
+                5,
+                16
+              ],
+              [
+                5,
+                17
+              ],
+              [
+                5,
+                18
+              ],
+              [
+                5,
+                19
+              ],
+              [
+                5,
+                20
+              ],
+              [
+                5,
+                21
+              ],
+              [
+                5,
+                22
+              ],
+              [
+                6,
+                22
+              ],
+              [
+                7,
+                22
+              ],
+              [
+                8,
+                22
+              ],
+              [
+                9,
+                22
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 20,
+            "metrics": {
+              "processed_states": 0,
+              "queue_pops": 0,
+              "queue_pushes": 0,
+              "elapsed_ms": 0.2601000014692545
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                5,
+                12
+              ],
+              [
+                5,
+                13
+              ],
+              [
+                5,
+                14
+              ],
+              [
+                5,
+                15
+              ],
+              [
+                5,
+                16
+              ],
+              [
+                5,
+                17
+              ],
+              [
+                5,
+                18
+              ],
+              [
+                5,
+                19
+              ],
+              [
+                5,
+                20
+              ],
+              [
+                5,
+                21
+              ],
+              [
+                5,
+                22
+              ],
+              [
+                6,
+                22
+              ],
+              [
+                7,
+                22
+              ],
+              [
+                8,
+                22
+              ],
+              [
+                9,
+                22
+              ],
+              [
+                10,
+                22
+              ]
+            ],
+            "cost": 20,
+            "metrics": {
+              "processed_states": 57,
+              "queue_pops": 57,
+              "queue_pushes": 77,
+              "elapsed_ms": 0.7952000014483929
+            },
+            "message": ""
+          }
+        }
+      ],
+      "diagnostic_inference_included": false,
+      "source_file": "data/search_scenarios/movement_reuse.json"
+    },
+    {
+      "schema_version": 1,
+      "scope": "search-only; diagnostic inference not run",
+      "created_at": "2026-10-10T21:57:34.962366+00:00",
+      "scenario": {
+        "id": "unreachable-recovery",
+        "title": "Unreachable Goal and Recovery",
+        "description": "A single open gap connects two warehouse areas. Closing it isolates the open goal; reopening it restores access. The robot does not move while the goal is unreachable.",
+        "rows": [
+          "....#....",
+          "....#....",
+          "....#....",
+          ".........",
+          "....#....",
+          "....#....",
+          "....#...."
+        ],
+        "start": [
+          3,
+          1
+        ],
+        "goal": [
+          3,
+          7
+        ],
+        "events": [
+          {
+            "id": "recovery-close-only-gap",
+            "type": "map",
+            "label": "Close the only gap",
+            "changes": [
+              {
+                "cell": [
+                  3,
+                  4
+                ],
+                "blocked": true
+              }
+            ]
+          },
+          {
+            "id": "recovery-reopen-only-gap",
+            "type": "map",
+            "label": "Reopen the gap",
+            "changes": [
+              {
+                "cell": [
+                  3,
+                  4
+                ],
+                "blocked": false
+              }
+            ]
+          }
+        ]
+      },
+      "applied_events": [
+        {
+          "changes": [
+            {
+              "blocked": true,
+              "cell": [
+                3,
+                4
+              ]
+            }
+          ],
+          "id": "recovery-close-only-gap",
+          "label": "Close the only gap",
+          "type": "map"
+        },
+        {
+          "changes": [
+            {
+              "blocked": false,
+              "cell": [
+                3,
+                4
+              ]
+            }
+          ],
+          "id": "recovery-reopen-only-gap",
+          "label": "Reopen the gap",
+          "type": "map"
+        }
+      ],
+      "records": [
+        {
+          "event_id": "initial",
+          "label": "Initial planning",
+          "map_revision": 0,
+          "rows": [
+            "....#....",
+            "....#....",
+            "....#....",
+            ".........",
+            "....#....",
+            "....#....",
+            "....#...."
+          ],
+          "start": [
+            3,
+            1
+          ],
+          "goal": [
+            3,
+            7
+          ],
+          "k_m": 0,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                3,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                3,
+                7
+              ]
+            ],
+            "cost": 6,
+            "metrics": {
+              "processed_states": 7,
+              "queue_pops": 7,
+              "queue_pushes": 21,
+              "elapsed_ms": 0.6747999868821353
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                3,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                3,
+                7
+              ]
+            ],
+            "cost": 6,
+            "metrics": {
+              "processed_states": 7,
+              "queue_pops": 7,
+              "queue_pushes": 18,
+              "elapsed_ms": 0.11370002175681293
+            },
+            "message": ""
+          }
+        },
+        {
+          "event_id": "recovery-close-only-gap",
+          "label": "Close the only gap",
+          "map_revision": 1,
+          "rows": [
+            "....#....",
+            "....#....",
+            "....#....",
+            "....#....",
+            "....#....",
+            "....#....",
+            "....#...."
+          ],
+          "start": [
+            3,
+            1
+          ],
+          "goal": [
+            3,
+            7
+          ],
+          "k_m": 0,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "unreachable",
+            "path": [],
+            "cost": null,
+            "metrics": {
+              "processed_states": 29,
+              "queue_pops": 57,
+              "queue_pushes": 43,
+              "elapsed_ms": 1.7108999891206622
+            },
+            "message": "No route connects the current robot and goal."
+          },
+          "astar": {
+            "status": "unreachable",
+            "path": [],
+            "cost": null,
+            "metrics": {
+              "processed_states": 28,
+              "queue_pops": 28,
+              "queue_pushes": 28,
+              "elapsed_ms": 0.3735999925993383
+            },
+            "message": "No route connects the start and goal on the current map."
+          }
+        },
+        {
+          "event_id": "recovery-reopen-only-gap",
+          "label": "Reopen the gap",
+          "map_revision": 2,
+          "rows": [
+            "....#....",
+            "....#....",
+            "....#....",
+            ".........",
+            "....#....",
+            "....#....",
+            "....#...."
+          ],
+          "start": [
+            3,
+            1
+          ],
+          "goal": [
+            3,
+            7
+          ],
+          "k_m": 0,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                3,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                3,
+                7
+              ]
+            ],
+            "cost": 6,
+            "metrics": {
+              "processed_states": 4,
+              "queue_pops": 4,
+              "queue_pushes": 11,
+              "elapsed_ms": 0.3225000109523535
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                3,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                3,
+                7
+              ]
+            ],
+            "cost": 6,
+            "metrics": {
+              "processed_states": 7,
+              "queue_pops": 7,
+              "queue_pushes": 18,
+              "elapsed_ms": 0.09700001101009548
+            },
+            "message": ""
+          }
+        }
+      ],
+      "diagnostic_inference_included": false,
+      "source_file": "data/search_scenarios/unreachable_recovery.json"
+    },
+    {
+      "schema_version": 1,
+      "scope": "search-only; diagnostic inference not run",
+      "created_at": "2026-10-10T21:57:34.966902+00:00",
+      "scenario": {
+        "id": "widespread-changes",
+        "title": "Widespread Map Changes",
+        "description": "This medium synthetic map keeps its entire boundary open while scattered interior cells are blocked and restored in batches. It illustrates broad map edits and makes no claim that incremental planning is faster.",
+        "rows": [
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................",
+          "............................"
+        ],
+        "start": [
+          0,
+          0
+        ],
+        "goal": [
+          19,
+          27
+        ],
+        "events": [
+          {
+            "id": "widespread-block-scattered-cells",
+            "type": "map",
+            "label": "Block scattered interior cells",
+            "changes": [
+              {
+                "cell": [
+                  2,
+                  4
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  2,
+                  11
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  2,
+                  20
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  4,
+                  7
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  4,
+                  16
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  5,
+                  24
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  7,
+                  3
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  7,
+                  12
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  7,
+                  21
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  9,
+                  6
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  9,
+                  18
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  11,
+                  10
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  12,
+                  23
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  14,
+                  5
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  15,
+                  14
+                ],
+                "blocked": true
+              },
+              {
+                "cell": [
+                  17,
+                  22
+                ],
+                "blocked": true
+              }
+            ]
+          },
+          {
+            "id": "widespread-restore-scattered-cells",
+            "type": "map",
+            "label": "Restore the scattered interior cells",
+            "changes": [
+              {
+                "cell": [
+                  2,
+                  4
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  2,
+                  11
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  2,
+                  20
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  4,
+                  7
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  4,
+                  16
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  5,
+                  24
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  7,
+                  3
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  7,
+                  12
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  7,
+                  21
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  9,
+                  6
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  9,
+                  18
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  11,
+                  10
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  12,
+                  23
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  14,
+                  5
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  15,
+                  14
+                ],
+                "blocked": false
+              },
+              {
+                "cell": [
+                  17,
+                  22
+                ],
+                "blocked": false
+              }
+            ]
+          }
+        ]
+      },
+      "applied_events": [
+        {
+          "changes": [
+            {
+              "blocked": true,
+              "cell": [
+                2,
+                4
+              ]
+            },
+            {
+              "blocked": true,
+              "cell": [
+                2,
+                11
+              ]
+            },
+            {
+              "blocked": true,
+              "cell": [
+                2,
+                20
+              ]
+            },
+            {
+              "blocked": true,
+              "cell": [
+                4,
+                7
+              ]
+            },
+            {
+              "blocked": true,
+              "cell": [
+                4,
+                16
+              ]
+            },
+            {
+              "blocked": true,
+              "cell": [
+                5,
+                24
+              ]
+            },
+            {
+              "blocked": true,
+              "cell": [
+                7,
+                3
+              ]
+            },
+            {
+              "blocked": true,
+              "cell": [
+                7,
+                12
+              ]
+            },
+            {
+              "blocked": true,
+              "cell": [
+                7,
+                21
+              ]
+            },
+            {
+              "blocked": true,
+              "cell": [
+                9,
+                6
+              ]
+            },
+            {
+              "blocked": true,
+              "cell": [
+                9,
+                18
+              ]
+            },
+            {
+              "blocked": true,
+              "cell": [
+                11,
+                10
+              ]
+            },
+            {
+              "blocked": true,
+              "cell": [
+                12,
+                23
+              ]
+            },
+            {
+              "blocked": true,
+              "cell": [
+                14,
+                5
+              ]
+            },
+            {
+              "blocked": true,
+              "cell": [
+                15,
+                14
+              ]
+            },
+            {
+              "blocked": true,
+              "cell": [
+                17,
+                22
+              ]
+            }
+          ],
+          "id": "widespread-block-scattered-cells",
+          "label": "Block scattered interior cells",
+          "type": "map"
+        },
+        {
+          "changes": [
+            {
+              "blocked": false,
+              "cell": [
+                2,
+                4
+              ]
+            },
+            {
+              "blocked": false,
+              "cell": [
+                2,
+                11
+              ]
+            },
+            {
+              "blocked": false,
+              "cell": [
+                2,
+                20
+              ]
+            },
+            {
+              "blocked": false,
+              "cell": [
+                4,
+                7
+              ]
+            },
+            {
+              "blocked": false,
+              "cell": [
+                4,
+                16
+              ]
+            },
+            {
+              "blocked": false,
+              "cell": [
+                5,
+                24
+              ]
+            },
+            {
+              "blocked": false,
+              "cell": [
+                7,
+                3
+              ]
+            },
+            {
+              "blocked": false,
+              "cell": [
+                7,
+                12
+              ]
+            },
+            {
+              "blocked": false,
+              "cell": [
+                7,
+                21
+              ]
+            },
+            {
+              "blocked": false,
+              "cell": [
+                9,
+                6
+              ]
+            },
+            {
+              "blocked": false,
+              "cell": [
+                9,
+                18
+              ]
+            },
+            {
+              "blocked": false,
+              "cell": [
+                11,
+                10
+              ]
+            },
+            {
+              "blocked": false,
+              "cell": [
+                12,
+                23
+              ]
+            },
+            {
+              "blocked": false,
+              "cell": [
+                14,
+                5
+              ]
+            },
+            {
+              "blocked": false,
+              "cell": [
+                15,
+                14
+              ]
+            },
+            {
+              "blocked": false,
+              "cell": [
+                17,
+                22
+              ]
+            }
+          ],
+          "id": "widespread-restore-scattered-cells",
+          "label": "Restore the scattered interior cells",
+          "type": "map"
+        }
+      ],
+      "records": [
+        {
+          "event_id": "initial",
+          "label": "Initial planning",
+          "map_revision": 0,
+          "rows": [
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................"
+          ],
+          "start": [
+            0,
+            0
+          ],
+          "goal": [
+            19,
+            27
+          ],
+          "k_m": 0,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                4
+              ],
+              [
+                0,
+                5
+              ],
+              [
+                0,
+                6
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                0,
+                8
+              ],
+              [
+                0,
+                9
+              ],
+              [
+                0,
+                10
+              ],
+              [
+                0,
+                11
+              ],
+              [
+                0,
+                12
+              ],
+              [
+                0,
+                13
+              ],
+              [
+                0,
+                14
+              ],
+              [
+                0,
+                15
+              ],
+              [
+                0,
+                16
+              ],
+              [
+                0,
+                17
+              ],
+              [
+                0,
+                18
+              ],
+              [
+                0,
+                19
+              ],
+              [
+                0,
+                20
+              ],
+              [
+                0,
+                21
+              ],
+              [
+                0,
+                22
+              ],
+              [
+                0,
+                23
+              ],
+              [
+                0,
+                24
+              ],
+              [
+                0,
+                25
+              ],
+              [
+                0,
+                26
+              ],
+              [
+                0,
+                27
+              ],
+              [
+                1,
+                27
+              ],
+              [
+                2,
+                27
+              ],
+              [
+                3,
+                27
+              ],
+              [
+                4,
+                27
+              ],
+              [
+                5,
+                27
+              ],
+              [
+                6,
+                27
+              ],
+              [
+                7,
+                27
+              ],
+              [
+                8,
+                27
+              ],
+              [
+                9,
+                27
+              ],
+              [
+                10,
+                27
+              ],
+              [
+                11,
+                27
+              ],
+              [
+                12,
+                27
+              ],
+              [
+                13,
+                27
+              ],
+              [
+                14,
+                27
+              ],
+              [
+                15,
+                27
+              ],
+              [
+                16,
+                27
+              ],
+              [
+                17,
+                27
+              ],
+              [
+                18,
+                27
+              ],
+              [
+                19,
+                27
+              ]
+            ],
+            "cost": 46,
+            "metrics": {
+              "processed_states": 560,
+              "queue_pops": 1073,
+              "queue_pushes": 1073,
+              "elapsed_ms": 32.8575000166893
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                4
+              ],
+              [
+                0,
+                5
+              ],
+              [
+                0,
+                6
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                0,
+                8
+              ],
+              [
+                0,
+                9
+              ],
+              [
+                0,
+                10
+              ],
+              [
+                0,
+                11
+              ],
+              [
+                0,
+                12
+              ],
+              [
+                0,
+                13
+              ],
+              [
+                0,
+                14
+              ],
+              [
+                0,
+                15
+              ],
+              [
+                0,
+                16
+              ],
+              [
+                0,
+                17
+              ],
+              [
+                0,
+                18
+              ],
+              [
+                0,
+                19
+              ],
+              [
+                0,
+                20
+              ],
+              [
+                0,
+                21
+              ],
+              [
+                0,
+                22
+              ],
+              [
+                0,
+                23
+              ],
+              [
+                0,
+                24
+              ],
+              [
+                0,
+                25
+              ],
+              [
+                0,
+                26
+              ],
+              [
+                0,
+                27
+              ],
+              [
+                1,
+                27
+              ],
+              [
+                2,
+                27
+              ],
+              [
+                3,
+                27
+              ],
+              [
+                4,
+                27
+              ],
+              [
+                5,
+                27
+              ],
+              [
+                6,
+                27
+              ],
+              [
+                7,
+                27
+              ],
+              [
+                8,
+                27
+              ],
+              [
+                9,
+                27
+              ],
+              [
+                10,
+                27
+              ],
+              [
+                11,
+                27
+              ],
+              [
+                12,
+                27
+              ],
+              [
+                13,
+                27
+              ],
+              [
+                14,
+                27
+              ],
+              [
+                15,
+                27
+              ],
+              [
+                16,
+                27
+              ],
+              [
+                17,
+                27
+              ],
+              [
+                18,
+                27
+              ],
+              [
+                19,
+                27
+              ]
+            ],
+            "cost": 46,
+            "metrics": {
+              "processed_states": 560,
+              "queue_pops": 560,
+              "queue_pushes": 560,
+              "elapsed_ms": 6.7291999876033515
+            },
+            "message": ""
+          }
+        },
+        {
+          "event_id": "widespread-block-scattered-cells",
+          "label": "Block scattered interior cells",
+          "map_revision": 1,
+          "rows": [
+            "............................",
+            "............................",
+            "....#......#........#.......",
+            "............................",
+            ".......#........#...........",
+            "........................#...",
+            "............................",
+            "...#........#........#......",
+            "............................",
+            "......#...........#.........",
+            "............................",
+            "..........#.................",
+            ".......................#....",
+            "............................",
+            ".....#......................",
+            "..............#.............",
+            "............................",
+            "......................#.....",
+            "............................",
+            "............................"
+          ],
+          "start": [
+            0,
+            0
+          ],
+          "goal": [
+            19,
+            27
+          ],
+          "k_m": 0,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                4
+              ],
+              [
+                0,
+                5
+              ],
+              [
+                0,
+                6
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                0,
+                8
+              ],
+              [
+                0,
+                9
+              ],
+              [
+                0,
+                10
+              ],
+              [
+                0,
+                11
+              ],
+              [
+                0,
+                12
+              ],
+              [
+                0,
+                13
+              ],
+              [
+                0,
+                14
+              ],
+              [
+                0,
+                15
+              ],
+              [
+                0,
+                16
+              ],
+              [
+                0,
+                17
+              ],
+              [
+                0,
+                18
+              ],
+              [
+                0,
+                19
+              ],
+              [
+                0,
+                20
+              ],
+              [
+                0,
+                21
+              ],
+              [
+                0,
+                22
+              ],
+              [
+                0,
+                23
+              ],
+              [
+                0,
+                24
+              ],
+              [
+                0,
+                25
+              ],
+              [
+                0,
+                26
+              ],
+              [
+                0,
+                27
+              ],
+              [
+                1,
+                27
+              ],
+              [
+                2,
+                27
+              ],
+              [
+                3,
+                27
+              ],
+              [
+                4,
+                27
+              ],
+              [
+                5,
+                27
+              ],
+              [
+                6,
+                27
+              ],
+              [
+                7,
+                27
+              ],
+              [
+                8,
+                27
+              ],
+              [
+                9,
+                27
+              ],
+              [
+                10,
+                27
+              ],
+              [
+                11,
+                27
+              ],
+              [
+                12,
+                27
+              ],
+              [
+                13,
+                27
+              ],
+              [
+                14,
+                27
+              ],
+              [
+                15,
+                27
+              ],
+              [
+                16,
+                27
+              ],
+              [
+                17,
+                27
+              ],
+              [
+                18,
+                27
+              ],
+              [
+                19,
+                27
+              ]
+            ],
+            "cost": 46,
+            "metrics": {
+              "processed_states": 16,
+              "queue_pops": 16,
+              "queue_pushes": 16,
+              "elapsed_ms": 1.4979999978095293
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                4
+              ],
+              [
+                0,
+                5
+              ],
+              [
+                0,
+                6
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                0,
+                8
+              ],
+              [
+                0,
+                9
+              ],
+              [
+                0,
+                10
+              ],
+              [
+                0,
+                11
+              ],
+              [
+                0,
+                12
+              ],
+              [
+                0,
+                13
+              ],
+              [
+                0,
+                14
+              ],
+              [
+                0,
+                15
+              ],
+              [
+                0,
+                16
+              ],
+              [
+                0,
+                17
+              ],
+              [
+                0,
+                18
+              ],
+              [
+                0,
+                19
+              ],
+              [
+                0,
+                20
+              ],
+              [
+                0,
+                21
+              ],
+              [
+                0,
+                22
+              ],
+              [
+                0,
+                23
+              ],
+              [
+                0,
+                24
+              ],
+              [
+                0,
+                25
+              ],
+              [
+                0,
+                26
+              ],
+              [
+                0,
+                27
+              ],
+              [
+                1,
+                27
+              ],
+              [
+                2,
+                27
+              ],
+              [
+                3,
+                27
+              ],
+              [
+                4,
+                27
+              ],
+              [
+                5,
+                27
+              ],
+              [
+                6,
+                27
+              ],
+              [
+                7,
+                27
+              ],
+              [
+                8,
+                27
+              ],
+              [
+                9,
+                27
+              ],
+              [
+                10,
+                27
+              ],
+              [
+                11,
+                27
+              ],
+              [
+                12,
+                27
+              ],
+              [
+                13,
+                27
+              ],
+              [
+                14,
+                27
+              ],
+              [
+                15,
+                27
+              ],
+              [
+                16,
+                27
+              ],
+              [
+                17,
+                27
+              ],
+              [
+                18,
+                27
+              ],
+              [
+                19,
+                27
+              ]
+            ],
+            "cost": 46,
+            "metrics": {
+              "processed_states": 544,
+              "queue_pops": 544,
+              "queue_pushes": 544,
+              "elapsed_ms": 6.408799992641434
+            },
+            "message": ""
+          }
+        },
+        {
+          "event_id": "widespread-restore-scattered-cells",
+          "label": "Restore the scattered interior cells",
+          "map_revision": 2,
+          "rows": [
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................",
+            "............................"
+          ],
+          "start": [
+            0,
+            0
+          ],
+          "goal": [
+            19,
+            27
+          ],
+          "k_m": 0,
+          "initialization_count": 1,
+          "dstar_lite": {
+            "status": "found",
+            "path": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                4
+              ],
+              [
+                0,
+                5
+              ],
+              [
+                0,
+                6
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                0,
+                8
+              ],
+              [
+                0,
+                9
+              ],
+              [
+                0,
+                10
+              ],
+              [
+                0,
+                11
+              ],
+              [
+                0,
+                12
+              ],
+              [
+                0,
+                13
+              ],
+              [
+                0,
+                14
+              ],
+              [
+                0,
+                15
+              ],
+              [
+                0,
+                16
+              ],
+              [
+                0,
+                17
+              ],
+              [
+                0,
+                18
+              ],
+              [
+                0,
+                19
+              ],
+              [
+                0,
+                20
+              ],
+              [
+                0,
+                21
+              ],
+              [
+                0,
+                22
+              ],
+              [
+                0,
+                23
+              ],
+              [
+                0,
+                24
+              ],
+              [
+                0,
+                25
+              ],
+              [
+                0,
+                26
+              ],
+              [
+                0,
+                27
+              ],
+              [
+                1,
+                27
+              ],
+              [
+                2,
+                27
+              ],
+              [
+                3,
+                27
+              ],
+              [
+                4,
+                27
+              ],
+              [
+                5,
+                27
+              ],
+              [
+                6,
+                27
+              ],
+              [
+                7,
+                27
+              ],
+              [
+                8,
+                27
+              ],
+              [
+                9,
+                27
+              ],
+              [
+                10,
+                27
+              ],
+              [
+                11,
+                27
+              ],
+              [
+                12,
+                27
+              ],
+              [
+                13,
+                27
+              ],
+              [
+                14,
+                27
+              ],
+              [
+                15,
+                27
+              ],
+              [
+                16,
+                27
+              ],
+              [
+                17,
+                27
+              ],
+              [
+                18,
+                27
+              ],
+              [
+                19,
+                27
+              ]
+            ],
+            "cost": 46,
+            "metrics": {
+              "processed_states": 16,
+              "queue_pops": 16,
+              "queue_pushes": 16,
+              "elapsed_ms": 1.2373000208754092
+            },
+            "message": ""
+          },
+          "astar": {
+            "status": "found",
+            "path": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                4
+              ],
+              [
+                0,
+                5
+              ],
+              [
+                0,
+                6
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                0,
+                8
+              ],
+              [
+                0,
+                9
+              ],
+              [
+                0,
+                10
+              ],
+              [
+                0,
+                11
+              ],
+              [
+                0,
+                12
+              ],
+              [
+                0,
+                13
+              ],
+              [
+                0,
+                14
+              ],
+              [
+                0,
+                15
+              ],
+              [
+                0,
+                16
+              ],
+              [
+                0,
+                17
+              ],
+              [
+                0,
+                18
+              ],
+              [
+                0,
+                19
+              ],
+              [
+                0,
+                20
+              ],
+              [
+                0,
+                21
+              ],
+              [
+                0,
+                22
+              ],
+              [
+                0,
+                23
+              ],
+              [
+                0,
+                24
+              ],
+              [
+                0,
+                25
+              ],
+              [
+                0,
+                26
+              ],
+              [
+                0,
+                27
+              ],
+              [
+                1,
+                27
+              ],
+              [
+                2,
+                27
+              ],
+              [
+                3,
+                27
+              ],
+              [
+                4,
+                27
+              ],
+              [
+                5,
+                27
+              ],
+              [
+                6,
+                27
+              ],
+              [
+                7,
+                27
+              ],
+              [
+                8,
+                27
+              ],
+              [
+                9,
+                27
+              ],
+              [
+                10,
+                27
+              ],
+              [
+                11,
+                27
+              ],
+              [
+                12,
+                27
+              ],
+              [
+                13,
+                27
+              ],
+              [
+                14,
+                27
+              ],
+              [
+                15,
+                27
+              ],
+              [
+                16,
+                27
+              ],
+              [
+                17,
+                27
+              ],
+              [
+                18,
+                27
+              ],
+              [
+                19,
+                27
+              ]
+            ],
+            "cost": 46,
+            "metrics": {
+              "processed_states": 560,
+              "queue_pops": 560,
+              "queue_pushes": 560,
+              "elapsed_ms": 7.5499000085983425
+            },
+            "message": ""
+          }
+        }
+      ],
+      "diagnostic_inference_included": false,
+      "source_file": "data/search_scenarios/widespread_changes.json"
+    }
+  ]
+}

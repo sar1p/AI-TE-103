@@ -1,0 +1,135 @@
+{
+  "metadata": {
+    "environment": {
+      "timestamp_utc": "2026-10-10T21:57:33.334774+00:00",
+      "source_commit": "118e95b50c2aa3196980435075a21ed6be789603",
+      "worktree_dirty": false,
+      "python": "3.12.14",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "dependencies": {
+        "streamlit": "1.65.0",
+        "pytest": "9.1.1"
+      },
+      "implementation": "cpython"
+    },
+    "knowledge_base": {
+      "source": "expert_system/knowledge_base.json",
+      "sha256": "e293fc70b6dfdeacb1db32a8acba26885594ec3ddb1ef62ee0b8dc2d99286cc3",
+      "schema_version": 1,
+      "provenance": "Illustrative classroom simulation rules proposed for software demonstration; not validated against a manufacturer manual, domain expert, or measured robot faults."
+    }
+  },
+  "input": {
+    "kind": "scenario",
+    "id": "battery-multi-hop",
+    "title": "Battery Power-Path Chain",
+    "source": "data/diagnostic_scenarios/battery-multi-hop.json",
+    "provenance": "Illustrative classroom simulation input; categorical observations do not prove physical causation.",
+    "facts": {
+      "motor_temperature": "normal",
+      "movement_status": "stalled",
+      "sensor_lidar": "clear",
+      "battery_voltage": "low",
+      "battery_connection": "disconnected"
+    }
+  },
+  "diagnosis": {
+    "status": "ok",
+    "findings": [
+      {
+        "condition": "battery_power_path_issue",
+        "rule_ids": [
+          "R03",
+          "R04",
+          "R05"
+        ]
+      },
+      {
+        "condition": "battery_related_stall",
+        "rule_ids": [
+          "R03",
+          "R04",
+          "R05",
+          "R06"
+        ]
+      }
+    ],
+    "rule_trace": [
+      {
+        "rule_id": "R03",
+        "premises": {
+          "battery_voltage": "low"
+        },
+        "conclusion": {
+          "condition": "battery_voltage_low",
+          "value": true
+        },
+        "reason": "Illustrative rule: a categorical low-voltage observation supports checking the simulated battery state; it does not establish a measured voltage threshold."
+      },
+      {
+        "rule_id": "R04",
+        "premises": {
+          "battery_connection": "disconnected"
+        },
+        "conclusion": {
+          "condition": "battery_connection_open",
+          "value": true
+        },
+        "reason": "Illustrative rule: a reported disconnected battery connection supports a simulated open-connection fact."
+      },
+      {
+        "rule_id": "R05",
+        "premises": {
+          "battery_voltage_low": true,
+          "battery_connection_open": true
+        },
+        "conclusion": {
+          "condition": "battery_power_path_issue",
+          "value": true,
+          "pause_robot": true
+        },
+        "reason": "Illustrative rule: low battery status together with a disconnected connection supports a simulated battery power-path finding."
+      },
+      {
+        "rule_id": "R06",
+        "premises": {
+          "battery_power_path_issue": true,
+          "movement_status": "stalled"
+        },
+        "conclusion": {
+          "condition": "battery_related_stall",
+          "value": true,
+          "pause_robot": true
+        },
+        "reason": "Illustrative rule: a simulated battery power-path finding with stalled movement supports reviewing both power and drive observations; it does not prove causation."
+      }
+    ],
+    "recommendations": [
+      {
+        "action": "pause_robot",
+        "reason": "Pause simulated movement while the power-path observations are reviewed."
+      },
+      {
+        "action": "check_power",
+        "reason": "Review the supplied battery voltage and connection observations."
+      },
+      {
+        "action": "pause_robot",
+        "reason": "Keep simulated movement paused while the stalled-movement evidence is reviewed."
+      },
+      {
+        "action": "check_drive",
+        "reason": "Review the movement and drive observations alongside the power-path result."
+      }
+    ],
+    "missing_facts": []
+  },
+  "expected": {
+    "status": "ok",
+    "conditions": [
+      "battery_power_path_issue",
+      "battery_related_stall"
+    ]
+  },
+  "expectation_match": true
+}

@@ -1,0 +1,686 @@
+{
+  "metadata": {
+    "environment": {
+      "timestamp_utc": "2026-10-10T21:57:31.875083+00:00",
+      "source_commit": "118e95b50c2aa3196980435075a21ed6be789603",
+      "worktree_dirty": false,
+      "python": "3.12.14",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "dependencies": {
+        "streamlit": "1.65.0",
+        "pytest": "9.1.1"
+      },
+      "implementation": "cpython"
+    },
+    "knowledge_base": {
+      "source": "expert_system/knowledge_base.json",
+      "sha256": "e293fc70b6dfdeacb1db32a8acba26885594ec3ddb1ef62ee0b8dc2d99286cc3",
+      "schema_version": 1,
+      "provenance": "Illustrative classroom simulation rules proposed for software demonstration; not validated against a manufacturer manual, domain expert, or measured robot faults."
+    }
+  },
+  "input": {
+    "kind": "all_scenarios",
+    "count": 8
+  },
+  "cases": [
+    {
+      "input": {
+        "kind": "scenario",
+        "id": "battery-multi-hop",
+        "title": "Battery Power-Path Chain",
+        "source": "data/diagnostic_scenarios/battery-multi-hop.json",
+        "provenance": "Illustrative classroom simulation input; categorical observations do not prove physical causation.",
+        "facts": {
+          "motor_temperature": "normal",
+          "movement_status": "stalled",
+          "sensor_lidar": "clear",
+          "battery_voltage": "low",
+          "battery_connection": "disconnected"
+        }
+      },
+      "diagnosis": {
+        "status": "ok",
+        "findings": [
+          {
+            "condition": "battery_power_path_issue",
+            "rule_ids": [
+              "R03",
+              "R04",
+              "R05"
+            ]
+          },
+          {
+            "condition": "battery_related_stall",
+            "rule_ids": [
+              "R03",
+              "R04",
+              "R05",
+              "R06"
+            ]
+          }
+        ],
+        "rule_trace": [
+          {
+            "rule_id": "R03",
+            "premises": {
+              "battery_voltage": "low"
+            },
+            "conclusion": {
+              "condition": "battery_voltage_low",
+              "value": true
+            },
+            "reason": "Illustrative rule: a categorical low-voltage observation supports checking the simulated battery state; it does not establish a measured voltage threshold."
+          },
+          {
+            "rule_id": "R04",
+            "premises": {
+              "battery_connection": "disconnected"
+            },
+            "conclusion": {
+              "condition": "battery_connection_open",
+              "value": true
+            },
+            "reason": "Illustrative rule: a reported disconnected battery connection supports a simulated open-connection fact."
+          },
+          {
+            "rule_id": "R05",
+            "premises": {
+              "battery_voltage_low": true,
+              "battery_connection_open": true
+            },
+            "conclusion": {
+              "condition": "battery_power_path_issue",
+              "value": true,
+              "pause_robot": true
+            },
+            "reason": "Illustrative rule: low battery status together with a disconnected connection supports a simulated battery power-path finding."
+          },
+          {
+            "rule_id": "R06",
+            "premises": {
+              "battery_power_path_issue": true,
+              "movement_status": "stalled"
+            },
+            "conclusion": {
+              "condition": "battery_related_stall",
+              "value": true,
+              "pause_robot": true
+            },
+            "reason": "Illustrative rule: a simulated battery power-path finding with stalled movement supports reviewing both power and drive observations; it does not prove causation."
+          }
+        ],
+        "recommendations": [
+          {
+            "action": "pause_robot",
+            "reason": "Pause simulated movement while the power-path observations are reviewed."
+          },
+          {
+            "action": "check_power",
+            "reason": "Review the supplied battery voltage and connection observations."
+          },
+          {
+            "action": "pause_robot",
+            "reason": "Keep simulated movement paused while the stalled-movement evidence is reviewed."
+          },
+          {
+            "action": "check_drive",
+            "reason": "Review the movement and drive observations alongside the power-path result."
+          }
+        ],
+        "missing_facts": []
+      },
+      "expected": {
+        "status": "ok",
+        "conditions": [
+          "battery_power_path_issue",
+          "battery_related_stall"
+        ]
+      },
+      "expectation_match": true
+    },
+    {
+      "input": {
+        "kind": "scenario",
+        "id": "corrected-observations",
+        "title": "Corrected Baseline Observations",
+        "source": "data/diagnostic_scenarios/corrected-observations.json",
+        "provenance": "Illustrative classroom simulation input; it does not establish the absence of faults outside this knowledge base.",
+        "facts": {
+          "motor_temperature": "normal",
+          "movement_status": "moving",
+          "sensor_lidar": "clear"
+        }
+      },
+      "diagnosis": {
+        "status": "ok",
+        "findings": [],
+        "rule_trace": [],
+        "recommendations": [],
+        "missing_facts": []
+      },
+      "expected": {
+        "status": "ok",
+        "conditions": []
+      },
+      "expectation_match": true
+    },
+    {
+      "input": {
+        "kind": "scenario",
+        "id": "drive-encoder-multi-hop",
+        "title": "Drive and Encoder Feedback Chain",
+        "source": "data/diagnostic_scenarios/drive-encoder-multi-hop.json",
+        "provenance": "Illustrative classroom simulation input; no physical drive or encoder is assessed.",
+        "facts": {
+          "motor_temperature": "normal",
+          "movement_status": "moving",
+          "sensor_lidar": "clear",
+          "drive_status": "fault",
+          "encoder_feedback": "absent"
+        }
+      },
+      "diagnosis": {
+        "status": "ok",
+        "findings": [
+          {
+            "condition": "drive_encoder_fault",
+            "rule_ids": [
+              "R07",
+              "R08",
+              "R09"
+            ]
+          }
+        ],
+        "rule_trace": [
+          {
+            "rule_id": "R07",
+            "premises": {
+              "drive_status": "fault"
+            },
+            "conclusion": {
+              "condition": "drive_fault_observed",
+              "value": true
+            },
+            "reason": "Illustrative rule: a categorical drive-fault observation supports a simulated drive fault fact."
+          },
+          {
+            "rule_id": "R08",
+            "premises": {
+              "encoder_feedback": "absent"
+            },
+            "conclusion": {
+              "condition": "encoder_feedback_absent",
+              "value": true
+            },
+            "reason": "Illustrative rule: absent encoder feedback supports a simulated missing-feedback fact without asserting its physical cause."
+          },
+          {
+            "rule_id": "R09",
+            "premises": {
+              "drive_fault_observed": true,
+              "encoder_feedback_absent": true
+            },
+            "conclusion": {
+              "condition": "drive_encoder_fault",
+              "value": true,
+              "pause_robot": true
+            },
+            "reason": "Illustrative rule: a drive-fault observation together with absent encoder feedback supports a simulated drive-and-encoder finding."
+          }
+        ],
+        "recommendations": [
+          {
+            "action": "pause_robot",
+            "reason": "Pause simulated movement while drive and encoder observations are reviewed."
+          },
+          {
+            "action": "check_drive",
+            "reason": "Review the supplied drive-status observation."
+          },
+          {
+            "action": "check_encoder",
+            "reason": "Review the supplied encoder-feedback observation."
+          }
+        ],
+        "missing_facts": []
+      },
+      "expected": {
+        "status": "ok",
+        "conditions": [
+          "drive_encoder_fault"
+        ]
+      },
+      "expectation_match": true
+    },
+    {
+      "input": {
+        "kind": "scenario",
+        "id": "empty-input",
+        "title": "No Observations Supplied",
+        "source": "data/diagnostic_scenarios/empty-input.json",
+        "provenance": "Illustrative classroom simulation input; expected output documents missing evidence only.",
+        "facts": {}
+      },
+      "diagnosis": {
+        "status": "insufficient_evidence",
+        "findings": [],
+        "rule_trace": [],
+        "recommendations": [],
+        "missing_facts": [
+          "motor_temperature",
+          "movement_status",
+          "sensor_lidar"
+        ]
+      },
+      "expected": {
+        "status": "insufficient_evidence",
+        "conditions": []
+      },
+      "expectation_match": true
+    },
+    {
+      "input": {
+        "kind": "scenario",
+        "id": "invalid-observation",
+        "title": "Unsupported Observation Value",
+        "source": "data/diagnostic_scenarios/invalid-observation.json",
+        "provenance": "Illustrative classroom simulation input used to demonstrate strict categorical validation.",
+        "facts": {
+          "motor_temperature": "warm",
+          "movement_status": "moving",
+          "sensor_lidar": "clear"
+        }
+      },
+      "diagnosis": {
+        "status": "invalid_input",
+        "findings": [],
+        "rule_trace": [],
+        "recommendations": [],
+        "missing_facts": []
+      },
+      "expected": {
+        "status": "invalid_input",
+        "conditions": []
+      },
+      "expectation_match": true
+    },
+    {
+      "input": {
+        "kind": "scenario",
+        "id": "motor-connection-multi-hop",
+        "title": "Motor Connection Chain",
+        "source": "data/diagnostic_scenarios/motor-connection-multi-hop.json",
+        "provenance": "Illustrative classroom simulation input; no physical motor circuit is assessed.",
+        "facts": {
+          "motor_temperature": "normal",
+          "movement_status": "idle",
+          "sensor_lidar": "clear",
+          "motor_connection": "disconnected",
+          "motor_enable": "enabled"
+        }
+      },
+      "diagnosis": {
+        "status": "ok",
+        "findings": [
+          {
+            "condition": "motor_connection_fault",
+            "rule_ids": [
+              "R10",
+              "R11"
+            ]
+          }
+        ],
+        "rule_trace": [
+          {
+            "rule_id": "R10",
+            "premises": {
+              "motor_connection": "disconnected"
+            },
+            "conclusion": {
+              "condition": "motor_connection_open",
+              "value": true
+            },
+            "reason": "Illustrative rule: a reported disconnected motor connection supports a simulated open-connection fact."
+          },
+          {
+            "rule_id": "R11",
+            "premises": {
+              "motor_connection_open": true,
+              "motor_enable": "enabled"
+            },
+            "conclusion": {
+              "condition": "motor_connection_fault",
+              "value": true,
+              "pause_robot": true
+            },
+            "reason": "Illustrative rule: an enabled simulated motor with a reported disconnected connection supports a motor-connection finding."
+          }
+        ],
+        "recommendations": [
+          {
+            "action": "pause_robot",
+            "reason": "Pause simulated movement while the motor-connection observations are reviewed."
+          },
+          {
+            "action": "check_drive",
+            "reason": "Review the supplied motor-connection and enable observations."
+          }
+        ],
+        "missing_facts": []
+      },
+      "expected": {
+        "status": "ok",
+        "conditions": [
+          "motor_connection_fault"
+        ]
+      },
+      "expectation_match": true
+    },
+    {
+      "input": {
+        "kind": "scenario",
+        "id": "partial-power",
+        "title": "Incomplete Power Group",
+        "source": "data/diagnostic_scenarios/partial-power.json",
+        "provenance": "Illustrative classroom simulation input; missing evidence remains unknown.",
+        "facts": {
+          "motor_temperature": "normal",
+          "movement_status": "moving",
+          "sensor_lidar": "clear",
+          "battery_voltage": "low"
+        }
+      },
+      "diagnosis": {
+        "status": "insufficient_evidence",
+        "findings": [],
+        "rule_trace": [
+          {
+            "rule_id": "R03",
+            "premises": {
+              "battery_voltage": "low"
+            },
+            "conclusion": {
+              "condition": "battery_voltage_low",
+              "value": true
+            },
+            "reason": "Illustrative rule: a categorical low-voltage observation supports checking the simulated battery state; it does not establish a measured voltage threshold."
+          }
+        ],
+        "recommendations": [],
+        "missing_facts": [
+          "battery_connection"
+        ]
+      },
+      "expected": {
+        "status": "insufficient_evidence",
+        "conditions": []
+      },
+      "expectation_match": true
+    },
+    {
+      "input": {
+        "kind": "scenario",
+        "id": "simultaneous-faults",
+        "title": "Simultaneous Illustrative Fault Inputs",
+        "source": "data/diagnostic_scenarios/simultaneous-faults.json",
+        "provenance": "Illustrative classroom simulation input; combined findings are independent rule examples, not a physical robot assessment.",
+        "facts": {
+          "motor_temperature": "high",
+          "movement_status": "stalled",
+          "sensor_lidar": "blocked",
+          "battery_voltage": "low",
+          "battery_connection": "disconnected",
+          "drive_status": "fault",
+          "encoder_feedback": "absent",
+          "motor_connection": "disconnected",
+          "motor_enable": "enabled"
+        }
+      },
+      "diagnosis": {
+        "status": "ok",
+        "findings": [
+          {
+            "condition": "suspected_motor_overheating",
+            "rule_ids": [
+              "R01"
+            ]
+          },
+          {
+            "condition": "lidar_obstruction",
+            "rule_ids": [
+              "R02"
+            ]
+          },
+          {
+            "condition": "battery_power_path_issue",
+            "rule_ids": [
+              "R03",
+              "R04",
+              "R05"
+            ]
+          },
+          {
+            "condition": "battery_related_stall",
+            "rule_ids": [
+              "R03",
+              "R04",
+              "R05",
+              "R06"
+            ]
+          },
+          {
+            "condition": "drive_encoder_fault",
+            "rule_ids": [
+              "R07",
+              "R08",
+              "R09"
+            ]
+          },
+          {
+            "condition": "motor_connection_fault",
+            "rule_ids": [
+              "R10",
+              "R11"
+            ]
+          }
+        ],
+        "rule_trace": [
+          {
+            "rule_id": "R01",
+            "premises": {
+              "motor_temperature": "high",
+              "movement_status": "stalled"
+            },
+            "conclusion": {
+              "condition": "suspected_motor_overheating",
+              "pause_robot": true
+            },
+            "reason": "Illustrative rule: a high motor temperature and stalled movement support suspected motor overheating; they do not establish the cause."
+          },
+          {
+            "rule_id": "R02",
+            "premises": {
+              "sensor_lidar": "blocked"
+            },
+            "conclusion": {
+              "condition": "lidar_obstruction",
+              "pause_robot": true
+            },
+            "reason": "Illustrative rule: a reported lidar obstruction supports inspecting the sensor before resuming simulated movement."
+          },
+          {
+            "rule_id": "R03",
+            "premises": {
+              "battery_voltage": "low"
+            },
+            "conclusion": {
+              "condition": "battery_voltage_low",
+              "value": true
+            },
+            "reason": "Illustrative rule: a categorical low-voltage observation supports checking the simulated battery state; it does not establish a measured voltage threshold."
+          },
+          {
+            "rule_id": "R04",
+            "premises": {
+              "battery_connection": "disconnected"
+            },
+            "conclusion": {
+              "condition": "battery_connection_open",
+              "value": true
+            },
+            "reason": "Illustrative rule: a reported disconnected battery connection supports a simulated open-connection fact."
+          },
+          {
+            "rule_id": "R05",
+            "premises": {
+              "battery_voltage_low": true,
+              "battery_connection_open": true
+            },
+            "conclusion": {
+              "condition": "battery_power_path_issue",
+              "value": true,
+              "pause_robot": true
+            },
+            "reason": "Illustrative rule: low battery status together with a disconnected connection supports a simulated battery power-path finding."
+          },
+          {
+            "rule_id": "R06",
+            "premises": {
+              "battery_power_path_issue": true,
+              "movement_status": "stalled"
+            },
+            "conclusion": {
+              "condition": "battery_related_stall",
+              "value": true,
+              "pause_robot": true
+            },
+            "reason": "Illustrative rule: a simulated battery power-path finding with stalled movement supports reviewing both power and drive observations; it does not prove causation."
+          },
+          {
+            "rule_id": "R07",
+            "premises": {
+              "drive_status": "fault"
+            },
+            "conclusion": {
+              "condition": "drive_fault_observed",
+              "value": true
+            },
+            "reason": "Illustrative rule: a categorical drive-fault observation supports a simulated drive fault fact."
+          },
+          {
+            "rule_id": "R08",
+            "premises": {
+              "encoder_feedback": "absent"
+            },
+            "conclusion": {
+              "condition": "encoder_feedback_absent",
+              "value": true
+            },
+            "reason": "Illustrative rule: absent encoder feedback supports a simulated missing-feedback fact without asserting its physical cause."
+          },
+          {
+            "rule_id": "R09",
+            "premises": {
+              "drive_fault_observed": true,
+              "encoder_feedback_absent": true
+            },
+            "conclusion": {
+              "condition": "drive_encoder_fault",
+              "value": true,
+              "pause_robot": true
+            },
+            "reason": "Illustrative rule: a drive-fault observation together with absent encoder feedback supports a simulated drive-and-encoder finding."
+          },
+          {
+            "rule_id": "R10",
+            "premises": {
+              "motor_connection": "disconnected"
+            },
+            "conclusion": {
+              "condition": "motor_connection_open",
+              "value": true
+            },
+            "reason": "Illustrative rule: a reported disconnected motor connection supports a simulated open-connection fact."
+          },
+          {
+            "rule_id": "R11",
+            "premises": {
+              "motor_connection_open": true,
+              "motor_enable": "enabled"
+            },
+            "conclusion": {
+              "condition": "motor_connection_fault",
+              "value": true,
+              "pause_robot": true
+            },
+            "reason": "Illustrative rule: an enabled simulated motor with a reported disconnected connection supports a motor-connection finding."
+          }
+        ],
+        "recommendations": [
+          {
+            "action": "pause_robot",
+            "reason": "Pause the robot and inspect motor temperature and drive load."
+          },
+          {
+            "action": "pause_robot",
+            "reason": "Pause the robot and inspect the lidar sensor for an obstruction."
+          },
+          {
+            "action": "pause_robot",
+            "reason": "Pause simulated movement while the power-path observations are reviewed."
+          },
+          {
+            "action": "check_power",
+            "reason": "Review the supplied battery voltage and connection observations."
+          },
+          {
+            "action": "pause_robot",
+            "reason": "Keep simulated movement paused while the stalled-movement evidence is reviewed."
+          },
+          {
+            "action": "check_drive",
+            "reason": "Review the movement and drive observations alongside the power-path result."
+          },
+          {
+            "action": "pause_robot",
+            "reason": "Pause simulated movement while drive and encoder observations are reviewed."
+          },
+          {
+            "action": "check_drive",
+            "reason": "Review the supplied drive-status observation."
+          },
+          {
+            "action": "check_encoder",
+            "reason": "Review the supplied encoder-feedback observation."
+          },
+          {
+            "action": "pause_robot",
+            "reason": "Pause simulated movement while the motor-connection observations are reviewed."
+          },
+          {
+            "action": "check_drive",
+            "reason": "Review the supplied motor-connection and enable observations."
+          }
+        ],
+        "missing_facts": []
+      },
+      "expected": {
+        "status": "ok",
+        "conditions": [
+          "suspected_motor_overheating",
+          "lidar_obstruction",
+          "battery_power_path_issue",
+          "battery_related_stall",
+          "drive_encoder_fault",
+          "motor_connection_fault"
+        ]
+      },
+      "expectation_match": true
+    }
+  ],
+  "scenario_validation": {
+    "passed": true,
+    "failed_ids": []
+  }
+}

@@ -1,0 +1,501 @@
+{
+  "metadata": {
+    "timestamp_utc": "2026-10-10T22:01:41.633663+00:00",
+    "source_commit": "118e95b50c2aa3196980435075a21ed6be789603",
+    "worktree_dirty": false,
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "dependencies": {
+      "streamlit": "1.65.0",
+      "pytest": "9.1.1"
+    },
+    "implementation": "cpython",
+    "knowledge_base": {
+      "source": "expert_system/knowledge_base.json",
+      "sha256": "e293fc70b6dfdeacb1db32a8acba26885594ec3ddb1ef62ee0b8dc2d99286cc3",
+      "schema_version": 1,
+      "provenance": "Illustrative classroom simulation rules proposed for software demonstration; not validated against a manufacturer manual, domain expert, or measured robot faults."
+    }
+  },
+  "schema_version": 1,
+  "scope": "route planning with observation-based diagnostics",
+  "created_at": "2026-10-10T21:58:12.734385+00:00",
+  "scenario": {
+    "id": "corridor-changes",
+    "title": "Warehouse Corridor Changes",
+    "description": "Synthetic warehouse shelves frame a central aisle. Close one central cell, move along the replanned route, reopen the aisle, and continue.",
+    "rows": [
+      ".............",
+      ".###...###...",
+      ".###...###...",
+      ".............",
+      ".............",
+      "...###.###...",
+      "...###.###...",
+      "............."
+    ],
+    "start": [
+      4,
+      1
+    ],
+    "goal": [
+      4,
+      11
+    ],
+    "events": [
+      {
+        "id": "corridor-close-center-aisle",
+        "type": "map",
+        "label": "Block the central aisle",
+        "changes": [
+          {
+            "cell": [
+              4,
+              6
+            ],
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "id": "corridor-step-around-shelves",
+        "type": "move",
+        "label": "Move one legal step on the replanned route"
+      },
+      {
+        "id": "corridor-reopen-center-aisle",
+        "type": "map",
+        "label": "Reopen the central aisle",
+        "changes": [
+          {
+            "cell": [
+              4,
+              6
+            ],
+            "blocked": false
+          }
+        ]
+      },
+      {
+        "id": "corridor-continue-route",
+        "type": "move",
+        "label": "Continue one legal route step"
+      }
+    ]
+  },
+  "applied_events": [
+    {
+      "changes": [
+        {
+          "blocked": true,
+          "cell": [
+            4,
+            6
+          ]
+        }
+      ],
+      "id": "corridor-close-center-aisle",
+      "label": "Block the central aisle",
+      "type": "map"
+    }
+  ],
+  "records": [
+    {
+      "event_id": "initial",
+      "label": "Initial planning",
+      "map_revision": 0,
+      "rows": [
+        ".............",
+        ".###...###...",
+        ".###...###...",
+        ".............",
+        ".............",
+        "...###.###...",
+        "...###.###...",
+        "............."
+      ],
+      "start": [
+        4,
+        1
+      ],
+      "goal": [
+        4,
+        11
+      ],
+      "k_m": 0,
+      "initialization_count": 1,
+      "dstar_lite": {
+        "status": "found",
+        "path": [
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            4,
+            10
+          ],
+          [
+            4,
+            11
+          ]
+        ],
+        "cost": 10,
+        "metrics": {
+          "processed_states": 11,
+          "queue_pops": 11,
+          "queue_pushes": 29,
+          "elapsed_ms": 0.7915000023785979
+        },
+        "message": ""
+      },
+      "astar": {
+        "status": "found",
+        "path": [
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            4,
+            10
+          ],
+          [
+            4,
+            11
+          ]
+        ],
+        "cost": 10,
+        "metrics": {
+          "processed_states": 11,
+          "queue_pops": 11,
+          "queue_pushes": 26,
+          "elapsed_ms": 0.1441999920643866
+        },
+        "message": ""
+      }
+    },
+    {
+      "event_id": "corridor-close-center-aisle",
+      "label": "Block the central aisle",
+      "map_revision": 1,
+      "rows": [
+        ".............",
+        ".###...###...",
+        ".###...###...",
+        ".............",
+        "......#......",
+        "...###.###...",
+        "...###.###...",
+        "............."
+      ],
+      "start": [
+        4,
+        1
+      ],
+      "goal": [
+        4,
+        11
+      ],
+      "k_m": 0,
+      "initialization_count": 1,
+      "dstar_lite": {
+        "status": "found",
+        "path": [
+          [
+            4,
+            1
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            4,
+            11
+          ]
+        ],
+        "cost": 12,
+        "metrics": {
+          "processed_states": 25,
+          "queue_pops": 49,
+          "queue_pushes": 46,
+          "elapsed_ms": 2.902999985963106
+        },
+        "message": ""
+      },
+      "astar": {
+        "status": "found",
+        "path": [
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            4,
+            11
+          ]
+        ],
+        "cost": 12,
+        "metrics": {
+          "processed_states": 24,
+          "queue_pops": 24,
+          "queue_pushes": 35,
+          "elapsed_ms": 0.4034999874420464
+        },
+        "message": ""
+      }
+    }
+  ],
+  "diagnostics": {
+    "adapter_status": "ready",
+    "result": {
+      "status": "ok",
+      "findings": [
+        {
+          "condition": "battery_power_path_issue",
+          "rule_ids": [
+            "R03",
+            "R04",
+            "R05"
+          ]
+        },
+        {
+          "condition": "battery_related_stall",
+          "rule_ids": [
+            "R03",
+            "R04",
+            "R05",
+            "R06"
+          ]
+        }
+      ],
+      "rule_trace": [
+        {
+          "rule_id": "R03",
+          "premises": {
+            "battery_voltage": "low"
+          },
+          "conclusion": {
+            "condition": "battery_voltage_low",
+            "value": true
+          },
+          "reason": "Illustrative rule: a categorical low-voltage observation supports checking the simulated battery state; it does not establish a measured voltage threshold."
+        },
+        {
+          "rule_id": "R04",
+          "premises": {
+            "battery_connection": "disconnected"
+          },
+          "conclusion": {
+            "condition": "battery_connection_open",
+            "value": true
+          },
+          "reason": "Illustrative rule: a reported disconnected battery connection supports a simulated open-connection fact."
+        },
+        {
+          "rule_id": "R05",
+          "premises": {
+            "battery_voltage_low": true,
+            "battery_connection_open": true
+          },
+          "conclusion": {
+            "condition": "battery_power_path_issue",
+            "value": true,
+            "pause_robot": true
+          },
+          "reason": "Illustrative rule: low battery status together with a disconnected connection supports a simulated battery power-path finding."
+        },
+        {
+          "rule_id": "R06",
+          "premises": {
+            "battery_power_path_issue": true,
+            "movement_status": "stalled"
+          },
+          "conclusion": {
+            "condition": "battery_related_stall",
+            "value": true,
+            "pause_robot": true
+          },
+          "reason": "Illustrative rule: a simulated battery power-path finding with stalled movement supports reviewing both power and drive observations; it does not prove causation."
+        }
+      ],
+      "recommendations": [
+        {
+          "action": "pause_robot",
+          "reason": "Pause simulated movement while the power-path observations are reviewed."
+        },
+        {
+          "action": "check_power",
+          "reason": "Review the supplied battery voltage and connection observations."
+        },
+        {
+          "action": "pause_robot",
+          "reason": "Keep simulated movement paused while the stalled-movement evidence is reviewed."
+        },
+        {
+          "action": "check_drive",
+          "reason": "Review the movement and drive observations alongside the power-path result."
+        }
+      ],
+      "missing_facts": []
+    },
+    "safety_gate_enabled": true,
+    "raw_observations_json": "{\n  \"motor_temperature\": \"normal\",\n  \"movement_status\": \"stalled\",\n  \"sensor_lidar\": \"clear\",\n  \"battery_voltage\": \"low\",\n  \"battery_connection\": \"disconnected\"\n}",
+    "raw_observations": {
+      "motor_temperature": "normal",
+      "movement_status": "stalled",
+      "sensor_lidar": "clear",
+      "battery_voltage": "low",
+      "battery_connection": "disconnected"
+    }
+  }
+}

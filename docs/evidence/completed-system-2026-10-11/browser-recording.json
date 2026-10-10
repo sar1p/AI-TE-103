@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "source_commit": "118e95b50c2aa3196980435075a21ed6be789603",
+  "capture": "Actual browser screencast of the clean-clone warehouse demonstration; no reconstructed UI frames.",
+  "viewport": {
+    "width": 1366,
+    "height": 900
+  },
+  "started_timestamp": 1791669516.361,
+  "stopped_timestamp": 1791669748.015,
+  "frames": [
+    {
+      "file": "frame-00000.jpg",
+      "timestamp": 1791669516.45124,
+      "sequence": 502
+    },
+    {
+      "file": "frame-00001.jpg",
+      "timestamp": 1791669516.676569,
+      "sequence": 503
+    },
+    {
+      "file": "frame-00002.jpg",
+      "timestamp": 1791669535.453631,
+      "sequence": 504
+    },
+    {
+      "file": "frame-00003.jpg",
+      "timestamp": 1791669535.470633,
+      "sequence": 505
+    },
+    {
+      "file": "frame-00004.jpg",
+      "timestamp": 1791669536.683129,
+      "sequence": 506
+    },
+    {
+      "file": "frame-00005.jpg",
+      "timestamp": 1791669677.713996,
+      "sequence": 507
+    },
+    {
+      "file": "frame-00006.jpg",
+      "timestamp": 1791669695.631982,
+      "sequence": 508
+    },
+    {
+      "file": "frame-00007.jpg",
+      "timestamp": 1791669695.637494,
+      "sequence": 509
+    },
+    {
+      "file": "frame-00008.jpg",
+      "timestamp": 1791669696.270496,
+      "sequence": 511
+    },
+    {
+      "file": "frame-00009.jpg",
+      "timestamp": 1791669696.378278,
+      "sequence": 512
+    },
+    {
+      "file": "frame-00010.jpg",
+      "timestamp": 1791669700.617223,
+      "sequence": 513
+    },
+    {
+      "file": "frame-00011.jpg",
+      "timestamp": 1791669701.602515,
+      "sequence": 514
+    },
+    {
+      "file": "frame-00012.jpg",
+      "timestamp": 1791669701.69199,
+      "sequence": 515
+    },
+    {
+      "file": "frame-00013.jpg",
+      "timestamp": 1791669707.896872,
+      "sequence": 516
+    },
+    {
+      "file": "frame-00014.jpg",
+      "timestamp": 1791669708.194841,
+      "sequence": 517
+    },
+    {
+      "file": "frame-00015.jpg",
+      "timestamp": 1791669708.225594,
+      "sequence": 518
+    },
+    {
+      "file": "frame-00016.jpg",
+      "timestamp": 1791669708.24076,
+      "sequence": 519
+    },
+    {
+      "file": "frame-00017.jpg",
+      "timestamp": 1791669714.615699,
+      "sequence": 530
+    },
+    {
+      "file": "frame-00018.jpg",
+      "timestamp": 1791669714.77008,
+      "sequence": 531
+    },
+    {
+      "file": "frame-00019.jpg",
+      "timestamp": 1791669715.303172,
+      "sequence": 532
+    },
+    {
+      "file": "frame-00020.jpg",
+      "timestamp": 1791669718.516147,
+      "sequence": 535
+    },
+    {
+      "file": "frame-00021.jpg",
+      "timestamp": 1791669718.672327,
+      "sequence": 536
+    },
+    {
+      "file": "frame-00022.jpg",
+      "timestamp": 1791669719.205924,
+      "sequence": 537
+    },
+    {
+      "file": "frame-00023.jpg",
+      "timestamp": 1791669722.456539,
+      "sequence": 540
+    },
+    {
+      "file": "frame-00024.jpg",
+      "timestamp": 1791669722.592448,
+      "sequence": 541
+    },
+    {
+      "file": "frame-00025.jpg",
+      "timestamp": 1791669723.136537,
+      "sequence": 542
+    },
+    {
+      "file": "frame-00026.jpg",
+      "timestamp": 1791669727.92846,
+      "sequence": 544
+    },
+    {
+      "file": "frame-00027.jpg",
+      "timestamp": 1791669727.949089,
+      "sequence": 545
+    },
+    {
+      "file": "frame-00028.jpg",
+      "timestamp": 1791669727.952616,
+      "sequence": 546
+    },
+    {
+      "file": "frame-00029.jpg",
+      "timestamp": 1791669735.303931,
+      "sequence": 547
+    },
+    {
+      "file": "frame-00030.jpg",
+      "timestamp": 1791669741.517036,
+      "sequence": 548
+    },
+    {
+      "file": "frame-00031.jpg",
+      "timestamp": 1791669741.578375,
+      "sequence": 549
+    },
+    {
+      "file": "frame-00032.jpg",
+      "timestamp": 1791669742.69098,
+      "sequence": 560
+    },
+    {
+      "file": "frame-00033.jpg",
+      "timestamp": 1791669742.721788,
+      "sequence": 561
+    },
+    {
+      "file": "frame-00034.jpg",
+      "timestamp": 1791669742.75325,
+      "sequence": 562
+    }
+  ],
+  "video": "warehouse-demo.mp4",
+  "ffprobe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1366,
+        "height": 900
+      }
+    ],
+    "format": {
+      "duration": "231.600000",
+      "size": "774170"
+    }
+  },
+  "encoding": "H.264 variable frame rate using observed browser frame timestamps; no audio or reconstructed frames.",
+  "decode_validation": "ffmpeg decoded the complete encoded video without errors.",
+  "raw_frame_storage": "Raw browser JPEG frames remain in the ignored local capture directory; frame names in this manifest are capture identifiers."
+}

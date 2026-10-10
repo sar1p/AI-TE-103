@@ -1,0 +1,17 @@
+Main CI: https://github.com/sar1p/AI-TE-303/actions/runs/38089401923
+Source commit: 118e95b50c2aa3196980435075a21ed6be789603
+Conclusion: success
+
+Python tests	Install pinned dependencies	2026-10-10T21:54:32.8442576Z ##[group]Run python -m pip install -r requirements-dev.txt -c constraints.txt
+Python tests	Check dependency consistency	2026-10-10T21:54:43.6763184Z ##[group]Run python -m pip check
+Python tests	Check dependency consistency	2026-10-10T21:54:43.8254284Z No broken requirements found.
+Python tests	Run automated tests	2026-10-10T21:54:48.0079333Z 167 passed in 3.42s
+Python tests	Replay diagnostic scenarios	2026-10-10T21:54:48.0947802Z ##[group]Run python -m expert_system --all --output artifacts/diagnostics.json
+Python tests	Validate combined diagnosis and route planning	2026-10-10T21:54:48.1765648Z ##[group]Run python tools/combined_demo.py --output artifacts/combined-demo.json
+Python tests	Replay named scenarios	2026-10-10T21:54:48.2524956Z ##[group]Run python tools/replay_demo.py --output artifacts/demo
+Python tests	Replay named scenarios	2026-10-10T21:54:48.3599119Z Replay JSON: /home/runner/work/AI-TE-303/AI-TE-303/artifacts/demo/replay.json
+Python tests	Replay named scenarios	2026-10-10T21:54:48.3601423Z Diagnostic inference: not run; this artifact contains search results only.
+Python tests	Validate benchmark execution	2026-10-10T21:54:48.3703235Z ##[group]Run python tools/benchmark_search.py --output artifacts/benchmark --repeats 1
+Python tests	Validate benchmark execution	2026-10-10T21:54:48.4788675Z Raw measurements (22 rows): /home/runner/work/AI-TE-303/AI-TE-303/artifacts/benchmark/raw.csv
+Python tests	Validate benchmark execution	2026-10-10T21:54:48.4789185Z Median summary: /home/runner/work/AI-TE-303/AI-TE-303/artifacts/benchmark/summary.json
+Python tests	Validate benchmark execution	2026-10-10T21:54:48.4789463Z Diagnostic inference: not run; benchmark results cover search only.
