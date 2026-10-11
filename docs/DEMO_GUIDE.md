@@ -1,5 +1,7 @@
 # Demonstration and evidence guide
 
+Submission / live demonstration: Tuesday, October 13, 2026, Asia/Jakarta.
+
 The application is **Warehouse Operations**, a local simulation combining
 external-rule diagnostics with D* Lite route repair. All observation categories,
 rules, and scenarios are illustrative. They demonstrate software behavior rather
@@ -109,4 +111,4 @@ knowledge base, raw versus derived facts, missing evidence, and correction.
 Before presenting, the teammate should pull current main, reproduce the commands
 on their laptop, review the rules, and rehearse the live sequence. A recorded
 software demonstration does not establish that this independent rehearsal occurred.
-See [TEAMMATE_TASKS.md](TEAMMATE_TASKS.md) for the remaining human handoff.
+See [TEAMMATE_TASKS.md](TEAMMATE_TASKS.md) for presentation preparation.

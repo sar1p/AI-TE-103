@@ -108,8 +108,9 @@ and integration. That later work uses the lead's identity. The teammate's
 original contribution remains credited without needing an artificial commit.
 Further contributions should describe actual review findings, fixes, or
 documentation work. Read [TEAMMATE_TASKS.md](TEAMMATE_TASKS.md) and
-[issue #3](https://github.com/sar1p/AI-TE-303/issues/3) for independent review and
-presentation rehearsal. Begin any further change from current `main` on a new branch.
+[the closed issue #3](https://github.com/sar1p/AI-TE-303/issues/3) for the completed
+software record. Review and rehearsal prepare the team for Tuesday, October 13,
+2026. Begin any further change from current `main` on a new branch.
 
 ## Recovery
 
