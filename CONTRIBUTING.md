@@ -14,10 +14,11 @@ and presentation rehearsal. Future work from either contributor should be
 recorded with that contributor's configured Git identity.
 
 Coordinate overlapping edits through review. Current diagnostic behavior and
-the remaining handoff checks are described in
+presentation preparation are described in
 [TEAMMATE_TASKS.md](docs/TEAMMATE_TASKS.md). For branch setup, see
-[GITHUB_GUIDE.md](docs/GITHUB_GUIDE.md). Keep [issue #3](https://github.com/sar1p/AI-TE-303/issues/3)
-open for the teammate's independent review, laptop reproduction, and rehearsal.
+[GITHUB_GUIDE.md](docs/GITHUB_GUIDE.md). [Issue #3](https://github.com/sar1p/AI-TE-303/issues/3)
+is closed for completed software implementation and verification. Review,
+laptop setup, and rehearsal are preparation for the Tuesday, October 13 presentation.
 The [completed-system snapshot](docs/evidence/completed-system-2026-10-11/README.md)
 already records the lead's clean-clone checks, CLI/UI runs, and screen recording.
 

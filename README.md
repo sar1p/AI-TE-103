@@ -4,6 +4,9 @@
 
 [![Python validation](https://github.com/sar1p/AI-TE-303/actions/workflows/tests.yml/badge.svg)](https://github.com/sar1p/AI-TE-303/actions/workflows/tests.yml)
 
+Release: [v0.1.0](https://github.com/sar1p/AI-TE-303/releases/tag/v0.1.0).
+Submission / live demonstration: Tuesday, October 13, 2026, Asia/Jakarta.
+
 A two-member Artificial Intelligence coursework project. D* Lite repairs a
 warehouse robot's route after map changes and movement. Repeated A* provides a
 baseline. A separate expert system uses external IF-THEN rules and forward
@@ -109,7 +112,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) and
 [MODULE_CONTRACTS.md](docs/MODULE_CONTRACTS.md). New GitHub users can follow
 [GITHUB_GUIDE.md](docs/GITHUB_GUIDE.md) for setup, commits, pushes, PRs, and recovery.
 
-The expert-system handoff is tracked in
+Completed expert-system implementation and verification are tracked in the closed
 [issue #3](https://github.com/sar1p/AI-TE-303/issues/3). The teammate's
 `zaedalmusthofa` account has collaborator access and an attributed starter commit.
 That original commit remains in the main history. The lead completed the rule

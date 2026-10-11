@@ -1,8 +1,8 @@
 # AI-TE-303 Project Plan
 
-Planning date: Friday, October 9, 2026. Working delivery target: Sunday, October 11, 2026, Asia/Jakarta. The exact submission time is unconfirmed.
+Planning date: Friday, October 9, 2026. Submission / live demonstration: Tuesday, October 13, 2026, Asia/Jakarta.
 
-Status: software implementation and running verification completed Sunday, October 11, 2026. [The current evidence](evidence/completed-system-2026-10-11/README.md) records 167 passing tests, eight matching diagnostic fixtures, nine clean-clone checks, real UI exports and a browser recording, combined integration, and passing main CI at source `118e95b50c2aa3196980435075a21ed6be789603`. The October 9 sections below retain the original proposal. Issue #3 stays open for the teammate's independent review, laptop reproduction, and two-person presentation rehearsal, which have not been verified.
+Status: software implementation and running verification completed Sunday, October 11, 2026. [The current evidence](evidence/completed-system-2026-10-11/README.md) records 167 passing tests, eight matching diagnostic fixtures, nine clean-clone checks, real UI exports and a browser recording, combined integration, and passing main CI at source `118e95b50c2aa3196980435075a21ed6be789603`. Issue #3 is closed for completed software implementation and verification. Review and rehearsal are presentation preparation for Tuesday; they are not open software acceptance tasks. The October 9 scope sections below retain the original proposal.
 
 ## Project and scope
 
@@ -194,7 +194,7 @@ Evidence package:
 3. Exported replay results and benchmark CSV/JSON with source revision metadata.
 4. Passing GitHub Actions for the integrated source revision.
 5. Fresh clone on the teammate's laptop, followed by setup, tests, and both module demonstrations.
-6. A tested release tag such as `v0.1.0-demo`, selected only after integration passes.
+6. The tested release `v0.1.0`, selected after integration passes.
 
 Documentation/evidence commits can follow a test run. Their metadata should reference the code revision actually tested; do not manufacture a self-referential commit SHA inside generated evidence.
 
@@ -220,21 +220,14 @@ python -m venv .venv
 
 `requirements-dev.txt` should include `requirements.txt` plus pinned test dependencies. Directly invoking the virtual environment's Python avoids a PowerShell activation-policy change. UI access will be local, and the CLI commands provide a fallback if interface rendering is disrupted.
 
-## Original two-day schedule and fallback
+## Submission and demonstration schedule
 
-The table records the October 9 planning schedule, not current completion evidence or a new ownership restriction.
-
-| Period | Lead | Teammate | Shared completion gate |
-|---|---|---|---|
-| Friday, October 9 | Repository bootstrap plan, freeze contracts, begin validated map/baseline | Review handoff, draft rule data and named diagnostic cases | Both know ownership and data format; first real increments begin |
-| Saturday morning | D* Lite core and dynamic tests | Inference engine and trace tests | Each module can run independently |
-| Saturday afternoon/evening | Visual route demo, replay/export, integration adapter | Missing/corrected evidence behavior, diagnostic guide, integration review | Both modules run together before optional extensions |
-| Sunday morning, October 11 | Resolve regression failures and verify results | Fresh-clone run, diagnostic demonstration, cross-review | Integrated tests pass; actual evidence is captured |
-| Before confirmed Sunday cutoff | Select tested demo version and verified local backup | Rehearse and check submission contents | No unfinished optional feature blocks delivery |
-
-Proposed internal gates: by Saturday evening, both modules must pass their core tests and run one paired scenario through the CLI. If that gate is missed, drop all optional work and finish the headless demonstration before visual polish. By Sunday midday, freeze the required code, reproduce it from a clean clone, and capture the actual evidence. These are team targets, not confirmed submission times; move them earlier if the lecturer's cutoff requires it.
-
-If time becomes tight, remove Bayesian work, elaborate animations, weighted terrain, and extra visual styling first. Preserve the two working modules, D* Lite's incremental behavior, explanations, named scenarios, and running evidence. If D* Lite correctness remains unresolved, do not label a repeated A* implementation as D* Lite: report the limitation and resolve the algorithm before presenting that claim.
+Submission / live demonstration is Tuesday, October 13, 2026, Asia/Jakarta.
+The implementation, integrated verification, running evidence, and tested
+release are complete. Use [DEMO_GUIDE.md](DEMO_GUIDE.md) for the presentation
+sequence and [TEAMMATE_TASKS.md](TEAMMATE_TASKS.md) for each member's explanation.
+Laptop setup, rule review, and rehearsal are presentation preparation; do not
+record them as completed human actions unless the team has actually done them.
 
 Push tested work to the shared repository during development. Before submission, save and verify a Git bundle of committed history outside the checkout. Preserve any uncommitted work separately. A fork is not required by this backup plan.
 
