@@ -9,20 +9,37 @@ than establish a physical robot's condition.
 
 ## Setup and checks
 
-Use Python 3.12 and run commands from the repository root. Reuse an existing
-project environment; on a new clone in PowerShell:
+For a new clone or ZIP download, use the complete
+[README development setup](../README.md#development-setup). It includes the
+download location, project-folder check, Python 3.12 check, dependency
+installation, tests, and launch. Do not copy just the install commands while
+PowerShell is in `C:\Windows\System32` or another unrelated folder.
+
+For an already installed project, double-click `run_demo.bat` inside its folder.
+It enters the project folder automatically and uses the existing environment.
+There is no need to recreate `.venv` for each demonstration.
+
+To run the checks manually, open the folder containing `app.py` in File Explorer,
+type `powershell` in its address bar, and press Enter. Then copy this whole block:
 
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt -c constraints.txt
-.\.venv\Scripts\python.exe -m pip check
-.\.venv\Scripts\python.exe -m pytest -q
-.\.venv\Scripts\python.exe -m streamlit run app.py --server.address 127.0.0.1
+& {
+    $ErrorActionPreference = "Stop"
+    if (-not (Test-Path -LiteralPath ".\app.py" -PathType Leaf)) {
+        throw "Open PowerShell in the AI-TE-303 project folder before continuing."
+    }
+    & .\.venv\Scripts\python.exe -m pip check
+    if ($LASTEXITCODE -ne 0) { throw "Dependency consistency check failed. Follow the README setup." }
+    & .\.venv\Scripts\python.exe -m pytest -q
+    if ($LASTEXITCODE -ne 0) { throw "Tests failed. Check the results above before running the app." }
+    & .\.venv\Scripts\python.exe -m streamlit run app.py --server.address 127.0.0.1
+}
 ```
 
-Wait for installation to finish before testing. Open the URL printed by
-Streamlit. Windows users can instead double-click `run_demo.bat` after setup.
-On Linux/macOS, use `.venv/bin/python`. Stop the server with Ctrl+C.
+Open the URL printed by Streamlit. On Linux/macOS, use `.venv/bin/python`.
+Stop the server with Ctrl+C. A pip update notice is informational and does not
+cause missing-file or missing-module errors; a failed installation must be fixed
+before running tests or the application.
 
 Search and the expert-system engine use the standard library; the visual app
 needs Streamlit and tests need pytest. Versions are pinned by the requirement

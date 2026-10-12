@@ -26,23 +26,21 @@ the contribution count.
 
 ## First setup on a new laptop
 
-Install Git and Python 3.12, sign in to your own GitHub account, and accept the
-repository's collaborator invitation. GitHub Desktop is an alternative to the
-Git commands below. GitHub CLI is optional.
+Follow the [README development setup](../README.md#development-setup) for the
+complete Windows download, installation, checks, and launch sequence. Its
+download block chooses your own Documents folder and enters the clone. Its
+setup block checks the project files and Python version, reuses an existing
+environment, and stops if installation or tests fail. A ZIP download must be
+extracted, with PowerShell opened in the folder containing `app.py`.
 
-Clone into a new folder, then run from that folder:
+Anyone can download and run this public repository without a collaborator
+invitation. To push contributions to this shared repository, sign in to your own
+GitHub account and accept the invitation. GitHub Desktop is an alternative to
+Git commands; GitHub CLI is optional.
 
-```powershell
-git clone https://github.com/sar1p/AI-TE-303.git
-cd AI-TE-303
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt -c constraints.txt
-.\.venv\Scripts\python.exe -m pip check
-.\.venv\Scripts\python.exe -m pytest -q
-```
-
-Wait for dependency installation to finish before testing. Run the application
-with `run_demo.bat` or follow [DEMO_GUIDE.md](DEMO_GUIDE.md).
+For later sessions, double-click `run_demo.bat` in the project folder or follow
+[DEMO_GUIDE.md](DEMO_GUIDE.md). Wait for installation to finish before testing;
+do not continue after a failed dependency installation.
 
 Before committing, inspect your repository's author configuration:
 

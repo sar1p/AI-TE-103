@@ -27,22 +27,79 @@ See [PROJECT_PLAN.md](docs/PROJECT_PLAN.md) for scope and
 
 ## Development setup
 
-Use Python 3.12. From this repository in PowerShell:
+### Windows: first download
+
+Install Git and Python 3.12 before starting. The setup below expects `python`
+to select Python 3.12 when creating a new environment. Check with
+`python --version`; if the Windows Python launcher provides that version instead,
+use `py -3.12` in place of the two bare `python` commands in the setup block.
+An existing project environment is checked and reused.
+
+Open PowerShell and copy this download block. It places the project in your own
+Documents folder and enters it, even when PowerShell starts in another folder:
 
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt -c constraints.txt
-.\.venv\Scripts\python.exe -m pytest -q
-.\.venv\Scripts\python.exe -m streamlit run app.py --server.address 127.0.0.1
+& {
+    $ErrorActionPreference = "Stop"
+    $projectDirectory = Join-Path $env:USERPROFILE "Documents\AI-TE-303"
+    git clone https://github.com/sar1p/AI-TE-303.git "$projectDirectory"
+    if ($LASTEXITCODE -ne 0) { throw "Clone failed. Check the error above before continuing." }
+    Set-Location -LiteralPath $projectDirectory
+}
 ```
 
+If that folder already contains a clone, open that existing project instead of
+cloning again. If you downloaded a ZIP, extract it first. Open the folder that
+contains `app.py`, `requirements-dev.txt`, and `constraints.txt` in File Explorer,
+type `powershell` in its address bar, and press Enter. Do not run setup from
+`C:\Windows\System32` or from the parent folder of the project.
+
+### Windows: install, verify, and run
+
+Copy this whole block into PowerShell in the project folder. Keep the opening
+`& {` and closing `}`: they make setup stop at the first failed step.
+
+```powershell
+& {
+    $ErrorActionPreference = "Stop"
+    foreach ($file in @("app.py", "requirements-dev.txt", "constraints.txt")) {
+        if (-not (Test-Path -LiteralPath $file -PathType Leaf)) {
+            throw "Open PowerShell in the AI-TE-303 project folder. Missing file: $file"
+        }
+    }
+    $projectPython = ".\.venv\Scripts\python.exe"
+    if (-not (Test-Path -LiteralPath $projectPython -PathType Leaf)) {
+        python -c "import sys; sys.exit(0 if sys.version_info[:2] == (3, 12) else 'Select Python 3.12 before creating the environment.')"
+        if ($LASTEXITCODE -ne 0) { throw "Python 3.12 is required. Check the message above." }
+        python -m venv .venv
+        if ($LASTEXITCODE -ne 0) { throw "Virtual environment creation failed." }
+    }
+    & $projectPython -c "import sys; print(sys.version); sys.exit(0 if sys.version_info[:2] == (3, 12) else 'This environment must use Python 3.12.')"
+    if ($LASTEXITCODE -ne 0) { throw "Use a Python 3.12 project environment before continuing." }
+    & $projectPython -m pip install -r requirements-dev.txt -c constraints.txt
+    if ($LASTEXITCODE -ne 0) { throw "Dependency installation failed. Fix the error above before running tests or the app." }
+    & $projectPython -m pip check
+    if ($LASTEXITCODE -ne 0) { throw "Dependency consistency check failed." }
+    & $projectPython -m pytest -q
+    if ($LASTEXITCODE -ne 0) { throw "Tests failed. Check the results above before running the app." }
+    & $projectPython -m streamlit run app.py --server.address 127.0.0.1
+}
+```
+
+Wait for installation and tests to finish. Then open the local URL printed by
+Streamlit. A pip update notice is informational; it does not mean Python needs
+an update. If a step fails, address that error before continuing.
+
 Run commands through the virtual environment's Python directly. Activating it
-and changing PowerShell's execution policy are unnecessary. Core search will use
+and changing PowerShell's execution policy are unnecessary. Core search uses
 only the standard library, as does the expert-system engine. Streamlit provides
 the local visual application.
 
-After setup, Windows users can double-click `run_demo.bat`. Stop the server with
-Ctrl+C. See [DEMO_GUIDE.md](docs/DEMO_GUIDE.md) for the live presentation sequence.
+After successful setup, double-click `run_demo.bat` inside the project folder
+for later sessions; it enters the correct folder automatically. Stop the server
+with Ctrl+C. See [DEMO_GUIDE.md](docs/DEMO_GUIDE.md) for the live presentation
+sequence. The blocks above are for Windows PowerShell; on Linux/macOS the
+environment interpreter is `.venv/bin/python`.
 
 ## Run without the interface
 
