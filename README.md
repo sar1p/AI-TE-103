@@ -4,7 +4,7 @@
 
 [![Python validation](https://github.com/sar1p/AI-TE-303/actions/workflows/tests.yml/badge.svg)](https://github.com/sar1p/AI-TE-303/actions/workflows/tests.yml)
 
-Release: [v0.1.1](https://github.com/sar1p/AI-TE-303/releases/tag/v0.1.1).
+Release: [v0.1.2](https://github.com/sar1p/AI-TE-303/releases/tag/v0.1.2).
 Submission / live demonstration: Tuesday, October 13, 2026, Asia/Jakarta.
 
 A two-member Artificial Intelligence coursework project. D* Lite repairs a
@@ -65,6 +65,48 @@ Keep the terminal open while the app is running and press Ctrl+C to stop it.
 `run_demo.bat` remains available as a compatibility alias.
 See [DEMO_GUIDE.md](docs/DEMO_GUIDE.md) for the live presentation sequence.
 
+### Linux and macOS: automatic setup
+
+Open Terminal and paste this whole block. It puts the project in
+`~/Downloads/AI-TE-303`, prepares Python 3.12 and its libraries, and opens the
+local app. Git and Python do not need to be installed first. Git is used when
+available; otherwise the installer downloads the source archive.
+
+```bash
+(
+    set -e
+    installer="$(mktemp "${TMPDIR:-/tmp}/AI-TE-303-install.XXXXXX")"
+    url=https://raw.githubusercontent.com/sar1p/AI-TE-303/main/install.sh
+    if command -v curl >/dev/null 2>&1; then
+        curl --fail --location --silent --show-error "$url" --output "$installer"
+    else
+        wget -q "$url" -O "$installer"
+    fi
+    bash "$installer"
+)
+```
+
+For a ZIP download, extract it and open Terminal in the folder containing
+`app.py`. Run just:
+
+```bash
+bash run.sh
+```
+
+The same command starts later sessions. No environment activation or `chmod`
+command is needed. A macOS Git clone also includes an executable `run.command`
+entry point; double-click it to open Terminal and start the app. For downloaded
+ZIPs, extraction permissions and macOS file-opening rules can vary, so the
+Terminal command above is the consistent path.
+
+First setup needs internet. Keep the terminal open and press Ctrl+C to stop.
+Existing project files and incompatible environments are preserved. The launcher
+uses a suitable Python 3.12 or prepares a private runtime without changing system
+Python or shell profiles. Modern glibc Linux and macOS 14+ are supported on
+x86_64 and ARM64; Alpine/musl and 32-bit systems are outside this launcher.
+The download block needs `curl` or `wget`; normal `tar` and SHA256 utilities are
+also required. These are included in macOS and common desktop Linux installations.
+
 ### Developer checks
 
 From the project folder:
@@ -90,15 +132,16 @@ From the project folder:
 Runtime provenance, environment recovery, and launcher verification are in
 [WINDOWS_LAUNCHER.md](docs/WINDOWS_LAUNCHER.md).
 
-On Linux or macOS, use Python 3.12 and set up the environment manually:
+On Linux/macOS, the automatic launcher provides equivalent checks:
 
 ```bash
-python3.12 -m venv .venv
-.venv/bin/python -m pip install -r requirements-dev.txt -c constraints.txt
-.venv/bin/python -m pip check
-.venv/bin/python -m pytest -q
-.venv/bin/python -m streamlit run app.py --server.address 127.0.0.1
+bash run.sh --setup-only
+bash run.sh --verify
 ```
+
+Use `--managed-python` when creating an environment to select a project-private
+runtime even if Python 3.12 is installed. See [UNIX_LAUNCHER.md](docs/UNIX_LAUNCHER.md)
+for runtime provenance, supported platforms, and native verification.
 
 ## Run without the interface
 
