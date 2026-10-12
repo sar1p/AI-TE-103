@@ -34,6 +34,23 @@ jobs:
           done
       - name: Verify private Python setup, reuse, recovery and app launch
         run: python tools/check_unix_launcher.py
+      - name: Check the published Terminal installer in the default Downloads folder
+        if: github.ref == 'refs/heads/main'
+        run: |
+          (
+            set -e
+            installer="$(mktemp "${TMPDIR:-/tmp}/AI-TE-303-install.XXXXXX")"
+            url=https://raw.githubusercontent.com/sar1p/AI-TE-303/main/install.sh
+            if command -v curl >/dev/null 2>&1; then
+              curl --fail --location --silent --show-error "$url" --output "$installer"
+            else
+              wget -q "$url" -O "$installer"
+            fi
+            cd /
+            bash "$installer" --setup-only --managed-python
+            test -f "$HOME/Downloads/AI-TE-303/.venv/.ai-te-303-ready"
+            "$HOME/Downloads/AI-TE-303/.venv/bin/python" -c 'import sys,streamlit; assert sys.version_info[:2] == (3,12); assert streamlit.__version__ == "1.65.0"'
+          )
       - name: Save native launcher verification logs
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
