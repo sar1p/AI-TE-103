@@ -215,7 +215,7 @@ class UnixLauncherTests(unittest.TestCase):
         binaries = WORK / "without-git-bin"
         binaries.mkdir()
         # Restrict PATH to ordinary native utilities, excluding Git and Python.
-        for name in ("uname", "dirname", "mkdir", "basename", "mktemp", "tar", "cp", "rm", "awk", "grep", "ldd", "ln", "chmod", "sha256sum", "shasum"):
+        for name in ("uname", "dirname", "mkdir", "basename", "mktemp", "tar", "gzip", "cp", "rm", "awk", "grep", "ldd", "ln", "chmod", "sha256sum", "shasum"):
             actual = shutil.which(name)
             if actual:
                 (binaries / name).symlink_to(actual)
