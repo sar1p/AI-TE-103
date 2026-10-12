@@ -44,7 +44,9 @@ The shell obtains Python before `tools/start_unix.py` starts, so a system Python
 is not required. The helper holds a kernel file lock before creating or changing
 `.venv`. The lock releases on process death; its ignored regular file remains,
 so no stale PID-directory cleanup is required. A complete verified uv executable
-is published atomically; uv manages concurrent private-runtime installation.
+is published atomically. The pinned uv version holds an installation-directory
+lock for the full managed-runtime installation; this is verified in its
+[installation source](https://github.com/astral-sh/uv/blob/0.13.0/crates/uv-python-commands/src/install.rs).
 
 uv creates and seeds the environment even when a distribution does not bundle
 `ensurepip`. Normal virtual-environment interpreter symlinks are allowed; a linked
@@ -84,3 +86,7 @@ preservation, incomplete archives, directory-link rejection, busy-port fallback,
 duplicate-window handling, and server shutdown. Logs/results are retained under
 ignored `artifacts/unix-launcher/`. Headless CI verifies shell entry points and
 server behavior; it does not reproduce Finder dialogs or physical laptop setup.
+Additional cases verify interrupted setup returns failure and the no-Git archive
+installer. That archive case substitutes only the transport with the exact
+checkout and reuses its validated runtime cache; destination extraction, copying,
+environment creation, installation, and launcher handoff still execute.

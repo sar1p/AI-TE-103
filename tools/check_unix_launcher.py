@@ -11,6 +11,7 @@ import signal
 import socket
 import subprocess
 import sys
+import tarfile
 import tempfile
 import time
 import unittest
@@ -38,8 +39,8 @@ def command(project, *arguments):
     return ["/bin/bash", str(project / "run.sh"), *map(str, arguments)]
 
 
-def invoke(args, label, env=None, expected=0):
-    result = subprocess.run(args, cwd="/", env=env, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=600)
+def invoke(args, label, env=None, expected=0, timeout=600):
+    result = subprocess.run(args, cwd="/", env=env, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=timeout)
     (REPORT / f"{label}.log").write_text(result.stdout, encoding="utf-8")
     if result.returncode != expected:
         raise AssertionError(f"{label}: exit {result.returncode}, expected {expected}\n{result.stdout}")
@@ -53,6 +54,10 @@ def lock_is_free(project):
         except BlockingIOError:
             return False
         return True
+
+
+def shell_quote(value):
+    return "'" + str(value).replace("'", "'\"'\"'") + "'"
 
 
 @unittest.skipUnless(sys.platform in ("linux", "darwin"), "Native Linux/macOS verification")
@@ -177,6 +182,60 @@ class UnixLauncherTests(unittest.TestCase):
             else:
                 self.fail("The test server did not stop")
         self.assertTrue(lock_is_free(self.project))
+
+    def test_07_setup_interruption_is_not_success(self):
+        log_path = REPORT / "interrupted-verify.log"
+        with log_path.open("w") as log:
+            process = subprocess.Popen(command(self.project, "--verify", "--setup-only"), cwd="/", stdout=log, stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, start_new_session=True)
+            try:
+                deadline = time.monotonic() + 30
+                while time.monotonic() < deadline:
+                    text = log_path.read_text()
+                    if "Running the project tests" in text:
+                        os.killpg(process.pid, signal.SIGINT)
+                        break
+                    if process.poll() is not None:
+                        self.fail(text)
+                    time.sleep(0.05)
+                else:
+                    self.fail("Verification did not start")
+                self.assertNotEqual(process.wait(timeout=15), 0)
+                self.assertNotIn("Setup complete", log_path.read_text())
+            finally:
+                if process.poll() is None:
+                    os.killpg(process.pid, signal.SIGKILL)
+                    process.wait(timeout=10)
+        self.assertTrue(lock_is_free(self.project))
+
+    def test_08_archive_installer_without_git(self):
+        source = snapshot("archive source")
+        archive = WORK / "source.tar.gz"
+        with tarfile.open(archive, "w:gz") as bundle:
+            bundle.add(source, arcname="AI-TE-303-main")
+        binaries = WORK / "without-git-bin"
+        binaries.mkdir()
+        # Restrict PATH to ordinary native utilities, excluding Git and Python.
+        for name in ("uname", "dirname", "mkdir", "basename", "mktemp", "tar", "cp", "rm", "awk", "grep", "ldd", "ln", "chmod", "sha256sum", "shasum"):
+            actual = shutil.which(name)
+            if actual:
+                (binaries / name).symlink_to(actual)
+        curl = binaries / "curl"
+        curl.write_text("#!/bin/sh\nwhile [ $# -gt 0 ]; do\n if [ \"$1\" = --output ]; then shift; cp " + shell_quote(archive) + " \"$1\"; exit 0; fi\n shift\ndone\nexit 2\n")
+        curl.chmod(0o755)
+        bash = binaries / "bash"
+        # Reuse the verified runtime cache to keep this transport test offline
+        # at bootstrap; the actual destination launcher and pip still run.
+        bash.write_text("#!/bin/sh\nproject=$(dirname \"$1\")\ncp -R -p " + shell_quote(self.project / ".runtime") + " \"$project/.runtime\"\nexec /bin/bash \"$@\"\n")
+        bash.chmod(0o755)
+        target = WORK / "archive destination"
+        env = dict(os.environ, PATH=str(binaries), AI_TE_303_DIRECTORY=str(target))
+        output = invoke(["/bin/bash", str(ROOT / "install.sh"), "--managed-python", "--setup-only"], "archive-installer", env=env)
+        self.assertIn("Git was not found", output)
+        self.assertIn("Setup complete", output)
+        self.assertTrue((target / ".venv/.ai-te-303-ready").is_file())
+        self.assertFalse((target / ".git").exists())
+        self.assertEqual(list(WORK.glob(".AI-TE-303-download.*")), [])
+        self.assertEqual((target / "run.sh").read_bytes(), (ROOT / "run.sh").read_bytes())
 
 
 if __name__ == "__main__":

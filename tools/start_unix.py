@@ -74,6 +74,8 @@ def main():
     lock_path = ROOT / ".launcher-lock"
     if lock_path.is_symlink():
         raise RuntimeError("Use a normal startup lock file, not a link.")
+    if lock_path.exists() and not lock_path.is_file():
+        raise RuntimeError("The startup lock must be a regular file, not a directory or special file.")
     with lock_path.open("a") as lock:
         try:
             fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -115,7 +117,11 @@ def finish_setup(options):
         return 0
     port = available_port(options.port)
     print(f"[3/3] Opening http://127.0.0.1:{port}\nKeep this terminal open. Press Ctrl+C here to stop the app.", flush=True)
-    result = run("-m", "streamlit", "run", ROOT / "app.py", "--server.address", "127.0.0.1", "--server.port", port, "--server.headless", "true" if options.no_browser else "false", "--server.showEmailPrompt", "false", "--browser.gatherUsageStats", "false", "--logger.hideWelcomeMessage", "true")
+    try:
+        result = run("-m", "streamlit", "run", ROOT / "app.py", "--server.address", "127.0.0.1", "--server.port", port, "--server.headless", "true" if options.no_browser else "false", "--server.showEmailPrompt", "false", "--browser.gatherUsageStats", "false", "--logger.hideWelcomeMessage", "true")
+    except KeyboardInterrupt:
+        print("\nApplication stopped.", flush=True)
+        return 0
     if result.returncode not in (0, -2, 130):
         raise RuntimeError("The app could not run. Check the message above, then try again.")
     return 0
@@ -125,8 +131,8 @@ if __name__ == "__main__":
     try:
         sys.exit(main())
     except KeyboardInterrupt:
-        print("\nApplication stopped.", flush=True)
-        sys.exit(0)
+        print("\nSetup interrupted. Run bash run.sh again to finish setup.", file=sys.stderr, flush=True)
+        sys.exit(130)
     except (OSError, RuntimeError) as error:
         print(f"\nSetup stopped: {error}", file=sys.stderr, flush=True)
         sys.exit(1)
