@@ -9,12 +9,12 @@ than establish a physical robot's condition.
 
 ## Setup and checks
 
-The app runs locally on 64-bit Windows 10 or 11. For a new laptop, follow the
-[README development setup](../README.md#development-setup); its PowerShell block
-downloads the project, prepares it, and opens the app. You do not need to sign
-in to try the public project. If you downloaded a ZIP yourself, extract it and
-double-click `run.bat`; Git and Python do not need to be installed. The first
-setup needs internet access.
+For a new laptop, follow the [README development setup](../README.md#development-setup).
+Windows uses a PowerShell download block or `run.bat` inside an extracted ZIP.
+Linux/macOS use a Terminal download block or `bash run.sh` inside the extracted
+project folder. Both paths prepare Python 3.12 and the libraries, then open the
+local app. You do not need Git, Python, or a GitHub sign-in to start. First setup
+needs internet and the normal download/archive utilities described in the README.
 
 On first start, `run.bat` prepares the Python 3.12 runtime and project
 environment, installs and checks dependencies, and opens the local app in your
@@ -33,8 +33,9 @@ File Explorer, type `powershell` in its address bar, press Enter, and use:
 This prepares the environment, runs pytest, and then starts the app. Use
 `.\run.bat -SetupOnly` to prepare the environment without launching it, or pass
 `-Python "C:\Path\to\python.exe"` to supply a specific validated Python 3.12
-installation when creating the environment. Linux/macOS setup commands are in
-the README.
+installation when creating the environment. On Linux/macOS, use
+`bash run.sh --verify` for the equivalent test-and-launch sequence, or
+`bash run.sh --setup-only` to prepare without launching.
 
 ## Live demonstration
 

@@ -27,13 +27,19 @@ the contribution count.
 ## First setup on a new laptop
 
 Follow the [README development setup](../README.md#development-setup) for the
-Windows download and automatic launch steps. Anyone can try the public app
+Windows, Linux, and macOS download and automatic launch steps. Anyone can try the public app
 without a GitHub sign-in. The installer creates a Git clone when Git is already
 installed and falls back to a ZIP when it is not; it does not install Git. You
 can also download the ZIP from GitHub, extract it, and double-click `run.bat`.
 Neither Git nor Python needs to be installed to run an extracted ZIP. First
 setup needs an internet connection. The Windows launcher requires 64-bit
 Windows 10 or 11.
+
+Linux and macOS users can paste the Terminal block in the README, or run
+`bash run.sh` from an extracted project. The environment and dependencies are
+prepared automatically. The macOS clone also includes `run.command` as a
+Terminal entry point. See [UNIX_LAUNCHER.md](UNIX_LAUNCHER.md) for supported
+platforms and the difference between Finder and Terminal launch.
 
 To make commits, use a real Git clone so your work has repository history. If
 Git is not installed, install it separately and clone the repository before
