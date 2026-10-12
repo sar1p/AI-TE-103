@@ -9,41 +9,32 @@ than establish a physical robot's condition.
 
 ## Setup and checks
 
-For a new clone or ZIP download, use the complete
-[README development setup](../README.md#development-setup). It includes the
-download location, project-folder check, Python 3.12 check, dependency
-installation, tests, and launch. Do not copy just the install commands while
-PowerShell is in `C:\Windows\System32` or another unrelated folder.
+The app runs locally on 64-bit Windows 10 or 11. For a new laptop, follow the
+[README development setup](../README.md#development-setup); its PowerShell block
+downloads the project, prepares it, and opens the app. You do not need to sign
+in to try the public project. If you downloaded a ZIP yourself, extract it and
+double-click `run.bat`; Git and Python do not need to be installed. The first
+setup needs internet access.
 
-For an already installed project, double-click `run_demo.bat` inside its folder.
-It enters the project folder automatically and uses the existing environment.
-There is no need to recreate `.venv` for each demonstration.
+On first start, `run.bat` prepares the Python 3.12 runtime and project
+environment, installs and checks dependencies, and opens the local app in your
+default browser. It reuses the environment on later starts unless requirements
+changed. If port 8501 is busy, the launcher chooses the next available port.
+Keep the terminal open during the demo and press Ctrl+C to stop the app.
+`run_demo.bat` still works as a compatibility alias.
 
-To run the checks manually, open the folder containing `app.py` in File Explorer,
-type `powershell` in its address bar, and press Enter. Then copy this whole block:
+To run the project checks before opening the app, open the project folder in
+File Explorer, type `powershell` in its address bar, press Enter, and use:
 
 ```powershell
-& {
-    $ErrorActionPreference = "Stop"
-    if (-not (Test-Path -LiteralPath ".\app.py" -PathType Leaf)) {
-        throw "Open PowerShell in the AI-TE-303 project folder before continuing."
-    }
-    & .\.venv\Scripts\python.exe -m pip check
-    if ($LASTEXITCODE -ne 0) { throw "Dependency consistency check failed. Follow the README setup." }
-    & .\.venv\Scripts\python.exe -m pytest -q
-    if ($LASTEXITCODE -ne 0) { throw "Tests failed. Check the results above before running the app." }
-    & .\.venv\Scripts\python.exe -m streamlit run app.py --server.address 127.0.0.1
-}
+.\run.bat -Verify
 ```
 
-Open the URL printed by Streamlit. On Linux/macOS, use `.venv/bin/python`.
-Stop the server with Ctrl+C. A pip update notice is informational and does not
-cause missing-file or missing-module errors; a failed installation must be fixed
-before running tests or the application.
-
-Search and the expert-system engine use the standard library; the visual app
-needs Streamlit and tests need pytest. Versions are pinned by the requirement
-and constraint files.
+This prepares the environment, runs pytest, and then starts the app. Use
+`.\run.bat -SetupOnly` to prepare the environment without launching it, or pass
+`-Python "C:\Path\to\python.exe"` to supply a specific validated Python 3.12
+installation when creating the environment. Linux/macOS setup commands are in
+the README.
 
 ## Live demonstration
 
