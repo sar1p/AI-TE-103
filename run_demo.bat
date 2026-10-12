@@ -1,10 +1,10 @@
 @echo off
 setlocal
-cd /d "%~dp0"
-if not exist ".venv\Scripts\python.exe" (
-  echo Create the virtual environment and install requirements-dev.txt first.
-  echo See docs\DEMO_GUIDE.md for setup commands.
-  pause
-  exit /b 1
+powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "%~dp0tools\start_windows.ps1" %*
+set "result=%errorlevel%"
+if not "%result%"=="0" (
+    echo.
+    echo Please read the message above before closing this window.
+    pause
 )
-".venv\Scripts\python.exe" -m streamlit run app.py --server.address 127.0.0.1
+exit /b %result%

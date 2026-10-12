@@ -27,20 +27,24 @@ the contribution count.
 ## First setup on a new laptop
 
 Follow the [README development setup](../README.md#development-setup) for the
-complete Windows download, installation, checks, and launch sequence. Its
-download block chooses your own Documents folder and enters the clone. Its
-setup block checks the project files and Python version, reuses an existing
-environment, and stops if installation or tests fail. A ZIP download must be
-extracted, with PowerShell opened in the folder containing `app.py`.
+Windows download and automatic launch steps. Anyone can try the public app
+without a GitHub sign-in. The installer creates a Git clone when Git is already
+installed and falls back to a ZIP when it is not; it does not install Git. You
+can also download the ZIP from GitHub, extract it, and double-click `run.bat`.
+Neither Git nor Python needs to be installed to run an extracted ZIP. First
+setup needs an internet connection. The Windows launcher requires 64-bit
+Windows 10 or 11.
 
-Anyone can download and run this public repository without a collaborator
-invitation. To push contributions to this shared repository, sign in to your own
-GitHub account and accept the invitation. GitHub Desktop is an alternative to
-Git commands; GitHub CLI is optional.
+To make commits, use a real Git clone so your work has repository history. If
+Git is not installed, install it separately and clone the repository before
+contributing; the automatic ZIP fallback is for running the app. To push to the
+shared repository, sign in to your own GitHub account and accept the invitation.
+GitHub Desktop is an alternative to Git commands; GitHub CLI is optional.
 
-For later sessions, double-click `run_demo.bat` in the project folder or follow
-[DEMO_GUIDE.md](DEMO_GUIDE.md). Wait for installation to finish before testing;
-do not continue after a failed dependency installation.
+For later sessions, double-click `run.bat` in the project folder or follow
+[DEMO_GUIDE.md](DEMO_GUIDE.md). Keep the terminal open while the app runs and
+press Ctrl+C to stop it. If an older project folder reports that `run.bat` is
+missing, follow the update instruction shown by the installer before continuing.
 
 Before committing, inspect your repository's author configuration:
 

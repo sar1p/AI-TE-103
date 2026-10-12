@@ -4,7 +4,7 @@
 
 [![Python validation](https://github.com/sar1p/AI-TE-303/actions/workflows/tests.yml/badge.svg)](https://github.com/sar1p/AI-TE-303/actions/workflows/tests.yml)
 
-Release: [v0.1.0](https://github.com/sar1p/AI-TE-303/releases/tag/v0.1.0).
+Release: [v0.1.1](https://github.com/sar1p/AI-TE-303/releases/tag/v0.1.1).
 Submission / live demonstration: Tuesday, October 13, 2026, Asia/Jakarta.
 
 A two-member Artificial Intelligence coursework project. D* Lite repairs a
@@ -27,79 +27,78 @@ See [PROJECT_PLAN.md](docs/PROJECT_PLAN.md) for scope and
 
 ## Development setup
 
-### Windows: first download
+### Windows: automatic setup
 
-Install Git and Python 3.12 before starting. The setup below expects `python`
-to select Python 3.12 when creating a new environment. Check with
-`python --version`; if the Windows Python launcher provides that version instead,
-use `py -3.12` in place of the two bare `python` commands in the setup block.
-An existing project environment is checked and reused.
-
-Open PowerShell and copy this download block. It places the project in your own
-Documents folder and enters it, even when PowerShell starts in another folder:
-
-```powershell
-& {
-    $ErrorActionPreference = "Stop"
-    $projectDirectory = Join-Path $env:USERPROFILE "Documents\AI-TE-303"
-    git clone https://github.com/sar1p/AI-TE-303.git "$projectDirectory"
-    if ($LASTEXITCODE -ne 0) { throw "Clone failed. Check the error above before continuing." }
-    Set-Location -LiteralPath $projectDirectory
-}
-```
-
-If that folder already contains a clone, open that existing project instead of
-cloning again. If you downloaded a ZIP, extract it first. Open the folder that
-contains `app.py`, `requirements-dev.txt`, and `constraints.txt` in File Explorer,
-type `powershell` in its address bar, and press Enter. Do not run setup from
-`C:\Windows\System32` or from the parent folder of the project.
-
-### Windows: install, verify, and run
-
-Copy this whole block into PowerShell in the project folder. Keep the opening
-`& {` and closing `}`: they make setup stop at the first failed step.
+The app runs locally on 64-bit Windows 10 or 11. You do not need to sign in to
+try this public project. For a new laptop, open PowerShell and paste this whole
+block. It puts the project in your `Downloads\AI-TE-303` folder; when Git is
+installed it creates a clone with its history, and when Git is absent it
+downloads a ZIP instead. The installer does not install Git. A valid existing
+project folder is reused without pulling or overwriting it; an unrelated folder
+at that path is rejected. The block then prepares the environment and opens the
+app automatically.
 
 ```powershell
 & {
-    $ErrorActionPreference = "Stop"
-    foreach ($file in @("app.py", "requirements-dev.txt", "constraints.txt")) {
-        if (-not (Test-Path -LiteralPath $file -PathType Leaf)) {
-            throw "Open PowerShell in the AI-TE-303 project folder. Missing file: $file"
-        }
-    }
-    $projectPython = ".\.venv\Scripts\python.exe"
-    if (-not (Test-Path -LiteralPath $projectPython -PathType Leaf)) {
-        python -c "import sys; sys.exit(0 if sys.version_info[:2] == (3, 12) else 'Select Python 3.12 before creating the environment.')"
-        if ($LASTEXITCODE -ne 0) { throw "Python 3.12 is required. Check the message above." }
-        python -m venv .venv
-        if ($LASTEXITCODE -ne 0) { throw "Virtual environment creation failed." }
-    }
-    & $projectPython -c "import sys; print(sys.version); sys.exit(0 if sys.version_info[:2] == (3, 12) else 'This environment must use Python 3.12.')"
-    if ($LASTEXITCODE -ne 0) { throw "Use a Python 3.12 project environment before continuing." }
-    & $projectPython -m pip install -r requirements-dev.txt -c constraints.txt
-    if ($LASTEXITCODE -ne 0) { throw "Dependency installation failed. Fix the error above before running tests or the app." }
-    & $projectPython -m pip check
-    if ($LASTEXITCODE -ne 0) { throw "Dependency consistency check failed." }
-    & $projectPython -m pytest -q
-    if ($LASTEXITCODE -ne 0) { throw "Tests failed. Check the results above before running the app." }
-    & $projectPython -m streamlit run app.py --server.address 127.0.0.1
+    $ErrorActionPreference = 'Stop'
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    $installer = Join-Path $env:TEMP ('AI-TE-303-install-' + [guid]::NewGuid().ToString() + '.ps1')
+    Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/sar1p/AI-TE-303/main/install.ps1' -OutFile $installer
+    & powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File $installer
+    if ($LASTEXITCODE -ne 0) { throw 'Setup failed. Check the message above.' }
 }
 ```
 
-Wait for installation and tests to finish. Then open the local URL printed by
-Streamlit. A pip update notice is informational; it does not mean Python needs
-an update. If a step fails, address that error before continuing.
+If you downloaded the repository ZIP yourself, choose **Code > Download ZIP**
+on GitHub and extract it, then double-click `run.bat` inside the extracted
+folder.
+You do not need Git or Python installed to run an extracted ZIP. First setup
+needs an internet connection to download the runtime or packages as needed.
 
-Run commands through the virtual environment's Python directly. Activating it
-and changing PowerShell's execution policy are unnecessary. Core search uses
-only the standard library, as does the expert-system engine. Streamlit provides
-the local visual application.
+The launcher finds Python 3.12 or downloads a private runtime, creates the
+project environment, installs the libraries, and opens the app in your default
+browser. If port 8501 is busy, it chooses another local port. Later starts reuse
+the environment. Keep the extracted project close to the top of Downloads to
+avoid Windows errors caused by very long folder paths.
 
-After successful setup, double-click `run_demo.bat` inside the project folder
-for later sessions; it enters the correct folder automatically. Stop the server
-with Ctrl+C. See [DEMO_GUIDE.md](docs/DEMO_GUIDE.md) for the live presentation
-sequence. The blocks above are for Windows PowerShell; on Linux/macOS the
-environment interpreter is `.venv/bin/python`.
+Keep the terminal open while the app is running and press Ctrl+C to stop it.
+`run_demo.bat` remains available as a compatibility alias.
+See [DEMO_GUIDE.md](docs/DEMO_GUIDE.md) for the live presentation sequence.
+
+### Developer checks
+
+From the project folder:
+
+- Prepare the runtime and dependencies without launching the app:
+
+  ```powershell
+  .\run.bat -SetupOnly
+  ```
+
+- Run pytest, then start the app:
+
+  ```powershell
+  .\run.bat -Verify
+  ```
+
+- Supply a specific validated Python 3.12 when creating the environment:
+
+  ```powershell
+  .\run.bat -Python "C:\Path\to\python.exe"
+  ```
+
+Runtime provenance, environment recovery, and launcher verification are in
+[WINDOWS_LAUNCHER.md](docs/WINDOWS_LAUNCHER.md).
+
+On Linux or macOS, use Python 3.12 and set up the environment manually:
+
+```bash
+python3.12 -m venv .venv
+.venv/bin/python -m pip install -r requirements-dev.txt -c constraints.txt
+.venv/bin/python -m pip check
+.venv/bin/python -m pytest -q
+.venv/bin/python -m streamlit run app.py --server.address 127.0.0.1
+```
 
 ## Run without the interface
 

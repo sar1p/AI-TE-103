@@ -15,6 +15,29 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  windows-launcher:
+    name: Windows launcher
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        id: wrong-python
+        with:
+          python-version: '3.14'
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        id: project-python
+        with:
+          python-version: '3.12'
+      - name: Check first setup, repeat launch, ZIP, failure recovery and port fallback
+        run: python tools/check_windows_launcher.py --python "${{ steps.project-python.outputs.python-path }}" --wrong-python "${{ steps.wrong-python.outputs.python-path }}"
+      - name: Save launcher verification logs
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: windows-launcher-${{ github.sha }}
+          path: artifacts/windows-launcher/**/*.log
+          if-no-files-found: warn
+          retention-days: 30
   tests:
     name: Python tests
     runs-on: ubuntu-latest
