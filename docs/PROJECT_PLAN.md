@@ -1,5 +1,26 @@
 # AI-TE-303 Project Plan
 
+## Scope extension: October 19, 2026
+
+The user confirmed three coursework topics (expert systems, search, and
+multi-agent systems), then requested fuzzy logic as a fourth method and a
+primary-source review of more advanced approaches. The current extension adds
+independent robot agents with explicit traffic messages and one-tick reservations,
+Mamdani and zero-order Sugeno controllers, per-robot diagnosis priority, a shared
+fleet demonstration, standalone CLIs, reproducible exports, and tests.
+
+The four-method demonstration is simulated on a unit-cost grid. Controller
+thresholds and battery percentages are illustrative. The coordinator does not
+guarantee globally optimal routes or deadlock resolution. ANFIS, type-2 fuzzy
+models, CBS/ECBS, WHCA*, and Open-RMF are researched alternatives, rather than
+features claimed by the current implementation. See [ARCHITECTURE_REVIEW.md](ARCHITECTURE_REVIEW.md),
+[FUZZY_LOGIC.md](FUZZY_LOGIC.md), and [MULTI_AGENT_SYSTEM.md](MULTI_AGENT_SYSTEM.md).
+
+The dated sections below retain the original two-module plan and its historical
+acceptance results; they do not limit this newer user-authorized extension.
+
+## Original plan and completed baseline
+
 Planning date: Friday, October 9, 2026. Submission / live demonstration: Tuesday, October 13, 2026, Asia/Jakarta.
 
 Status: software implementation and running verification completed Sunday, October 11, 2026. [The current evidence](evidence/completed-system-2026-10-11/README.md) records 167 passing tests, eight matching diagnostic fixtures, nine clean-clone checks, real UI exports and a browser recording, combined integration, and passing main CI at source `118e95b50c2aa3196980435075a21ed6be789603`. Issue #3 is closed for completed software implementation and verification. Review and rehearsal are presentation preparation for Tuesday; they are not open software acceptance tasks. The October 9 scope sections below retain the original proposal.

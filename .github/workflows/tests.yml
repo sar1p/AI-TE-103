@@ -108,6 +108,14 @@ jobs:
         run: python -m expert_system --all --output artifacts/diagnostics.json
       - name: Validate combined diagnosis and route planning
         run: python tools/combined_demo.py --output artifacts/combined-demo.json
+      - name: Replay Mamdani and Sugeno controllers with cooperative robots
+        run: |
+          python -m fuzzy_logic --clearance 3 --battery 85 --output artifacts/fuzzy-mamdani.json
+          python -m fuzzy_logic --method sugeno --clearance 3 --battery 85 --output artifacts/fuzzy-sugeno.json
+          python -m multi_agent_system --ticks 12 --output artifacts/multi-agent.json
+          python tools/fleet_demo.py --method mamdani --output artifacts/fleet-mamdani.json
+          python tools/fleet_demo.py --method sugeno --output artifacts/fleet-sugeno.json
+          python tools/benchmark_fuzzy.py --repeats 1 --output artifacts/fuzzy-benchmark
       - name: Replay named scenarios
         run: python tools/replay_demo.py --output artifacts/demo
       - name: Validate benchmark execution

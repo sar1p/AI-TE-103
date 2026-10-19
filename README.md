@@ -1,16 +1,21 @@
 # AI-TE-303
 
-**Warehouse Robot Diagnostics and Dynamic Route Planning**
+**Warehouse Robot Diagnostics, Cooperative Routing, and Fuzzy Control**
 
 [![Python validation](https://github.com/sar1p/AI-TE-303/actions/workflows/tests.yml/badge.svg)](https://github.com/sar1p/AI-TE-303/actions/workflows/tests.yml)
 
-Release: [v0.1.2](https://github.com/sar1p/AI-TE-303/releases/tag/v0.1.2).
-Submission / live demonstration: Tuesday, October 13, 2026, Asia/Jakarta.
+Baseline release: [v0.1.2](https://github.com/sar1p/AI-TE-303/releases/tag/v0.1.2).
+The October 19 extension adds multi-agent coordination and fuzzy control to the existing diagnosis/search demonstration.
+Original live demonstration date: Tuesday, October 13, 2026, Asia/Jakarta.
 
 A two-member Artificial Intelligence coursework project. D* Lite repairs a
 warehouse robot's route after map changes and movement. Repeated A* provides a
 baseline. A separate expert system uses external IF-THEN rules and forward
 chaining to explain suspected robot faults and the observations supporting them.
+Two independent robot agents now request next-cell reservations from a traffic
+coordinator. Mamdani or zero-order Sugeno fuzzy control adjusts their movement
+cadence using illustrative clearance and battery readings. Per-robot diagnostic
+stops take priority over both speed proposals and reservation requests.
 
 ## Implementation status
 
@@ -21,6 +26,16 @@ chaining to explain suspected robot faults and the observations supporting them.
   grounded explanations, unknown evidence, corrected observations, and an independent CLI.
 - Diagnostic scope: nine categorical observations, eleven illustrative rules,
   six supported findings, and eight named scenarios.
+- Multi-agent system: independent persistent planners, explicit request/decision
+  messages, deterministic one-tick reservations, fractional cadence, and two-robot demonstration.
+- Fuzzy logic: nine linguistic rules, inspectable memberships, Mamdani max-min
+  inference with centroid approximation, and a zero-order Sugeno comparison.
+
+The four methods meet in **Fleet coordination**. **Fuzzy speed control** explains
+both inference methods using adjustable inputs, rule activations, and real outputs.
+See [FUZZY_LOGIC.md](docs/FUZZY_LOGIC.md),
+[MULTI_AGENT_SYSTEM.md](docs/MULTI_AGENT_SYSTEM.md), and the
+[source-linked architecture review](docs/ARCHITECTURE_REVIEW.md).
 
 See [PROJECT_PLAN.md](docs/PROJECT_PLAN.md) for scope and
 [TEAMMATE_TASKS.md](docs/TEAMMATE_TASKS.md) for contribution history and the review/presentation handoff.
@@ -151,6 +166,12 @@ for runtime provenance, supported platforms, and native verification.
 .\.venv\Scripts\python.exe -m search_algorithm.main --output artifacts/single-replay.json
 .\.venv\Scripts\python.exe tools/replay_demo.py --output artifacts/demo
 .\.venv\Scripts\python.exe tools/combined_demo.py --output artifacts/combined-demo.json
+.\.venv\Scripts\python.exe -m fuzzy_logic --clearance 3 --battery 85 --output artifacts/fuzzy-mamdani.json
+.\.venv\Scripts\python.exe -m fuzzy_logic --method sugeno --clearance 3 --battery 85 --output artifacts/fuzzy-sugeno.json
+.\.venv\Scripts\python.exe -m multi_agent_system --ticks 12 --output artifacts/multi-agent.json
+.\.venv\Scripts\python.exe tools/fleet_demo.py --method mamdani --output artifacts/fleet-mamdani.json
+.\.venv\Scripts\python.exe tools/fleet_demo.py --method sugeno --output artifacts/fleet-sugeno.json
+.\.venv\Scripts\python.exe tools/benchmark_fuzzy.py --repeats 5 --output artifacts/fuzzy-benchmark
 .\.venv\Scripts\python.exe tools/benchmark_search.py --output artifacts/benchmark --repeats 5
 ```
 
@@ -183,9 +204,14 @@ The teammate's independent review and laptop rehearsal remain the human handoff.
 | A* | Fresh shortest-path baseline for the current map | Repeats search after each update |
 | UCS / Dijkstra | Independent optimal-cost oracle in tests | Used for correctness, not the interactive planner |
 | Forward-chaining expert system | Explain categorical observations through an inspectable rule chain, including power, drive feedback, and motor connection cases | Limited to declared observations and illustrative rules; no measured diagnostic accuracy |
+| Cooperative robot agents | Keep independent goals and D* Lite planners; exchange next-cell requests and traffic decisions | Conservative discrete reservations can deadlock and are not globally optimal multi-agent pathfinding |
+| Mamdani fuzzy control | Show fuzzification, min-rule firing, clipped/max aggregation, and a centroid speed proposal | Illustrative ranges; numerical quadrature; no calibrated physical speed or braking model |
+| Zero-order Sugeno | Compare singleton weighted-average output using the same input memberships and rule antecedents | Outputs differ from Mamdani; faster arithmetic alone does not establish a better controller |
 
-The grid supports four-neighbor unit-cost movement. Weighted terrain, diagonal
-motion, multiple robots, and physical control are outside this implementation.
+The grid supports four-neighbor unit-cost movement. The single-robot planner
+remains independently usable; the fleet workspace adds multiple robots with
+separate planners. Weighted terrain, diagonal motion, and physical control
+remain outside this implementation.
 See [SEARCH_ALGORITHM.md](docs/SEARCH_ALGORITHM.md) for algorithm details,
 metric definitions, benchmark boundaries, and suitable/unsuitable uses.
 
@@ -199,7 +225,7 @@ certificate. See [EXPERT_SYSTEM.md](docs/EXPERT_SYSTEM.md) for supported
 observations, inference semantics, suitable uses, and limitations.
 
 The interface uses a restrained operations layout with separate route,
-diagnostic, and evidence tabs. A guided observation draft and named presets
+diagnostic, evidence, fleet, and fuzzy-control tabs. A guided observation draft and named presets
 support the live demo; the advanced JSON input rejects ambiguous or non-finite
 data. See [UI_DESIGN.md](docs/UI_DESIGN.md) for the design references and layout decisions.
 

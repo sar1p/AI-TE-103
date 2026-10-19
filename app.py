@@ -8,6 +8,8 @@ import streamlit as st
 
 from interface.diagnostics import DiagnosticState, evaluate_diagnostics
 from interface.evidence import environment_metadata
+from interface.fleet_view import render_fleet_tab
+from interface.fuzzy_view import render_fuzzy_tab
 from interface.presentation import render_diagnostic_result, route_status_strip
 from interface.rendering import grid_html
 from interface.session import SimulationSession
@@ -180,9 +182,13 @@ by_id = {scenario.id: scenario for _, scenario in choices}
 
 st.caption("AI-TE-303 / SIMULATION")
 st.title("Warehouse Operations")
-st.caption("Dynamic route planning, observation-based diagnostics, and session evidence.")
+st.caption("Dynamic routes, robot diagnostics, cooperative agents, and fuzzy speed control.")
 
-with st.container(key="scenario_toolbar", border=True):
+route_tab, diagnosis_tab, evidence_tab, fleet_tab, fuzzy_tab = st.tabs(
+    ["Route planner", "Diagnostics", "Evidence & methods", "Fleet coordination", "Fuzzy speed control"]
+)
+
+with route_tab, st.container(key="scenario_toolbar", border=True):
     scenario_column, reset_column, gate_column = st.columns([3.2, 1, 1.65], vertical_alignment="bottom")
     with scenario_column:
         selected = st.selectbox(
@@ -209,10 +215,6 @@ elif reset_clicked:
 
 if "simulation_error" in st.session_state:
     st.error(st.session_state.pop("simulation_error"))
-
-route_tab, diagnosis_tab, evidence_tab = st.tabs(
-    ["Route planner", "Diagnostics", "Evidence & methods"]
-)
 
 with diagnosis_tab:
     st.subheader("Robot observations")
@@ -475,6 +477,12 @@ with route_tab:
             width="stretch",
         )
 
+with fleet_tab:
+    fleet_session = render_fleet_tab()
+
+with fuzzy_tab:
+    fuzzy_comparison = render_fuzzy_tab()
+
 with evidence_tab:
     session = st.session_state.simulation
     metadata = environment_metadata()
@@ -501,6 +509,8 @@ with evidence_tab:
             "raw_observations_json": raw_text,
             "raw_observations": facts,
         },
+        "fleet_simulation": fleet_session.to_dict(),
+        "fuzzy_exploration": fuzzy_comparison,
     }
     st.download_button(
         "Download session evidence (JSON)",
@@ -522,7 +532,15 @@ with evidence_tab:
         "**Diagnostics:** the expert system evaluates the observations supplied above and exposes "
         "its findings, actions, and rule trace. It does not measure sensors or verify physical robot health."
     )
-    st.caption("Route planning and diagnostic rules are provided by the search_algorithm and expert_system modules.")
+    st.markdown(
+        "**Cooperative agents:** two robots keep independent goals and planners, exchange requests and "
+        "decisions with a traffic coordinator, and reserve their next cells. This discrete baseline can deadlock."
+    )
+    st.markdown(
+        "**Fuzzy control:** Mamdani and zero-order Sugeno use explicit illustrative memberships and rules. "
+        "Their proposal changes fractional movement cadence; diagnostic stops and reservations retain priority."
+    )
+    st.caption("The four methods are independently runnable and meet in the fleet simulation; no physical robot is controlled.")
     with st.expander("Reproduction commands"):
         st.code(
             "python -m pytest -q\n"
@@ -530,6 +548,9 @@ with evidence_tab:
             "python -m search_algorithm.main\n"
             "python tools/replay_demo.py --output artifacts/demo\n"
             "python tools/combined_demo.py --output artifacts/combined-demo.json\n"
+            "python -m fuzzy_logic --clearance 3 --battery 85\n"
+            "python -m multi_agent_system --ticks 12\n"
+            "python tools/fleet_demo.py --output artifacts/fleet-demo.json\n"
             "python tools/benchmark_search.py --output artifacts/benchmark --repeats 5",
             language="bash",
         )
