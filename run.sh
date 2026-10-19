@@ -14,7 +14,7 @@ for argument in "$@"; do
     esac
 done
 fail() { printf '\nSetup stopped: %s\n' "$*" >&2; exit 1; }
-for name in app.py requirements.txt requirements-dev.txt constraints.txt tools/start_unix.py; do
+for name in app.py requirements.txt requirements-dev.txt constraints.txt tools/start_unix.py expert_system/__init__.py search_algorithm/__init__.py fuzzy_logic/__init__.py multi_agent_system/__init__.py interface/fleet_session.py; do
     [ -f "$ROOT/$name" ] || fail "The project is incomplete (missing $name). Extract the whole archive first."
 done
 for path in "$RUNTIME" "$ROOT/.venv"; do
@@ -34,7 +34,7 @@ if [ "$(uname -s)" = Linux ] && command -v ldd >/dev/null 2>&1; then
         fail 'These pinned packages require a glibc Linux distribution. Alpine/musl is not supported.'
     fi
 fi
-printf '\nAI-TE-303 | Warehouse Operations\nProject folder: %s\n[1/3] Preparing Python 3.12...\n' "$ROOT"
+printf '\nAI-TE-103 | Warehouse Operations\nProject folder: %s\n[1/3] Preparing Python 3.12...\n' "$ROOT"
 ENV_PYTHON="$ROOT/.venv/bin/python"
 valid_environment() {
     [ -f "$ROOT/.venv/pyvenv.cfg" ] && [ -x "$ENV_PYTHON" ] &&

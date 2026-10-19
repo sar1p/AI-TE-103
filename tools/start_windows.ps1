@@ -141,7 +141,7 @@ function Test-Dependencies {
     try {
         $check = & $environmentPython -m pip check 2>&1
         if ($LASTEXITCODE -ne 0) { Write-Host ($check -join "`n"); return $false }
-        $imports = & $environmentPython -c "import streamlit,pytest; import expert_system,search_algorithm; assert streamlit.__version__ == '1.65.0'; assert pytest.__version__ == '9.1.1'" 2>&1
+        $imports = & $environmentPython -c "import streamlit,pytest; import expert_system,search_algorithm,fuzzy_logic,multi_agent_system; import interface.fleet_session; assert streamlit.__version__ == '1.65.0'; assert pytest.__version__ == '9.1.1'" 2>&1
         if ($LASTEXITCODE -ne 0) { Write-Host ($imports -join "`n"); return $false }
         return $true
     } catch {
@@ -172,7 +172,17 @@ try {
     }
     Assert-PlainDirectory $projectRoot
     Assert-PlainDirectory $environmentPath
-    foreach ($name in @('app.py', 'requirements.txt', 'requirements-dev.txt', 'constraints.txt')) {
+    foreach ($name in @(
+        'app.py',
+        'requirements.txt',
+        'requirements-dev.txt',
+        'constraints.txt',
+        'expert_system\__init__.py',
+        'search_algorithm\__init__.py',
+        'fuzzy_logic\__init__.py',
+        'multi_agent_system\__init__.py',
+        'interface\fleet_session.py'
+    )) {
         if (-not (Test-Path -LiteralPath (Join-Path $projectRoot $name) -PathType Leaf)) {
             throw "The project is incomplete (missing $name). Extract the full ZIP and run run.bat inside it."
         }
@@ -182,12 +192,12 @@ try {
     try {
         $projectHash = [BitConverter]::ToString($hasher.ComputeHash([Text.Encoding]::UTF8.GetBytes($projectRoot.ToLowerInvariant()))).Replace('-', '')
     } finally { $hasher.Dispose() }
-    $mutex = [Threading.Mutex]::new($false, ('Local\AI-TE-303-' + $projectHash))
+    $mutex = [Threading.Mutex]::new($false, ('Local\AI-TE-103-' + $projectHash))
     try { $ownsMutex = $mutex.WaitOne(0) } catch [Threading.AbandonedMutexException] { $ownsMutex = $true }
     if (-not $ownsMutex) { throw 'This copy is already setting up or running in another window. Use that window, or stop it with Ctrl+C before restarting.' }
 
     Write-Host ''
-    Write-Host 'AI-TE-303 | Warehouse Operations'
+    Write-Host 'AI-TE-103 | Warehouse Operations'
     Write-Host "Project folder: $projectRoot"
     Write-Host '[1/3] Preparing Python 3.12...'
     $existingPython = Get-EnvironmentPython
@@ -213,7 +223,7 @@ try {
 
     Write-Host '[2/3] Checking project libraries...'
     $stamp = Get-DependencyStamp
-    $stampFile = Join-Path $environmentPath '.ai-te-303-ready'
+    $stampFile = Join-Path $environmentPath '.ai-te-103-ready'
     $installedStamp = ''
     if (Test-Path -LiteralPath $stampFile -PathType Leaf) { $installedStamp = (Get-Content -LiteralPath $stampFile -Raw).Trim() }
     if ($installedStamp -ne $stamp -or -not (Test-Dependencies)) {

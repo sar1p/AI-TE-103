@@ -1,6 +1,6 @@
 # Module contracts
 
-These contracts define the boundary between two independently runnable modules.
+These contracts define the boundaries between independently runnable AI modules.
 Coordinates are zero-based (row, column) pairs, encoded as JSON arrays.
 
 ## Route planning
@@ -188,3 +188,63 @@ two-person presentation rehearsal remain unverified.
 The diagnostics module is suitable for demonstrating a bounded, explainable rule
 system. It is unsuitable for field diagnosis, safety certification, or claims of
 measured accuracy, reliability, or physical suitability.
+
+## Fuzzy speed proposals
+
+`fuzzy_logic.evaluate_speed(clearance_cells, battery_percent)` evaluates Mamdani
+max-min inference. `evaluate_sugeno_speed` uses the same antecedents with
+zero-order singleton consequents. Both require finite non-boolean numbers in
+the documented universes, return strict JSON-compatible proof records, and
+raise `FuzzyInputError` before producing output for invalid inputs.
+
+The output contains `inputs`, `memberships`, nine `rules` with activations,
+`output.speed_percent`, `output.speed_factor`, `aggregation`, `defuzzification`,
+and illustrative provenance. Mamdani exposes 201 aggregate samples and a
+composite-trapezoidal centroid approximation. Sugeno has an empty aggregation
+list and exposes singleton weighted contributions. `configuration()` returns
+an isolated copy of the rules, membership definitions, and method metadata.
+
+Output percentages are normalized cadence proposals. A tick has no physical
+time calibration. Membership degrees are not probabilities. Diagnostic stops,
+zero synthetic battery, and denied traffic reservations override movement.
+
+## Independent agents and traffic coordination
+
+`multi_agent_system.FleetSimulation(rows, robots)` accepts a grid and at least
+two validated `RobotSpec(id, start, goal)` records. IDs, starting positions,
+and goals are distinct. Each robot owns a persistent D* Lite planner and local
+position, goal, route, state, movement credit, and counters.
+
+`tick(speed_factors=None, paused_ids=())` validates all controls before mutation.
+Factors lie in [0,1]; unspecified factors default to one. Accumulated credit
+permits at most one move per tick. Successful moves preserve fractional
+surplus; denied requests retain at most one credit, preventing a stored burst.
+Zero speed and paused state suppress movement even with earned credit.
+
+Agents propose their own next cells. A rotating-priority coordinator only grants
+unique destinations that were free at the start of the tick. Messages record
+requests, decisions, reasons, and position updates. The conservative rule rejects
+same-cell conflicts, swaps, and following into a newly vacated cell. It can
+deadlock and does not optimize a joint trajectory.
+
+`update_cells(changes)` protects all current robot positions and goals and
+prevalidates the entire batch before updating every retained planner. Planning
+can recover after reopening an aisle. Snapshot `status` is the last tick's
+operating state until the next tick; map updates repair the route immediately.
+`clearance_cells(robot_id)` computes capped Manhattan distance to known blocked
+cells or other robots. It does not infer physical sensor distance.
+
+## Integrated fleet control
+
+`interface.fleet_session.FleetControlSession` composes the four methods.
+Battery percentages and categorical diagnostic observations are separate inputs.
+Every step evaluates a fresh diagnosis per robot, computes the selected fuzzy
+proposal, applies diagnosis/zero-battery stop priority, and requests traffic
+reservations only through the simulation API. Unknown or invalid diagnostic
+evidence blocks that robot. The independent single-robot workspace retains its
+explicit optional gate for search-only demonstrations.
+
+`to_dict()` exports current fleet state, rules/configuration, next-step proposals,
+last-step controls, per-tick records, raw observations, and limitations. Viewing
+or exporting does not advance the simulation. The app adds source/environment
+metadata to its shared export, and the standalone replay records it explicitly.

@@ -1,0 +1,905 @@
+{
+  "inputs": {
+    "clearance_cells": 3.0,
+    "battery_percent": 85.0
+  },
+  "memberships": {
+    "clearance": {
+      "near": 0.0,
+      "medium": 0.3333333333333333,
+      "far": 0.2
+    },
+    "battery": {
+      "low": 0.0,
+      "medium": 0.0,
+      "high": 0.5714285714285714
+    }
+  },
+  "rules": [
+    {
+      "id": "F01",
+      "clearance": "near",
+      "battery": "low",
+      "consequent": "slow",
+      "activation": 0.0
+    },
+    {
+      "id": "F02",
+      "clearance": "near",
+      "battery": "medium",
+      "consequent": "slow",
+      "activation": 0.0
+    },
+    {
+      "id": "F03",
+      "clearance": "near",
+      "battery": "high",
+      "consequent": "slow",
+      "activation": 0.0
+    },
+    {
+      "id": "F04",
+      "clearance": "medium",
+      "battery": "low",
+      "consequent": "slow",
+      "activation": 0.0
+    },
+    {
+      "id": "F05",
+      "clearance": "medium",
+      "battery": "medium",
+      "consequent": "medium",
+      "activation": 0.0
+    },
+    {
+      "id": "F06",
+      "clearance": "medium",
+      "battery": "high",
+      "consequent": "medium",
+      "activation": 0.3333333333333333
+    },
+    {
+      "id": "F07",
+      "clearance": "far",
+      "battery": "low",
+      "consequent": "slow",
+      "activation": 0.0
+    },
+    {
+      "id": "F08",
+      "clearance": "far",
+      "battery": "medium",
+      "consequent": "medium",
+      "activation": 0.0
+    },
+    {
+      "id": "F09",
+      "clearance": "far",
+      "battery": "high",
+      "consequent": "fast",
+      "activation": 0.2
+    }
+  ],
+  "output": {
+    "speed_percent": 58.31387147335423,
+    "speed_factor": 0.5831387147335423
+  },
+  "aggregation": [
+    {
+      "speed_percent": 0.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 0.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 1.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 1.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 2.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 2.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 3.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 3.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 4.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 4.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 5.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 5.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 6.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 6.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 7.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 7.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 8.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 8.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 9.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 9.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 10.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 10.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 11.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 11.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 12.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 12.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 13.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 13.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 14.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 14.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 15.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 15.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 16.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 16.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 17.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 17.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 18.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 18.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 19.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 19.5,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 20.0,
+      "membership": 0.0
+    },
+    {
+      "speed_percent": 20.5,
+      "membership": 0.016666666666666666
+    },
+    {
+      "speed_percent": 21.0,
+      "membership": 0.03333333333333333
+    },
+    {
+      "speed_percent": 21.5,
+      "membership": 0.05
+    },
+    {
+      "speed_percent": 22.0,
+      "membership": 0.06666666666666667
+    },
+    {
+      "speed_percent": 22.5,
+      "membership": 0.08333333333333333
+    },
+    {
+      "speed_percent": 23.0,
+      "membership": 0.1
+    },
+    {
+      "speed_percent": 23.5,
+      "membership": 0.11666666666666667
+    },
+    {
+      "speed_percent": 24.0,
+      "membership": 0.13333333333333333
+    },
+    {
+      "speed_percent": 24.5,
+      "membership": 0.15
+    },
+    {
+      "speed_percent": 25.0,
+      "membership": 0.16666666666666666
+    },
+    {
+      "speed_percent": 25.5,
+      "membership": 0.18333333333333332
+    },
+    {
+      "speed_percent": 26.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 26.5,
+      "membership": 0.21666666666666667
+    },
+    {
+      "speed_percent": 27.0,
+      "membership": 0.23333333333333334
+    },
+    {
+      "speed_percent": 27.5,
+      "membership": 0.25
+    },
+    {
+      "speed_percent": 28.0,
+      "membership": 0.26666666666666666
+    },
+    {
+      "speed_percent": 28.5,
+      "membership": 0.2833333333333333
+    },
+    {
+      "speed_percent": 29.0,
+      "membership": 0.3
+    },
+    {
+      "speed_percent": 29.5,
+      "membership": 0.31666666666666665
+    },
+    {
+      "speed_percent": 30.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 30.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 31.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 31.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 32.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 32.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 33.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 33.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 34.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 34.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 35.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 35.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 36.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 36.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 37.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 37.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 38.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 38.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 39.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 39.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 40.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 40.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 41.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 41.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 42.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 42.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 43.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 43.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 44.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 44.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 45.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 45.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 46.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 46.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 47.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 47.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 48.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 48.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 49.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 49.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 50.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 50.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 51.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 51.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 52.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 52.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 53.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 53.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 54.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 54.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 55.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 55.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 56.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 56.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 57.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 57.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 58.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 58.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 59.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 59.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 60.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 60.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 61.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 61.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 62.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 62.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 63.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 63.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 64.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 64.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 65.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 65.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 66.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 66.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 67.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 67.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 68.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 68.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 69.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 69.5,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 70.0,
+      "membership": 0.3333333333333333
+    },
+    {
+      "speed_percent": 70.5,
+      "membership": 0.31666666666666665
+    },
+    {
+      "speed_percent": 71.0,
+      "membership": 0.3
+    },
+    {
+      "speed_percent": 71.5,
+      "membership": 0.2833333333333333
+    },
+    {
+      "speed_percent": 72.0,
+      "membership": 0.26666666666666666
+    },
+    {
+      "speed_percent": 72.5,
+      "membership": 0.25
+    },
+    {
+      "speed_percent": 73.0,
+      "membership": 0.23333333333333334
+    },
+    {
+      "speed_percent": 73.5,
+      "membership": 0.21666666666666667
+    },
+    {
+      "speed_percent": 74.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 74.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 75.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 75.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 76.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 76.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 77.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 77.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 78.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 78.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 79.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 79.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 80.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 80.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 81.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 81.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 82.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 82.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 83.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 83.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 84.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 84.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 85.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 85.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 86.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 86.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 87.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 87.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 88.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 88.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 89.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 89.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 90.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 90.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 91.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 91.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 92.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 92.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 93.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 93.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 94.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 94.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 95.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 95.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 96.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 96.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 97.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 97.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 98.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 98.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 99.0,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 99.5,
+      "membership": 0.2
+    },
+    {
+      "speed_percent": 100.0,
+      "membership": 0.2
+    }
+  ],
+  "defuzzification": {
+    "method": "centroid",
+    "numerator": 1240.1416666666667,
+    "denominator": 21.266666666666666,
+    "sample_step": 0.5
+  },
+  "provenance": {
+    "model": "illustrative",
+    "method": "Mamdani",
+    "thresholds": "illustrative coursework values; not field-calibrated",
+    "membership_values": "degrees of membership, not probabilities"
+  }
+}

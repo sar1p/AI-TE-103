@@ -42,7 +42,7 @@ path is too long; move the complete project directly under Downloads and retry.
 
 ## Download and launch behavior
 
-`install.ps1` defaults to the current user's `Downloads\AI-TE-303`. It clones
+`install.ps1` defaults to the current user's `Downloads\AI-TE-103`. It clones
 with an existing Git executable, or downloads the main-branch ZIP without Git.
 Transfers use a unique staging folder so a failed clone does not occupy the final
 destination. Existing project copies are reused without a pull or overwrite;
