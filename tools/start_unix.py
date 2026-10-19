@@ -104,7 +104,7 @@ def finish_setup(options):
             raise RuntimeError("Environment creation failed. Check the error above and available disk space.")
     print("[2/3] Checking project libraries...", flush=True)
     stamp = "unix-setup-v1:" + ":".join(hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in ("requirements.txt", "requirements-dev.txt", "constraints.txt"))
-    stamp_file = ENVIRONMENT / ".ai-te-303-ready"
+    stamp_file = ENVIRONMENT / ".ai-te-103-ready"
     existing = stamp_file.read_text().strip() if stamp_file.is_file() else ""
     if existing != stamp or not dependencies_ready():
         print("Installing libraries. First setup needs internet and may take a few minutes...", flush=True)

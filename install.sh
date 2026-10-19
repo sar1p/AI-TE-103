@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Download into the user's Downloads folder without overwriting existing work.
 set -euo pipefail
-DESTINATION="${AI_TE_303_DIRECTORY:-$HOME/Downloads/AI-TE-303}"
+DESTINATION="${AI_TE_103_DIRECTORY:-$HOME/Downloads/AI-TE-103}"
 fail() { printf '\nInstallation stopped: %s\n' "$*" >&2; exit 1; }
 case "$(uname -s)" in Linux|Darwin) ;; *) fail 'Use the PowerShell installer on Windows.' ;; esac
 PARENT="$(dirname -- "$DESTINATION")"
@@ -17,7 +17,7 @@ cleanup() {
         # mktemp created this exact new directory under the resolved parent.
         # Never remove the final destination or an existing project.
         case "$STAGING" in
-            "$PARENT"/.AI-TE-303-download.*) rm -rf -- "$STAGING" ;;
+            "$PARENT"/.AI-TE-103-download.*) rm -rf -- "$STAGING" ;;
             *) printf 'Keeping unexpected staging path: %s\n' "$STAGING" >&2 ;;
         esac
     fi
@@ -33,19 +33,19 @@ if [ -e "$DESTINATION" ]; then
     [ -d "$DESTINATION" ] && complete_project "$DESTINATION" || fail "The destination already exists but is not a complete current project: $DESTINATION. Nothing was overwritten. Update it or choose another location."
     printf 'Using the existing project at %s\nYour files are preserved; this installer does not pull or overwrite them.\n' "$DESTINATION"
 else
-    STAGING="$(mktemp -d "$PARENT/.AI-TE-303-download.XXXXXX")"
+    STAGING="$(mktemp -d "$PARENT/.AI-TE-103-download.XXXXXX")"
     GIT="$(command -v git || true)"
     if [ "$(uname -s)" = Darwin ] && [ "$GIT" = /usr/bin/git ] && ! xcode-select -p >/dev/null 2>&1; then
         # The Apple Git stub can otherwise open a Command Line Tools installer.
         GIT=''
     fi
     if [ -n "$GIT" ]; then
-        printf 'Cloning AI-TE-303 into %s...\n' "$DESTINATION"
-        "$GIT" clone https://github.com/sar1p/AI-TE-303.git "$STAGING" || fail 'Clone failed. Check the error above; running again will retry.'
+        printf 'Cloning AI-TE-103 into %s...\n' "$DESTINATION"
+        "$GIT" clone https://github.com/sar1p/AI-TE-103.git "$STAGING" || fail 'Clone failed. Check the error above; running again will retry.'
     else
         printf 'Git was not found. Downloading the source archive into %s...\n' "$DESTINATION"
-        ARCHIVE="$(mktemp "${TMPDIR:-/tmp}/AI-TE-303-source.XXXXXX")"
-        URL='https://github.com/sar1p/AI-TE-303/archive/refs/heads/main.tar.gz'
+        ARCHIVE="$(mktemp "${TMPDIR:-/tmp}/AI-TE-103-source.XXXXXX")"
+        URL='https://github.com/sar1p/AI-TE-103/archive/refs/heads/main.tar.gz'
         if command -v curl >/dev/null 2>&1; then
             curl --fail --location --silent --show-error "$URL" --output "$ARCHIVE" || fail 'Download failed. Check your internet connection and try again.'
         elif command -v wget >/dev/null 2>&1; then

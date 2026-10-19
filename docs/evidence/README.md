@@ -1,5 +1,10 @@
 # Verified running evidence
 
+The project is now named **AI-TE-103** for group 1. Frozen snapshots below
+retain their original project names, URLs, source metadata, screenshot text,
+and checksums. The repository rename does not rewrite recorded results or
+contributor history.
+
 The latest [four-method snapshot](four-method-2026-10-19/README.md)
 records source `92edde2`, 224 passing tests, six successful CI jobs, Mamdani
 and Sugeno fleet replays, actual browser exports, and 121 fixed fuzzy input
@@ -19,7 +24,7 @@ in [integrated-starter-2026-10-11/](integrated-starter-2026-10-11/README.md), wi
 119 passing tests and its original pause/correction and contributor evidence.
 Historical artifacts and measurements are retained unchanged.
 
-Recorded source: [`9a724d6`](https://github.com/sar1p/AI-TE-303/commit/9a724d68378242e4587b7536bffe66889c9bc86e).
+Recorded source: [`9a724d6`](https://github.com/sar1p/AI-TE-103/commit/9a724d68378242e4587b7536bffe66889c9bc86e).
 Recorded on October 9, 2026, using Python 3.12.14,
 Streamlit 1.65.0, and pytest
 9.1.1 on Windows 11. The exported
@@ -30,7 +35,7 @@ publication do not change the measured search algorithms.
 
 - Fresh remote clone, fresh virtual environment, pinned dependency installation,
   and all five verification commands succeeded. The test output reports **90 passed**.
-- [Main CI](https://github.com/sar1p/AI-TE-303/actions/runs/37922918084)
+- [Main CI](https://github.com/sar1p/AI-TE-103/actions/runs/37922918084)
   passed the tests, all scenario replays, and a one-repetition benchmark on Ubuntu.
 - Four named scenarios produced 22 actual planning records.
 - The local benchmark completed 5 repetitions per scenario,

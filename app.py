@@ -19,7 +19,7 @@ from search_algorithm.scenarios import available_scenarios
 
 
 st.set_page_config(
-    page_title="Warehouse Operations | AI-TE-303",
+    page_title="Warehouse Operations | AI-TE-103",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -180,7 +180,7 @@ if not choices:
     st.stop()
 by_id = {scenario.id: scenario for _, scenario in choices}
 
-st.caption("AI-TE-303 / SIMULATION")
+st.caption("AI-TE-103 / SIMULATION")
 st.title("Warehouse Operations")
 st.caption("Dynamic routes, robot diagnostics, cooperative agents, and fuzzy speed control.")
 

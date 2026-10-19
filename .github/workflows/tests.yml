@@ -39,8 +39,8 @@ jobs:
         run: |
           (
             set -e
-            installer="$(mktemp "${TMPDIR:-/tmp}/AI-TE-303-install.XXXXXX")"
-            url=https://raw.githubusercontent.com/sar1p/AI-TE-303/main/install.sh
+            installer="$(mktemp "${TMPDIR:-/tmp}/AI-TE-103-install.XXXXXX")"
+            url=https://raw.githubusercontent.com/sar1p/AI-TE-103/main/install.sh
             if command -v curl >/dev/null 2>&1; then
               curl --fail --location --silent --show-error "$url" --output "$installer"
             else
@@ -48,8 +48,8 @@ jobs:
             fi
             cd /
             bash "$installer" --setup-only --managed-python
-            test -f "$HOME/Downloads/AI-TE-303/.venv/.ai-te-303-ready"
-            "$HOME/Downloads/AI-TE-303/.venv/bin/python" -c 'import sys,streamlit; assert sys.version_info[:2] == (3,12); assert streamlit.__version__ == "1.65.0"'
+            test -f "$HOME/Downloads/AI-TE-103/.venv/.ai-te-103-ready"
+            "$HOME/Downloads/AI-TE-103/.venv/bin/python" -c 'import sys,streamlit; assert sys.version_info[:2] == (3,12); assert streamlit.__version__ == "1.65.0"'
           )
       - name: Save native launcher verification logs
         if: always()

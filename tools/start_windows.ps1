@@ -192,12 +192,12 @@ try {
     try {
         $projectHash = [BitConverter]::ToString($hasher.ComputeHash([Text.Encoding]::UTF8.GetBytes($projectRoot.ToLowerInvariant()))).Replace('-', '')
     } finally { $hasher.Dispose() }
-    $mutex = [Threading.Mutex]::new($false, ('Local\AI-TE-303-' + $projectHash))
+    $mutex = [Threading.Mutex]::new($false, ('Local\AI-TE-103-' + $projectHash))
     try { $ownsMutex = $mutex.WaitOne(0) } catch [Threading.AbandonedMutexException] { $ownsMutex = $true }
     if (-not $ownsMutex) { throw 'This copy is already setting up or running in another window. Use that window, or stop it with Ctrl+C before restarting.' }
 
     Write-Host ''
-    Write-Host 'AI-TE-303 | Warehouse Operations'
+    Write-Host 'AI-TE-103 | Warehouse Operations'
     Write-Host "Project folder: $projectRoot"
     Write-Host '[1/3] Preparing Python 3.12...'
     $existingPython = Get-EnvironmentPython
@@ -223,7 +223,7 @@ try {
 
     Write-Host '[2/3] Checking project libraries...'
     $stamp = Get-DependencyStamp
-    $stampFile = Join-Path $environmentPath '.ai-te-303-ready'
+    $stampFile = Join-Path $environmentPath '.ai-te-103-ready'
     $installedStamp = ''
     if (Test-Path -LiteralPath $stampFile -PathType Leaf) { $installedStamp = (Get-Content -LiteralPath $stampFile -Raw).Trim() }
     if ($installedStamp -ne $stamp -or -not (Test-Dependencies)) {

@@ -1,4 +1,8 @@
-# AI-TE-303 Teammate Review and Handoff
+# AI-TE-103 Teammate Review and Handoff
+
+Group 1: Muhammad Syarif Hidayat Hadari (`sar1p`) works on
+`dev1/muhammad-syarif-hidayat-hadari`; Zaedal Musthofa (`zaedalmusthofa`) works
+on `dev2/zaedal-musthofa`. Both submit pull requests to protected `main`.
 
 ## October 19 extension: independent review still available
 
@@ -31,8 +35,8 @@ these checks on their own laptop and recording what actually happens:
    head-on corridor, and why CBS/ECBS or rolling-window search is a separate
    extension. Use the linked research without claiming those algorithms are
    implemented here.
-6. Commit a short English review/rehearsal report under `docs/reviews/` on a
-   feature branch using the teammate's own GitHub identity, then open a PR.
+6. Commit a short English review/rehearsal report under `docs/reviews/` on
+   `dev2/zaedal-musthofa` using the teammate's own GitHub identity, then open a PR.
    Include the tested revision, actual observations, evidence references,
    limitations, and any concrete correction. Report writing and fixes count
    as real work; no placeholder commits are needed.
@@ -53,7 +57,7 @@ Status updated Sunday, October 11, 2026. The lead has completed and integrated t
 
 ## Contribution record
 
-The teammate's original commit [a57eebd8e93cb00a899ee792146707f96e750046](https://github.com/sar1p/AI-TE-303/commit/a57eebd8e93cb00a899ee792146707f96e750046), by zaedalmusthofa, introduced the initial R01 motor-temperature/stall rule and R02 lidar rule. The normal merge through [PR #5](https://github.com/sar1p/AI-TE-303/pull/5) preserved the original commit and its contributor credit.
+The teammate's original commit [a57eebd8e93cb00a899ee792146707f96e750046](https://github.com/sar1p/AI-TE-103/commit/a57eebd8e93cb00a899ee792146707f96e750046), by zaedalmusthofa, introduced the initial R01 motor-temperature/stall rule and R02 lidar rule. The normal merge through [PR #5](https://github.com/sar1p/AI-TE-103/pull/5) preserved the original commit and its contributor credit.
 
 The lead later expanded the knowledge base and inference engine, corrected and integrated the module, and added the CLI and named fixtures under the lead's own Git identity. This current expansion does not change attribution for the teammate's starter. The teammate's next role is to review the current behavior and rehearse the diagnostic explanation. Any future code or documentation contribution from the teammate should be committed using that contributor's own configured identity so the history reflects the actual work.
 
@@ -97,4 +101,4 @@ For --all, exit code 0 means every fixture matches its hand-written expected sta
 
 ## Delivery status
 
-The software checks are recorded at source `118e95b50c2aa3196980435075a21ed6be789603`, merged through [PR #7](https://github.com/sar1p/AI-TE-303/pull/7). The contributor snapshot confirms zaedalmusthofa and retains the original starter commit. Issue #3 is closed because implementation and recorded software verification are complete. Use the review and rehearsal guidance to prepare for Tuesday's presentation. The verified clone and silent recording do not establish that either member's separate rehearsal has occurred.
+The software checks are recorded at source `118e95b50c2aa3196980435075a21ed6be789603`, merged through [PR #7](https://github.com/sar1p/AI-TE-103/pull/7). The contributor snapshot confirms zaedalmusthofa and retains the original starter commit. Issue #3 is closed because implementation and recorded software verification are complete. Use the review and rehearsal guidance to prepare for Tuesday's presentation. The verified clone and silent recording do not establish that either member's separate rehearsal has occurred.

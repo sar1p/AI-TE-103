@@ -1,7 +1,7 @@
 # Download a new copy into Downloads, then use the same launcher as ZIP users.
 [CmdletBinding()]
 param(
-    [string]$Destination = (Join-Path $env:USERPROFILE 'Downloads\AI-TE-303'),
+    [string]$Destination = (Join-Path $env:USERPROFILE 'Downloads\AI-TE-103'),
     [string]$Python,
     [switch]$SetupOnly,
     [switch]$Verify,
@@ -36,10 +36,10 @@ try {
         New-Item -ItemType Directory -Path $parent -Force | Out-Null
         $git = Get-Command git -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
         # A failed transfer must not occupy the final project location.
-        $staging = [IO.Path]::GetFullPath((Join-Path $parent ('.AI-TE-303-download-' + [guid]::NewGuid().ToString('N'))))
+        $staging = [IO.Path]::GetFullPath((Join-Path $parent ('.AI-TE-103-download-' + [guid]::NewGuid().ToString('N'))))
         if ($git) {
-            Write-Host "Cloning AI-TE-303 into $destinationPath..."
-            & $git.Source clone https://github.com/sar1p/AI-TE-303.git $staging
+            Write-Host "Cloning AI-TE-103 into $destinationPath..."
+            & $git.Source clone https://github.com/sar1p/AI-TE-103.git $staging
             if ($LASTEXITCODE -ne 0) { throw 'Clone failed. Check your internet connection and the error above. Setup has not started.' }
             $source = $staging
         } else {
@@ -47,9 +47,9 @@ try {
             [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
             New-Item -ItemType Directory -Path $staging | Out-Null
             $archive = Join-Path $staging 'project.zip'
-            Invoke-WebRequest -UseBasicParsing -Uri 'https://github.com/sar1p/AI-TE-303/archive/refs/heads/main.zip' -OutFile $archive
+            Invoke-WebRequest -UseBasicParsing -Uri 'https://github.com/sar1p/AI-TE-103/archive/refs/heads/main.zip' -OutFile $archive
             Expand-Archive -LiteralPath $archive -DestinationPath $staging
-            $source = [IO.Path]::GetFullPath((Join-Path $staging 'AI-TE-303-main'))
+            $source = [IO.Path]::GetFullPath((Join-Path $staging 'AI-TE-103-main'))
             $stagingPrefix = [IO.Path]::GetFullPath($staging).TrimEnd('\') + '\'
             if (-not $source.StartsWith($stagingPrefix, [StringComparison]::OrdinalIgnoreCase) -or -not (Test-Path -LiteralPath (Join-Path $source 'app.py') -PathType Leaf)) {
                 throw 'The project download is incomplete. Run the installer again with an internet connection.'

@@ -1,4 +1,16 @@
-# AI-TE-303 Project Plan
+# AI-TE-103 Project Plan
+
+## Group 1 repository and members
+
+The repository was renamed from `AI-TE-303` to `AI-TE-103` after the team was
+assigned group number 1. The member branches are:
+
+- Muhammad Syarif Hidayat Hadari (`sar1p`): `dev1/muhammad-syarif-hidayat-hadari`.
+- Zaedal Musthofa (`zaedalmusthofa`): `dev2/zaedal-musthofa`.
+- Shared integration: protected `main`.
+
+The member branches retain the existing work and use pull requests for
+integration. Contributor identities and historical evidence are preserved.
 
 ## Scope extension: October 19, 2026
 
@@ -29,7 +41,7 @@ Status: software implementation and running verification completed Sunday, Octob
 
 Proposed application title: **Warehouse Robot Diagnostics and Dynamic Route Planning**.
 
-Repository name: `AI-TE-303`. Owner: `sar1p`. Use a dedicated checkout of this repository rather than the parent folder containing course materials.
+Repository name: `AI-TE-103`. Owner: `sar1p`. Use a dedicated checkout of this repository rather than the parent folder containing course materials.
 
 The team has two members. The lead currently owns route planning, the application, and the expanded diagnostic engine, knowledge base, CLI, fixtures, and integration. The teammate contributed the original two-rule starter and now reviews the expanded implementation and rehearses the diagnostic presentation. Future contributions should be recorded under the actual contributor's own Git identity. All repository text, identifiers, comments, interface labels, documentation, commits, PRs, and workflow names use English.
 
@@ -62,7 +74,7 @@ D* Lite, the warehouse theme, the module split, the interface, and the acceptanc
 
 The initial starter credit remains attached to its author. Current source ownership follows actual contributions and Git identities; coordinate shared-file changes through review.
 
-Use feature branches in one shared repository. Preserve contributor identity in actual commits and review. A fork is optional and adds synchronization work.
+Use the member branches in one shared repository. Preserve contributor identity in actual commits and review. A fork is optional and adds synchronization work.
 
 ## Module contract summary
 
@@ -110,7 +122,7 @@ For comparisons, use the same map, start, goal, and map-event sequence. Compare 
 This is the October 9 outline, not a current file inventory; see the expert-system guide for the current module scope.
 
 ```text
-AI-TE-303/
+AI-TE-103/
   README.md
   CONTRIBUTING.md
   requirements.txt

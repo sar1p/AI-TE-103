@@ -1,10 +1,10 @@
-# AI-TE-303
+# AI-TE-103
 
 **Warehouse Robot Diagnostics, Cooperative Routing, and Fuzzy Control**
 
-[![Python validation](https://github.com/sar1p/AI-TE-303/actions/workflows/tests.yml/badge.svg)](https://github.com/sar1p/AI-TE-303/actions/workflows/tests.yml)
+[![Python validation](https://github.com/sar1p/AI-TE-103/actions/workflows/tests.yml/badge.svg)](https://github.com/sar1p/AI-TE-103/actions/workflows/tests.yml)
 
-Baseline release: [v0.1.2](https://github.com/sar1p/AI-TE-303/releases/tag/v0.1.2).
+Baseline release: [v0.1.2](https://github.com/sar1p/AI-TE-103/releases/tag/v0.1.2).
 The October 19 extension adds multi-agent coordination and fuzzy control to the existing diagnosis/search demonstration.
 Original live demonstration date: Tuesday, October 13, 2026, Asia/Jakarta.
 
@@ -46,7 +46,7 @@ See [PROJECT_PLAN.md](docs/PROJECT_PLAN.md) for scope and
 
 The app runs locally on 64-bit Windows 10 or 11. You do not need to sign in to
 try this public project. For a new laptop, open PowerShell and paste this whole
-block. It puts the project in your `Downloads\AI-TE-303` folder; when Git is
+block. It puts the project in your `Downloads\AI-TE-103` folder; when Git is
 installed it creates a clone with its history, and when Git is absent it
 downloads a ZIP instead. The installer does not install Git. A valid existing
 project folder is reused without pulling or overwriting it; an unrelated folder
@@ -57,8 +57,8 @@ app automatically.
 & {
     $ErrorActionPreference = 'Stop'
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-    $installer = Join-Path $env:TEMP ('AI-TE-303-install-' + [guid]::NewGuid().ToString() + '.ps1')
-    Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/sar1p/AI-TE-303/main/install.ps1' -OutFile $installer
+    $installer = Join-Path $env:TEMP ('AI-TE-103-install-' + [guid]::NewGuid().ToString() + '.ps1')
+    Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/sar1p/AI-TE-103/main/install.ps1' -OutFile $installer
     & powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File $installer
     if ($LASTEXITCODE -ne 0) { throw 'Setup failed. Check the message above.' }
 }
@@ -83,15 +83,15 @@ See [DEMO_GUIDE.md](docs/DEMO_GUIDE.md) for the live presentation sequence.
 ### Linux and macOS: automatic setup
 
 Open Terminal and paste this whole block. It puts the project in
-`~/Downloads/AI-TE-303`, prepares Python 3.12 and its libraries, and opens the
+`~/Downloads/AI-TE-103`, prepares Python 3.12 and its libraries, and opens the
 local app. Git and Python do not need to be installed first. Git is used when
 available; otherwise the installer downloads the source archive.
 
 ```bash
 (
     set -e
-    installer="$(mktemp "${TMPDIR:-/tmp}/AI-TE-303-install.XXXXXX")"
-    url=https://raw.githubusercontent.com/sar1p/AI-TE-303/main/install.sh
+    installer="$(mktemp "${TMPDIR:-/tmp}/AI-TE-103-install.XXXXXX")"
+    url=https://raw.githubusercontent.com/sar1p/AI-TE-103/main/install.sh
     if command -v curl >/dev/null 2>&1; then
         curl --fail --location --silent --show-error "$url" --output "$installer"
     else
@@ -237,14 +237,22 @@ data. See [UI_DESIGN.md](docs/UI_DESIGN.md) for the design references and layout
 
 ## Collaboration
 
-Use feature branches, tested commits, pull requests, and merge commits.
+Group number: **1**. The repository is **AI-TE-103**.
+
+| Role | Member | GitHub account | Branch |
+|---|---|---|---|
+| Dev 1 / lead | Muhammad Syarif Hidayat Hadari | `sar1p` | `dev1/muhammad-syarif-hidayat-hadari` |
+| Dev 2 | Zaedal Musthofa | `zaedalmusthofa` | `dev2/zaedal-musthofa` |
+| Integration | Both members | Shared review | Protected `main` |
+
+Use your member branch, tested commits, pull requests, and merge commits.
 Each member uses their own account for their actual work.
 See [CONTRIBUTING.md](CONTRIBUTING.md) and
 [MODULE_CONTRACTS.md](docs/MODULE_CONTRACTS.md). New GitHub users can follow
 [GITHUB_GUIDE.md](docs/GITHUB_GUIDE.md) for setup, commits, pushes, PRs, and recovery.
 
 Completed expert-system implementation and verification are tracked in the closed
-[issue #3](https://github.com/sar1p/AI-TE-303/issues/3). The teammate's
+[issue #3](https://github.com/sar1p/AI-TE-103/issues/3). The teammate's
 `zaedalmusthofa` account has collaborator access and an attributed starter commit.
 That original commit remains in the main history. The lead completed the rule
 engine expansion, tests, interface, and integration; those later changes use

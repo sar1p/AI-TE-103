@@ -1,4 +1,4 @@
-# Architecture Review: Four AI-TE-303 Modules
+# Architecture Review: Four AI-TE-103 Modules
 
 **Review date:** 2026-10-19
 

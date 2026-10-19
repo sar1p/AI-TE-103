@@ -5,6 +5,15 @@ names, commits, pull requests, and workflow names.
 
 ## Current collaboration
 
+| Member | GitHub account | Working branch |
+|---|---|---|
+| Muhammad Syarif Hidayat Hadari | `sar1p` | `dev1/muhammad-syarif-hidayat-hadari` |
+| Zaedal Musthofa | `zaedalmusthofa` | `dev2/zaedal-musthofa` |
+
+These are persistent member branches for group 1. Open pull requests from your
+branch into protected `main`. Branch names identify the working area; actual
+commit authorship still comes from each contributor's Git configuration.
+
 The teammate's original commit a57eebd8e93cb00a899ee792146707f96e750046 by
 zaedalmusthofa introduced the initial R01 and R02 rules. Its original commit
 and contributor attribution were preserved by the normal merge through PR #5.
@@ -16,23 +25,28 @@ recorded with that contributor's configured Git identity.
 Coordinate overlapping edits through review. Current diagnostic behavior and
 presentation preparation are described in
 [TEAMMATE_TASKS.md](docs/TEAMMATE_TASKS.md). For branch setup, see
-[GITHUB_GUIDE.md](docs/GITHUB_GUIDE.md). [Issue #3](https://github.com/sar1p/AI-TE-303/issues/3)
-is closed for completed software implementation and verification. Review,
-laptop setup, and rehearsal are preparation for the Tuesday, October 13 presentation.
-The [completed-system snapshot](docs/evidence/completed-system-2026-10-11/README.md)
-already records the lead's clean-clone checks, CLI/UI runs, and screen recording.
+[GITHUB_GUIDE.md](docs/GITHUB_GUIDE.md). [Issue #3](https://github.com/sar1p/AI-TE-103/issues/3)
+is closed for completed software implementation and verification. The original
+October 13 presentation date is historical; the current handoff covers all four
+methods. The [completed-system snapshot](docs/evidence/completed-system-2026-10-11/README.md)
+records the earlier clean-clone checks, CLI/UI runs, and screen recording; the
+[four-method snapshot](docs/evidence/four-method-2026-10-19/README.md) records the
+later fleet and fuzzy extension.
 
 ## Daily workflow
 
-1. Update local main with git switch main and git pull --ff-only.
-2. Create a branch for one coherent change.
+1. Update local `main` with `git switch main` and `git pull --ff-only origin main`.
+2. Switch to your member branch and bring in current `main`. Use `git merge
+   --ff-only origin/main` when possible; inspect any divergence and preserve
+   both contributors' work rather than resetting or force pushing.
 3. Make the change and run the checks that apply to it.
 4. Stage only intended files and inspect git diff --staged.
 5. Commit a complete change with a descriptive message.
 6. Push the branch and open a reviewable pull request.
 7. Address review comments on that branch.
 8. Merge after required checks pass, preserving contributor history through a
-   merge commit. Update main before starting the next change.
+   merge commit. Keep both member branches and update them from `main` before
+   starting the next change.
 
 A commit records a local version. A push uploads commits. A branch isolates
 work. A pull request makes a change reviewable. Avoid invented authors, force

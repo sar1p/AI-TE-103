@@ -83,10 +83,10 @@ class LauncherTests(unittest.TestCase):
         output = invoke(command(self.project, "-Python", OPTIONS.python, "-SetupOnly", "-Verify"), "first-setup")
         self.assertIn("Setup complete", output)
         self.assertRegex(output, r"\d+ passed")
-        self.assertTrue((self.project / ".venv/.ai-te-303-ready").is_file())
+        self.assertTrue((self.project / ".venv/.ai-te-103-ready").is_file())
 
     def test_02_batch_alias_and_repeat_offline(self):
-        stamp = self.project / ".venv/.ai-te-303-ready"
+        stamp = self.project / ".venv/.ai-te-103-ready"
         before = stamp.stat().st_mtime_ns
         env = dict(os.environ, PIP_NO_INDEX="1")
         cmd = str(Path(os.environ["SystemRoot"]) / "System32/cmd.exe")
@@ -112,12 +112,12 @@ class LauncherTests(unittest.TestCase):
 
     def test_04_failed_install_stops_before_launch(self):
         project = snapshot("failed libraries")
-        (project / "requirements-dev.txt").write_text("ai-te-303-missing-package-for-test==0.0.0\n", encoding="utf-8")
+        (project / "requirements-dev.txt").write_text("ai-te-103-missing-package-for-test==0.0.0\n", encoding="utf-8")
         env = dict(os.environ, PIP_NO_INDEX="1")
         output = invoke(command(project, "-Python", OPTIONS.python), "failed-libraries", env=env, expected=1)
         self.assertIn("Library installation failed", output)
         self.assertNotIn("[3/3] Opening", output)
-        self.assertFalse((project / ".venv/.ai-te-303-ready").exists())
+        self.assertFalse((project / ".venv/.ai-te-103-ready").exists())
 
     def test_05_wrong_environment_preserved_and_replaced(self):
         if not OPTIONS.wrong_python:
@@ -151,7 +151,7 @@ class LauncherTests(unittest.TestCase):
         with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as bundle:
             for file in project.rglob("*"):
                 if file.is_file():
-                    bundle.write(file, "AI-TE-303-main/" + file.relative_to(project).as_posix())
+                    bundle.write(file, "AI-TE-103-main/" + file.relative_to(project).as_posix())
         target = WORK / "no git installation"
         # Substitute only the transport, using a ZIP of this exact checkout.
         # The real extraction, validation, destination move and setup all run.
@@ -164,7 +164,7 @@ class LauncherTests(unittest.TestCase):
         )
         output = invoke([str(POWERSHELL), "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(script)], "zip-without-git")
         self.assertIn("Git was not found", output)
-        self.assertTrue((target / ".venv/.ai-te-303-ready").is_file())
+        self.assertTrue((target / ".venv/.ai-te-103-ready").is_file())
         self.assertFalse((target / ".git").exists())
 
     def test_08_busy_port_and_single_launch(self):
@@ -232,7 +232,7 @@ if __name__ == "__main__":
     REPORT = ROOT / "artifacts/windows-launcher" / run_id
     REPORT.mkdir(parents=True)
     # Keep package paths short even on Windows installations without long paths.
-    WORK = Path(tempfile.gettempdir()) / ("ai303-test-" + run_id[:8])
+    WORK = Path(tempfile.gettempdir()) / ("ai103-test-" + run_id[:8])
     WORK.mkdir(parents=True)
     print(f"Launcher verification logs: {REPORT}", flush=True)
     suite = unittest.defaultTestLoader.loadTestsFromTestCase(LauncherTests)
@@ -241,7 +241,7 @@ if __name__ == "__main__":
     if result.wasSuccessful():
         temp_root = Path(tempfile.gettempdir()).resolve()
         resolved_work = WORK.resolve()
-        if resolved_work.parent != temp_root or not resolved_work.name.startswith("ai303-test-"):
+        if resolved_work.parent != temp_root or not resolved_work.name.startswith("ai103-test-"):
             raise RuntimeError("Refusing to remove a test folder outside its temporary parent")
         shutil.rmtree(resolved_work)
     sys.exit(0 if result.wasSuccessful() else 1)

@@ -34,7 +34,7 @@ if [ "$(uname -s)" = Linux ] && command -v ldd >/dev/null 2>&1; then
         fail 'These pinned packages require a glibc Linux distribution. Alpine/musl is not supported.'
     fi
 fi
-printf '\nAI-TE-303 | Warehouse Operations\nProject folder: %s\n[1/3] Preparing Python 3.12...\n' "$ROOT"
+printf '\nAI-TE-103 | Warehouse Operations\nProject folder: %s\n[1/3] Preparing Python 3.12...\n' "$ROOT"
 ENV_PYTHON="$ROOT/.venv/bin/python"
 valid_environment() {
     [ -f "$ROOT/.venv/pyvenv.cfg" ] && [ -x "$ENV_PYTHON" ] &&
