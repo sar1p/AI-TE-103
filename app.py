@@ -6,6 +6,11 @@ from uuid import uuid4
 
 import streamlit as st
 
+from interface.advanced_features_view import (
+    render_ad_star_section,
+    render_bayesian_and_anfis_section,
+    render_cbs_section,
+)
 from interface.diagnostics import DiagnosticState, evaluate_diagnostics
 from interface.evidence import environment_metadata
 from interface.fleet_view import render_fleet_tab
@@ -324,6 +329,9 @@ with diagnosis_tab:
         else:
             render_diagnostic_result(diagnostic.result, facts)
 
+    with st.expander("Probabilistic Diagnosis (Bayesian Network & ANFIS)", expanded=False):
+        render_bayesian_and_anfis_section()
+
 movement_allowed = not use_gate or diagnostic.can_move
 
 with route_tab:
@@ -477,8 +485,13 @@ with route_tab:
             width="stretch",
         )
 
+    with st.expander("Anytime Dynamic A* (AD*) Search & Time-Budget Refinement", expanded=False):
+        render_ad_star_section(session.planner.grid, session.planner.start, session.planner.goal)
+
 with fleet_tab:
     fleet_session = render_fleet_tab()
+    with st.expander("Conflict-Based Search (CBS) Multi-Robot Routing", expanded=False):
+        render_cbs_section(st.session_state.simulation.planner.grid)
 
 with fuzzy_tab:
     fuzzy_comparison = render_fuzzy_tab()
