@@ -35,7 +35,7 @@ def snapshot(name):
     target.mkdir()
     for name in ("app.py", "requirements.txt", "requirements-dev.txt", "constraints.txt", "run.bat", "run_demo.bat", "install.ps1", "pytest.ini"):
         shutil.copy2(ROOT / name, target / name)
-    for name in (".streamlit", "data", "expert_system", "interface", "search_algorithm", "tests", "tools"):
+    for name in (".streamlit", "data", "expert_system", "fuzzy_logic", "interface", "multi_agent_system", "search_algorithm", "tests", "tools"):
         shutil.copytree(ROOT / name, target / name, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
     return target
 
@@ -62,6 +62,22 @@ class LauncherTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.project = snapshot("ZIP project & 100% ready")
+
+    def test_00_missing_module_stops_before_setup_and_preserves_existing_copy(self):
+        project = snapshot("missing fuzzy package")
+        entry = project / "fuzzy_logic/__init__.py"
+        preserved = entry.with_suffix(".saved")
+        entry.rename(preserved)
+        output = invoke(command(project, "-SetupOnly"), "missing-module", expected=1)
+        self.assertIn("missing fuzzy_logic\\__init__.py", output)
+        self.assertFalse((project / ".venv").exists())
+        output = invoke(
+            command(ROOT, "-Destination", project, "-SetupOnly", installer=True),
+            "incomplete-existing-project", expected=1,
+        )
+        self.assertIn("Nothing was overwritten", output)
+        self.assertTrue(preserved.is_file())
+        self.assertFalse(entry.exists())
 
     def test_01_first_setup_and_core_tests(self):
         output = invoke(command(self.project, "-Python", OPTIONS.python, "-SetupOnly", "-Verify"), "first-setup")

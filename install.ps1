@@ -24,7 +24,7 @@ try {
         if (-not $item.PSIsContainer -or ($item.Attributes -band [IO.FileAttributes]::ReparsePoint)) {
             throw "Choose a normal, empty project location. This path is a file or directory link: $destinationPath"
         }
-        foreach ($file in @('app.py', 'run.bat', 'requirements.txt', 'requirements-dev.txt', 'constraints.txt', 'tools\start_windows.ps1')) {
+        foreach ($file in @('app.py', 'run.bat', 'requirements.txt', 'requirements-dev.txt', 'constraints.txt', 'tools\start_windows.ps1', 'expert_system\__init__.py', 'search_algorithm\__init__.py', 'fuzzy_logic\__init__.py', 'multi_agent_system\__init__.py', 'interface\fleet_session.py')) {
             if (-not (Test-Path -LiteralPath (Join-Path $destinationPath $file) -PathType Leaf)) {
                 throw "The destination already exists but is not a complete current project: $destinationPath. Nothing was overwritten. Update that copy from GitHub, or move it aside before trying again."
             }
@@ -61,7 +61,7 @@ try {
         if (-not $source.StartsWith($parentPrefix, [StringComparison]::OrdinalIgnoreCase) -or -not $destinationPath.StartsWith($parentPrefix, [StringComparison]::OrdinalIgnoreCase)) {
             throw 'The download location is outside the selected destination folder.'
         }
-        foreach ($file in @('app.py', 'run.bat', 'requirements.txt', 'requirements-dev.txt', 'constraints.txt', 'tools\start_windows.ps1')) {
+        foreach ($file in @('app.py', 'run.bat', 'requirements.txt', 'requirements-dev.txt', 'constraints.txt', 'tools\start_windows.ps1', 'expert_system\__init__.py', 'search_algorithm\__init__.py', 'fuzzy_logic\__init__.py', 'multi_agent_system\__init__.py', 'interface\fleet_session.py')) {
             if (-not (Test-Path -LiteralPath (Join-Path $source $file) -PathType Leaf)) { throw "The project download is incomplete (missing $file). Run the installer again." }
         }
         # Recheck the exact absolute destination before moving the new copy.

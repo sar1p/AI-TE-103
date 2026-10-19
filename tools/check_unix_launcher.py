@@ -30,7 +30,7 @@ def snapshot(name):
     target.mkdir()
     for name in ("app.py", "requirements.txt", "requirements-dev.txt", "constraints.txt", "run.sh", "run.command", "install.sh", "pytest.ini"):
         shutil.copy2(ROOT / name, target / name)
-    for name in (".streamlit", "data", "expert_system", "interface", "search_algorithm", "tests", "tools"):
+    for name in (".streamlit", "data", "expert_system", "fuzzy_logic", "interface", "multi_agent_system", "search_algorithm", "tests", "tools"):
         shutil.copytree(ROOT / name, target / name, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
     return target
 
@@ -65,6 +65,43 @@ class UnixLauncherTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.project = snapshot("ZIP project & 100% ready")
+
+    def test_00_snapshot_includes_importable_app_packages(self):
+        packages = ("fuzzy_logic", "multi_agent_system")
+        for package in packages:
+            self.assertTrue((self.project / package / "__init__.py").is_file())
+
+        root = repr(str(self.project.resolve()))
+        code = (
+            "import pathlib, fuzzy_logic, multi_agent_system; "
+            f"root = pathlib.Path({root}).resolve(); "
+            "assert pathlib.Path(fuzzy_logic.__file__).resolve().is_relative_to(root); "
+            "assert pathlib.Path(multi_agent_system.__file__).resolve().is_relative_to(root); "
+            "print('fixture packages imported')"
+        )
+        output = invoke(
+            [sys.executable, "-c", code],
+            "fixture-package-imports",
+            env=dict(os.environ, PYTHONPATH=str(self.project)),
+        )
+        self.assertIn("fixture packages imported", output)
+
+    def test_00_missing_module_stops_before_setup_and_preserves_existing_copy(self):
+        project = snapshot("missing fuzzy package")
+        entry = project / "fuzzy_logic/__init__.py"
+        preserved = entry.with_suffix(".saved")
+        entry.rename(preserved)
+        output = invoke(command(project, "--setup-only"), "missing-module", expected=1)
+        self.assertIn("missing fuzzy_logic/__init__.py", output)
+        self.assertFalse((project / ".venv").exists())
+        output = invoke(
+            ["/bin/bash", str(ROOT / "install.sh"), "--setup-only"],
+            "incomplete-existing-project", expected=1,
+            env=dict(os.environ, AI_TE_303_DIRECTORY=str(project)),
+        )
+        self.assertIn("Nothing was overwritten", output)
+        self.assertTrue(preserved.is_file())
+        self.assertFalse(entry.exists())
 
     def test_01_private_python_first_setup_and_core_suite(self):
         output = invoke(command(self.project, "--managed-python", "--setup-only", "--verify"), "first-setup")

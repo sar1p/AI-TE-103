@@ -25,7 +25,7 @@ cleanup() {
 trap cleanup EXIT
 complete_project() {
     local name
-    for name in app.py run.sh tools/start_unix.py requirements.txt requirements-dev.txt constraints.txt; do
+    for name in app.py run.sh tools/start_unix.py requirements.txt requirements-dev.txt constraints.txt expert_system/__init__.py search_algorithm/__init__.py fuzzy_logic/__init__.py multi_agent_system/__init__.py interface/fleet_session.py; do
         [ -f "$1/$name" ] || return 1
     done
 }

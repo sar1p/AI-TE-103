@@ -14,7 +14,7 @@ for argument in "$@"; do
     esac
 done
 fail() { printf '\nSetup stopped: %s\n' "$*" >&2; exit 1; }
-for name in app.py requirements.txt requirements-dev.txt constraints.txt tools/start_unix.py; do
+for name in app.py requirements.txt requirements-dev.txt constraints.txt tools/start_unix.py expert_system/__init__.py search_algorithm/__init__.py fuzzy_logic/__init__.py multi_agent_system/__init__.py interface/fleet_session.py; do
     [ -f "$ROOT/$name" ] || fail "The project is incomplete (missing $name). Extract the whole archive first."
 done
 for path in "$RUNTIME" "$ROOT/.venv"; do

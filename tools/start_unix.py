@@ -22,7 +22,14 @@ def run(*arguments, capture=False):
 def dependencies_ready():
     for arguments in (
         ("-m", "pip", "check"),
-        ("-c", "import streamlit,pytest; import expert_system,search_algorithm; assert streamlit.__version__ == '1.65.0'; assert pytest.__version__ == '9.1.1'"),
+        (
+            "-c",
+            "import streamlit,pytest; "
+            "import expert_system,search_algorithm,fuzzy_logic,multi_agent_system; "
+            "import interface.fleet_session; "
+            "assert streamlit.__version__ == '1.65.0'; "
+            "assert pytest.__version__ == '9.1.1'",
+        ),
     ):
         result = run(*arguments, capture=True)
         if result.returncode:

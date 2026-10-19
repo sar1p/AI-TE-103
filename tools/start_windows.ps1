@@ -141,7 +141,7 @@ function Test-Dependencies {
     try {
         $check = & $environmentPython -m pip check 2>&1
         if ($LASTEXITCODE -ne 0) { Write-Host ($check -join "`n"); return $false }
-        $imports = & $environmentPython -c "import streamlit,pytest; import expert_system,search_algorithm; assert streamlit.__version__ == '1.65.0'; assert pytest.__version__ == '9.1.1'" 2>&1
+        $imports = & $environmentPython -c "import streamlit,pytest; import expert_system,search_algorithm,fuzzy_logic,multi_agent_system; import interface.fleet_session; assert streamlit.__version__ == '1.65.0'; assert pytest.__version__ == '9.1.1'" 2>&1
         if ($LASTEXITCODE -ne 0) { Write-Host ($imports -join "`n"); return $false }
         return $true
     } catch {
@@ -172,7 +172,17 @@ try {
     }
     Assert-PlainDirectory $projectRoot
     Assert-PlainDirectory $environmentPath
-    foreach ($name in @('app.py', 'requirements.txt', 'requirements-dev.txt', 'constraints.txt')) {
+    foreach ($name in @(
+        'app.py',
+        'requirements.txt',
+        'requirements-dev.txt',
+        'constraints.txt',
+        'expert_system\__init__.py',
+        'search_algorithm\__init__.py',
+        'fuzzy_logic\__init__.py',
+        'multi_agent_system\__init__.py',
+        'interface\fleet_session.py'
+    )) {
         if (-not (Test-Path -LiteralPath (Join-Path $projectRoot $name) -PathType Leaf)) {
             throw "The project is incomplete (missing $name). Extract the full ZIP and run run.bat inside it."
         }
