@@ -1,0 +1,2105 @@
+{
+  "final": {
+    "map_revision": 0,
+    "messages": [
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R01",
+        "sender": "controller",
+        "tick": 1
+      },
+      {
+        "kind": "request",
+        "payload": {
+          "from": [
+            3,
+            1
+          ],
+          "movement_credit": 1.0,
+          "to": [
+            3,
+            2
+          ]
+        },
+        "receiver": "traffic_coordinator",
+        "sender": "R01",
+        "tick": 1
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R02",
+        "sender": "controller",
+        "tick": 1
+      },
+      {
+        "kind": "request",
+        "payload": {
+          "from": [
+            0,
+            4
+          ],
+          "movement_credit": 1.0,
+          "to": [
+            1,
+            4
+          ]
+        },
+        "receiver": "traffic_coordinator",
+        "sender": "R02",
+        "tick": 1
+      },
+      {
+        "kind": "grant",
+        "payload": {
+          "priority_order": [
+            "R01",
+            "R02"
+          ],
+          "reason": "cell_available",
+          "requesters": [
+            "R01"
+          ],
+          "to": [
+            3,
+            2
+          ]
+        },
+        "receiver": "R01",
+        "sender": "traffic_coordinator",
+        "tick": 1
+      },
+      {
+        "kind": "grant",
+        "payload": {
+          "priority_order": [
+            "R01",
+            "R02"
+          ],
+          "reason": "cell_available",
+          "requesters": [
+            "R02"
+          ],
+          "to": [
+            1,
+            4
+          ]
+        },
+        "receiver": "R02",
+        "sender": "traffic_coordinator",
+        "tick": 1
+      },
+      {
+        "kind": "position_update",
+        "payload": {
+          "from": [
+            3,
+            1
+          ],
+          "status": "ready",
+          "to": [
+            3,
+            2
+          ]
+        },
+        "receiver": "fleet",
+        "sender": "R01",
+        "tick": 1
+      },
+      {
+        "kind": "position_update",
+        "payload": {
+          "from": [
+            0,
+            4
+          ],
+          "status": "ready",
+          "to": [
+            1,
+            4
+          ]
+        },
+        "receiver": "fleet",
+        "sender": "R02",
+        "tick": 1
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R01",
+        "sender": "controller",
+        "tick": 2
+      },
+      {
+        "kind": "request",
+        "payload": {
+          "from": [
+            3,
+            2
+          ],
+          "movement_credit": 1.0,
+          "to": [
+            3,
+            3
+          ]
+        },
+        "receiver": "traffic_coordinator",
+        "sender": "R01",
+        "tick": 2
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R02",
+        "sender": "controller",
+        "tick": 2
+      },
+      {
+        "kind": "request",
+        "payload": {
+          "from": [
+            1,
+            4
+          ],
+          "movement_credit": 1.0,
+          "to": [
+            2,
+            4
+          ]
+        },
+        "receiver": "traffic_coordinator",
+        "sender": "R02",
+        "tick": 2
+      },
+      {
+        "kind": "grant",
+        "payload": {
+          "priority_order": [
+            "R02",
+            "R01"
+          ],
+          "reason": "cell_available",
+          "requesters": [
+            "R01"
+          ],
+          "to": [
+            3,
+            3
+          ]
+        },
+        "receiver": "R01",
+        "sender": "traffic_coordinator",
+        "tick": 2
+      },
+      {
+        "kind": "grant",
+        "payload": {
+          "priority_order": [
+            "R02",
+            "R01"
+          ],
+          "reason": "cell_available",
+          "requesters": [
+            "R02"
+          ],
+          "to": [
+            2,
+            4
+          ]
+        },
+        "receiver": "R02",
+        "sender": "traffic_coordinator",
+        "tick": 2
+      },
+      {
+        "kind": "position_update",
+        "payload": {
+          "from": [
+            3,
+            2
+          ],
+          "status": "ready",
+          "to": [
+            3,
+            3
+          ]
+        },
+        "receiver": "fleet",
+        "sender": "R01",
+        "tick": 2
+      },
+      {
+        "kind": "position_update",
+        "payload": {
+          "from": [
+            1,
+            4
+          ],
+          "status": "ready",
+          "to": [
+            2,
+            4
+          ]
+        },
+        "receiver": "fleet",
+        "sender": "R02",
+        "tick": 2
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R01",
+        "sender": "controller",
+        "tick": 3
+      },
+      {
+        "kind": "request",
+        "payload": {
+          "from": [
+            3,
+            3
+          ],
+          "movement_credit": 1.0,
+          "to": [
+            3,
+            4
+          ]
+        },
+        "receiver": "traffic_coordinator",
+        "sender": "R01",
+        "tick": 3
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R02",
+        "sender": "controller",
+        "tick": 3
+      },
+      {
+        "kind": "request",
+        "payload": {
+          "from": [
+            2,
+            4
+          ],
+          "movement_credit": 1.0,
+          "to": [
+            3,
+            4
+          ]
+        },
+        "receiver": "traffic_coordinator",
+        "sender": "R02",
+        "tick": 3
+      },
+      {
+        "kind": "grant",
+        "payload": {
+          "priority_order": [
+            "R01",
+            "R02"
+          ],
+          "reason": "round_robin",
+          "requesters": [
+            "R01",
+            "R02"
+          ],
+          "to": [
+            3,
+            4
+          ]
+        },
+        "receiver": "R01",
+        "sender": "traffic_coordinator",
+        "tick": 3
+      },
+      {
+        "kind": "denial",
+        "payload": {
+          "reason": "cell_conflict",
+          "requesters": [
+            "R01",
+            "R02"
+          ],
+          "to": [
+            3,
+            4
+          ],
+          "winner": "R01"
+        },
+        "receiver": "R02",
+        "sender": "traffic_coordinator",
+        "tick": 3
+      },
+      {
+        "kind": "wait",
+        "payload": {
+          "position": [
+            2,
+            4
+          ],
+          "reason": "cell_conflict",
+          "requesters": [
+            "R01",
+            "R02"
+          ],
+          "status": "waiting",
+          "winner": "R01"
+        },
+        "receiver": "traffic_coordinator",
+        "sender": "R02",
+        "tick": 3
+      },
+      {
+        "kind": "position_update",
+        "payload": {
+          "from": [
+            3,
+            3
+          ],
+          "status": "ready",
+          "to": [
+            3,
+            4
+          ]
+        },
+        "receiver": "fleet",
+        "sender": "R01",
+        "tick": 3
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R01",
+        "sender": "controller",
+        "tick": 4
+      },
+      {
+        "kind": "request",
+        "payload": {
+          "from": [
+            3,
+            4
+          ],
+          "movement_credit": 1.0,
+          "to": [
+            3,
+            5
+          ]
+        },
+        "receiver": "traffic_coordinator",
+        "sender": "R01",
+        "tick": 4
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R02",
+        "sender": "controller",
+        "tick": 4
+      },
+      {
+        "kind": "request",
+        "payload": {
+          "from": [
+            2,
+            4
+          ],
+          "movement_credit": 2.0,
+          "to": [
+            3,
+            4
+          ]
+        },
+        "receiver": "traffic_coordinator",
+        "sender": "R02",
+        "tick": 4
+      },
+      {
+        "kind": "grant",
+        "payload": {
+          "priority_order": [
+            "R02",
+            "R01"
+          ],
+          "reason": "cell_available",
+          "requesters": [
+            "R01"
+          ],
+          "to": [
+            3,
+            5
+          ]
+        },
+        "receiver": "R01",
+        "sender": "traffic_coordinator",
+        "tick": 4
+      },
+      {
+        "kind": "denial",
+        "payload": {
+          "blocking_robots": [
+            "R01"
+          ],
+          "reason": "occupied_start",
+          "to": [
+            3,
+            4
+          ]
+        },
+        "receiver": "R02",
+        "sender": "traffic_coordinator",
+        "tick": 4
+      },
+      {
+        "kind": "wait",
+        "payload": {
+          "blocking_robots": [
+            "R01"
+          ],
+          "position": [
+            2,
+            4
+          ],
+          "reason": "occupied_start",
+          "status": "waiting"
+        },
+        "receiver": "traffic_coordinator",
+        "sender": "R02",
+        "tick": 4
+      },
+      {
+        "kind": "position_update",
+        "payload": {
+          "from": [
+            3,
+            4
+          ],
+          "status": "ready",
+          "to": [
+            3,
+            5
+          ]
+        },
+        "receiver": "fleet",
+        "sender": "R01",
+        "tick": 4
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R01",
+        "sender": "controller",
+        "tick": 5
+      },
+      {
+        "kind": "request",
+        "payload": {
+          "from": [
+            3,
+            5
+          ],
+          "movement_credit": 1.0,
+          "to": [
+            3,
+            6
+          ]
+        },
+        "receiver": "traffic_coordinator",
+        "sender": "R01",
+        "tick": 5
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R02",
+        "sender": "controller",
+        "tick": 5
+      },
+      {
+        "kind": "request",
+        "payload": {
+          "from": [
+            2,
+            4
+          ],
+          "movement_credit": 2.0,
+          "to": [
+            3,
+            4
+          ]
+        },
+        "receiver": "traffic_coordinator",
+        "sender": "R02",
+        "tick": 5
+      },
+      {
+        "kind": "grant",
+        "payload": {
+          "priority_order": [
+            "R01",
+            "R02"
+          ],
+          "reason": "cell_available",
+          "requesters": [
+            "R01"
+          ],
+          "to": [
+            3,
+            6
+          ]
+        },
+        "receiver": "R01",
+        "sender": "traffic_coordinator",
+        "tick": 5
+      },
+      {
+        "kind": "grant",
+        "payload": {
+          "priority_order": [
+            "R01",
+            "R02"
+          ],
+          "reason": "cell_available",
+          "requesters": [
+            "R02"
+          ],
+          "to": [
+            3,
+            4
+          ]
+        },
+        "receiver": "R02",
+        "sender": "traffic_coordinator",
+        "tick": 5
+      },
+      {
+        "kind": "position_update",
+        "payload": {
+          "from": [
+            3,
+            5
+          ],
+          "status": "ready",
+          "to": [
+            3,
+            6
+          ]
+        },
+        "receiver": "fleet",
+        "sender": "R01",
+        "tick": 5
+      },
+      {
+        "kind": "position_update",
+        "payload": {
+          "from": [
+            2,
+            4
+          ],
+          "status": "ready",
+          "to": [
+            3,
+            4
+          ]
+        },
+        "receiver": "fleet",
+        "sender": "R02",
+        "tick": 5
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R01",
+        "sender": "controller",
+        "tick": 6
+      },
+      {
+        "kind": "request",
+        "payload": {
+          "from": [
+            3,
+            6
+          ],
+          "movement_credit": 1.0,
+          "to": [
+            3,
+            7
+          ]
+        },
+        "receiver": "traffic_coordinator",
+        "sender": "R01",
+        "tick": 6
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R02",
+        "sender": "controller",
+        "tick": 6
+      },
+      {
+        "kind": "request",
+        "payload": {
+          "from": [
+            3,
+            4
+          ],
+          "movement_credit": 2.0,
+          "to": [
+            4,
+            4
+          ]
+        },
+        "receiver": "traffic_coordinator",
+        "sender": "R02",
+        "tick": 6
+      },
+      {
+        "kind": "grant",
+        "payload": {
+          "priority_order": [
+            "R02",
+            "R01"
+          ],
+          "reason": "cell_available",
+          "requesters": [
+            "R01"
+          ],
+          "to": [
+            3,
+            7
+          ]
+        },
+        "receiver": "R01",
+        "sender": "traffic_coordinator",
+        "tick": 6
+      },
+      {
+        "kind": "grant",
+        "payload": {
+          "priority_order": [
+            "R02",
+            "R01"
+          ],
+          "reason": "cell_available",
+          "requesters": [
+            "R02"
+          ],
+          "to": [
+            4,
+            4
+          ]
+        },
+        "receiver": "R02",
+        "sender": "traffic_coordinator",
+        "tick": 6
+      },
+      {
+        "kind": "position_update",
+        "payload": {
+          "from": [
+            3,
+            6
+          ],
+          "status": "arrived",
+          "to": [
+            3,
+            7
+          ]
+        },
+        "receiver": "fleet",
+        "sender": "R01",
+        "tick": 6
+      },
+      {
+        "kind": "position_update",
+        "payload": {
+          "from": [
+            3,
+            4
+          ],
+          "status": "ready",
+          "to": [
+            4,
+            4
+          ]
+        },
+        "receiver": "fleet",
+        "sender": "R02",
+        "tick": 6
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R01",
+        "sender": "controller",
+        "tick": 7
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R02",
+        "sender": "controller",
+        "tick": 7
+      },
+      {
+        "kind": "request",
+        "payload": {
+          "from": [
+            4,
+            4
+          ],
+          "movement_credit": 2.0,
+          "to": [
+            5,
+            4
+          ]
+        },
+        "receiver": "traffic_coordinator",
+        "sender": "R02",
+        "tick": 7
+      },
+      {
+        "kind": "grant",
+        "payload": {
+          "priority_order": [
+            "R01",
+            "R02"
+          ],
+          "reason": "cell_available",
+          "requesters": [
+            "R02"
+          ],
+          "to": [
+            5,
+            4
+          ]
+        },
+        "receiver": "R02",
+        "sender": "traffic_coordinator",
+        "tick": 7
+      },
+      {
+        "kind": "position_update",
+        "payload": {
+          "from": [
+            4,
+            4
+          ],
+          "status": "ready",
+          "to": [
+            5,
+            4
+          ]
+        },
+        "receiver": "fleet",
+        "sender": "R02",
+        "tick": 7
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R01",
+        "sender": "controller",
+        "tick": 8
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R02",
+        "sender": "controller",
+        "tick": 8
+      },
+      {
+        "kind": "request",
+        "payload": {
+          "from": [
+            5,
+            4
+          ],
+          "movement_credit": 2.0,
+          "to": [
+            6,
+            4
+          ]
+        },
+        "receiver": "traffic_coordinator",
+        "sender": "R02",
+        "tick": 8
+      },
+      {
+        "kind": "grant",
+        "payload": {
+          "priority_order": [
+            "R02",
+            "R01"
+          ],
+          "reason": "cell_available",
+          "requesters": [
+            "R02"
+          ],
+          "to": [
+            6,
+            4
+          ]
+        },
+        "receiver": "R02",
+        "sender": "traffic_coordinator",
+        "tick": 8
+      },
+      {
+        "kind": "position_update",
+        "payload": {
+          "from": [
+            5,
+            4
+          ],
+          "status": "arrived",
+          "to": [
+            6,
+            4
+          ]
+        },
+        "receiver": "fleet",
+        "sender": "R02",
+        "tick": 8
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R01",
+        "sender": "controller",
+        "tick": 9
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R02",
+        "sender": "controller",
+        "tick": 9
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R01",
+        "sender": "controller",
+        "tick": 10
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R02",
+        "sender": "controller",
+        "tick": 10
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R01",
+        "sender": "controller",
+        "tick": 11
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R02",
+        "sender": "controller",
+        "tick": 11
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R01",
+        "sender": "controller",
+        "tick": 12
+      },
+      {
+        "kind": "control",
+        "payload": {
+          "effective_speed_factor": 1.0,
+          "paused": false,
+          "requested_speed_factor": 1.0
+        },
+        "receiver": "R02",
+        "sender": "controller",
+        "tick": 12
+      }
+    ],
+    "robots": [
+      {
+        "cost": 0,
+        "goal": [
+          3,
+          7
+        ],
+        "id": "R01",
+        "initialization_count": 1,
+        "movement_credit": 0.0,
+        "path": [
+          [
+            3,
+            7
+          ]
+        ],
+        "position": [
+          3,
+          7
+        ],
+        "speed_factor": 1.0,
+        "status": "arrived",
+        "steps": 6,
+        "waiting_ticks": 0
+      },
+      {
+        "cost": 0,
+        "goal": [
+          6,
+          4
+        ],
+        "id": "R02",
+        "initialization_count": 1,
+        "movement_credit": 1.0,
+        "path": [
+          [
+            6,
+            4
+          ]
+        ],
+        "position": [
+          6,
+          4
+        ],
+        "speed_factor": 1.0,
+        "status": "arrived",
+        "steps": 6,
+        "waiting_ticks": 2
+      }
+    ],
+    "rows": [
+      "####.####",
+      "####.####",
+      "####.####",
+      ".........",
+      "####.####",
+      "####.####",
+      "####.####"
+    ],
+    "tick": 12
+  },
+  "messages": [
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R01",
+      "sender": "controller",
+      "tick": 1
+    },
+    {
+      "kind": "request",
+      "payload": {
+        "from": [
+          3,
+          1
+        ],
+        "movement_credit": 1.0,
+        "to": [
+          3,
+          2
+        ]
+      },
+      "receiver": "traffic_coordinator",
+      "sender": "R01",
+      "tick": 1
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R02",
+      "sender": "controller",
+      "tick": 1
+    },
+    {
+      "kind": "request",
+      "payload": {
+        "from": [
+          0,
+          4
+        ],
+        "movement_credit": 1.0,
+        "to": [
+          1,
+          4
+        ]
+      },
+      "receiver": "traffic_coordinator",
+      "sender": "R02",
+      "tick": 1
+    },
+    {
+      "kind": "grant",
+      "payload": {
+        "priority_order": [
+          "R01",
+          "R02"
+        ],
+        "reason": "cell_available",
+        "requesters": [
+          "R01"
+        ],
+        "to": [
+          3,
+          2
+        ]
+      },
+      "receiver": "R01",
+      "sender": "traffic_coordinator",
+      "tick": 1
+    },
+    {
+      "kind": "grant",
+      "payload": {
+        "priority_order": [
+          "R01",
+          "R02"
+        ],
+        "reason": "cell_available",
+        "requesters": [
+          "R02"
+        ],
+        "to": [
+          1,
+          4
+        ]
+      },
+      "receiver": "R02",
+      "sender": "traffic_coordinator",
+      "tick": 1
+    },
+    {
+      "kind": "position_update",
+      "payload": {
+        "from": [
+          3,
+          1
+        ],
+        "status": "ready",
+        "to": [
+          3,
+          2
+        ]
+      },
+      "receiver": "fleet",
+      "sender": "R01",
+      "tick": 1
+    },
+    {
+      "kind": "position_update",
+      "payload": {
+        "from": [
+          0,
+          4
+        ],
+        "status": "ready",
+        "to": [
+          1,
+          4
+        ]
+      },
+      "receiver": "fleet",
+      "sender": "R02",
+      "tick": 1
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R01",
+      "sender": "controller",
+      "tick": 2
+    },
+    {
+      "kind": "request",
+      "payload": {
+        "from": [
+          3,
+          2
+        ],
+        "movement_credit": 1.0,
+        "to": [
+          3,
+          3
+        ]
+      },
+      "receiver": "traffic_coordinator",
+      "sender": "R01",
+      "tick": 2
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R02",
+      "sender": "controller",
+      "tick": 2
+    },
+    {
+      "kind": "request",
+      "payload": {
+        "from": [
+          1,
+          4
+        ],
+        "movement_credit": 1.0,
+        "to": [
+          2,
+          4
+        ]
+      },
+      "receiver": "traffic_coordinator",
+      "sender": "R02",
+      "tick": 2
+    },
+    {
+      "kind": "grant",
+      "payload": {
+        "priority_order": [
+          "R02",
+          "R01"
+        ],
+        "reason": "cell_available",
+        "requesters": [
+          "R01"
+        ],
+        "to": [
+          3,
+          3
+        ]
+      },
+      "receiver": "R01",
+      "sender": "traffic_coordinator",
+      "tick": 2
+    },
+    {
+      "kind": "grant",
+      "payload": {
+        "priority_order": [
+          "R02",
+          "R01"
+        ],
+        "reason": "cell_available",
+        "requesters": [
+          "R02"
+        ],
+        "to": [
+          2,
+          4
+        ]
+      },
+      "receiver": "R02",
+      "sender": "traffic_coordinator",
+      "tick": 2
+    },
+    {
+      "kind": "position_update",
+      "payload": {
+        "from": [
+          3,
+          2
+        ],
+        "status": "ready",
+        "to": [
+          3,
+          3
+        ]
+      },
+      "receiver": "fleet",
+      "sender": "R01",
+      "tick": 2
+    },
+    {
+      "kind": "position_update",
+      "payload": {
+        "from": [
+          1,
+          4
+        ],
+        "status": "ready",
+        "to": [
+          2,
+          4
+        ]
+      },
+      "receiver": "fleet",
+      "sender": "R02",
+      "tick": 2
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R01",
+      "sender": "controller",
+      "tick": 3
+    },
+    {
+      "kind": "request",
+      "payload": {
+        "from": [
+          3,
+          3
+        ],
+        "movement_credit": 1.0,
+        "to": [
+          3,
+          4
+        ]
+      },
+      "receiver": "traffic_coordinator",
+      "sender": "R01",
+      "tick": 3
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R02",
+      "sender": "controller",
+      "tick": 3
+    },
+    {
+      "kind": "request",
+      "payload": {
+        "from": [
+          2,
+          4
+        ],
+        "movement_credit": 1.0,
+        "to": [
+          3,
+          4
+        ]
+      },
+      "receiver": "traffic_coordinator",
+      "sender": "R02",
+      "tick": 3
+    },
+    {
+      "kind": "grant",
+      "payload": {
+        "priority_order": [
+          "R01",
+          "R02"
+        ],
+        "reason": "round_robin",
+        "requesters": [
+          "R01",
+          "R02"
+        ],
+        "to": [
+          3,
+          4
+        ]
+      },
+      "receiver": "R01",
+      "sender": "traffic_coordinator",
+      "tick": 3
+    },
+    {
+      "kind": "denial",
+      "payload": {
+        "reason": "cell_conflict",
+        "requesters": [
+          "R01",
+          "R02"
+        ],
+        "to": [
+          3,
+          4
+        ],
+        "winner": "R01"
+      },
+      "receiver": "R02",
+      "sender": "traffic_coordinator",
+      "tick": 3
+    },
+    {
+      "kind": "wait",
+      "payload": {
+        "position": [
+          2,
+          4
+        ],
+        "reason": "cell_conflict",
+        "requesters": [
+          "R01",
+          "R02"
+        ],
+        "status": "waiting",
+        "winner": "R01"
+      },
+      "receiver": "traffic_coordinator",
+      "sender": "R02",
+      "tick": 3
+    },
+    {
+      "kind": "position_update",
+      "payload": {
+        "from": [
+          3,
+          3
+        ],
+        "status": "ready",
+        "to": [
+          3,
+          4
+        ]
+      },
+      "receiver": "fleet",
+      "sender": "R01",
+      "tick": 3
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R01",
+      "sender": "controller",
+      "tick": 4
+    },
+    {
+      "kind": "request",
+      "payload": {
+        "from": [
+          3,
+          4
+        ],
+        "movement_credit": 1.0,
+        "to": [
+          3,
+          5
+        ]
+      },
+      "receiver": "traffic_coordinator",
+      "sender": "R01",
+      "tick": 4
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R02",
+      "sender": "controller",
+      "tick": 4
+    },
+    {
+      "kind": "request",
+      "payload": {
+        "from": [
+          2,
+          4
+        ],
+        "movement_credit": 2.0,
+        "to": [
+          3,
+          4
+        ]
+      },
+      "receiver": "traffic_coordinator",
+      "sender": "R02",
+      "tick": 4
+    },
+    {
+      "kind": "grant",
+      "payload": {
+        "priority_order": [
+          "R02",
+          "R01"
+        ],
+        "reason": "cell_available",
+        "requesters": [
+          "R01"
+        ],
+        "to": [
+          3,
+          5
+        ]
+      },
+      "receiver": "R01",
+      "sender": "traffic_coordinator",
+      "tick": 4
+    },
+    {
+      "kind": "denial",
+      "payload": {
+        "blocking_robots": [
+          "R01"
+        ],
+        "reason": "occupied_start",
+        "to": [
+          3,
+          4
+        ]
+      },
+      "receiver": "R02",
+      "sender": "traffic_coordinator",
+      "tick": 4
+    },
+    {
+      "kind": "wait",
+      "payload": {
+        "blocking_robots": [
+          "R01"
+        ],
+        "position": [
+          2,
+          4
+        ],
+        "reason": "occupied_start",
+        "status": "waiting"
+      },
+      "receiver": "traffic_coordinator",
+      "sender": "R02",
+      "tick": 4
+    },
+    {
+      "kind": "position_update",
+      "payload": {
+        "from": [
+          3,
+          4
+        ],
+        "status": "ready",
+        "to": [
+          3,
+          5
+        ]
+      },
+      "receiver": "fleet",
+      "sender": "R01",
+      "tick": 4
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R01",
+      "sender": "controller",
+      "tick": 5
+    },
+    {
+      "kind": "request",
+      "payload": {
+        "from": [
+          3,
+          5
+        ],
+        "movement_credit": 1.0,
+        "to": [
+          3,
+          6
+        ]
+      },
+      "receiver": "traffic_coordinator",
+      "sender": "R01",
+      "tick": 5
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R02",
+      "sender": "controller",
+      "tick": 5
+    },
+    {
+      "kind": "request",
+      "payload": {
+        "from": [
+          2,
+          4
+        ],
+        "movement_credit": 2.0,
+        "to": [
+          3,
+          4
+        ]
+      },
+      "receiver": "traffic_coordinator",
+      "sender": "R02",
+      "tick": 5
+    },
+    {
+      "kind": "grant",
+      "payload": {
+        "priority_order": [
+          "R01",
+          "R02"
+        ],
+        "reason": "cell_available",
+        "requesters": [
+          "R01"
+        ],
+        "to": [
+          3,
+          6
+        ]
+      },
+      "receiver": "R01",
+      "sender": "traffic_coordinator",
+      "tick": 5
+    },
+    {
+      "kind": "grant",
+      "payload": {
+        "priority_order": [
+          "R01",
+          "R02"
+        ],
+        "reason": "cell_available",
+        "requesters": [
+          "R02"
+        ],
+        "to": [
+          3,
+          4
+        ]
+      },
+      "receiver": "R02",
+      "sender": "traffic_coordinator",
+      "tick": 5
+    },
+    {
+      "kind": "position_update",
+      "payload": {
+        "from": [
+          3,
+          5
+        ],
+        "status": "ready",
+        "to": [
+          3,
+          6
+        ]
+      },
+      "receiver": "fleet",
+      "sender": "R01",
+      "tick": 5
+    },
+    {
+      "kind": "position_update",
+      "payload": {
+        "from": [
+          2,
+          4
+        ],
+        "status": "ready",
+        "to": [
+          3,
+          4
+        ]
+      },
+      "receiver": "fleet",
+      "sender": "R02",
+      "tick": 5
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R01",
+      "sender": "controller",
+      "tick": 6
+    },
+    {
+      "kind": "request",
+      "payload": {
+        "from": [
+          3,
+          6
+        ],
+        "movement_credit": 1.0,
+        "to": [
+          3,
+          7
+        ]
+      },
+      "receiver": "traffic_coordinator",
+      "sender": "R01",
+      "tick": 6
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R02",
+      "sender": "controller",
+      "tick": 6
+    },
+    {
+      "kind": "request",
+      "payload": {
+        "from": [
+          3,
+          4
+        ],
+        "movement_credit": 2.0,
+        "to": [
+          4,
+          4
+        ]
+      },
+      "receiver": "traffic_coordinator",
+      "sender": "R02",
+      "tick": 6
+    },
+    {
+      "kind": "grant",
+      "payload": {
+        "priority_order": [
+          "R02",
+          "R01"
+        ],
+        "reason": "cell_available",
+        "requesters": [
+          "R01"
+        ],
+        "to": [
+          3,
+          7
+        ]
+      },
+      "receiver": "R01",
+      "sender": "traffic_coordinator",
+      "tick": 6
+    },
+    {
+      "kind": "grant",
+      "payload": {
+        "priority_order": [
+          "R02",
+          "R01"
+        ],
+        "reason": "cell_available",
+        "requesters": [
+          "R02"
+        ],
+        "to": [
+          4,
+          4
+        ]
+      },
+      "receiver": "R02",
+      "sender": "traffic_coordinator",
+      "tick": 6
+    },
+    {
+      "kind": "position_update",
+      "payload": {
+        "from": [
+          3,
+          6
+        ],
+        "status": "arrived",
+        "to": [
+          3,
+          7
+        ]
+      },
+      "receiver": "fleet",
+      "sender": "R01",
+      "tick": 6
+    },
+    {
+      "kind": "position_update",
+      "payload": {
+        "from": [
+          3,
+          4
+        ],
+        "status": "ready",
+        "to": [
+          4,
+          4
+        ]
+      },
+      "receiver": "fleet",
+      "sender": "R02",
+      "tick": 6
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R01",
+      "sender": "controller",
+      "tick": 7
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R02",
+      "sender": "controller",
+      "tick": 7
+    },
+    {
+      "kind": "request",
+      "payload": {
+        "from": [
+          4,
+          4
+        ],
+        "movement_credit": 2.0,
+        "to": [
+          5,
+          4
+        ]
+      },
+      "receiver": "traffic_coordinator",
+      "sender": "R02",
+      "tick": 7
+    },
+    {
+      "kind": "grant",
+      "payload": {
+        "priority_order": [
+          "R01",
+          "R02"
+        ],
+        "reason": "cell_available",
+        "requesters": [
+          "R02"
+        ],
+        "to": [
+          5,
+          4
+        ]
+      },
+      "receiver": "R02",
+      "sender": "traffic_coordinator",
+      "tick": 7
+    },
+    {
+      "kind": "position_update",
+      "payload": {
+        "from": [
+          4,
+          4
+        ],
+        "status": "ready",
+        "to": [
+          5,
+          4
+        ]
+      },
+      "receiver": "fleet",
+      "sender": "R02",
+      "tick": 7
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R01",
+      "sender": "controller",
+      "tick": 8
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R02",
+      "sender": "controller",
+      "tick": 8
+    },
+    {
+      "kind": "request",
+      "payload": {
+        "from": [
+          5,
+          4
+        ],
+        "movement_credit": 2.0,
+        "to": [
+          6,
+          4
+        ]
+      },
+      "receiver": "traffic_coordinator",
+      "sender": "R02",
+      "tick": 8
+    },
+    {
+      "kind": "grant",
+      "payload": {
+        "priority_order": [
+          "R02",
+          "R01"
+        ],
+        "reason": "cell_available",
+        "requesters": [
+          "R02"
+        ],
+        "to": [
+          6,
+          4
+        ]
+      },
+      "receiver": "R02",
+      "sender": "traffic_coordinator",
+      "tick": 8
+    },
+    {
+      "kind": "position_update",
+      "payload": {
+        "from": [
+          5,
+          4
+        ],
+        "status": "arrived",
+        "to": [
+          6,
+          4
+        ]
+      },
+      "receiver": "fleet",
+      "sender": "R02",
+      "tick": 8
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R01",
+      "sender": "controller",
+      "tick": 9
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R02",
+      "sender": "controller",
+      "tick": 9
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R01",
+      "sender": "controller",
+      "tick": 10
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R02",
+      "sender": "controller",
+      "tick": 10
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R01",
+      "sender": "controller",
+      "tick": 11
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R02",
+      "sender": "controller",
+      "tick": 11
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R01",
+      "sender": "controller",
+      "tick": 12
+    },
+    {
+      "kind": "control",
+      "payload": {
+        "effective_speed_factor": 1.0,
+        "paused": false,
+        "requested_speed_factor": 1.0
+      },
+      "receiver": "R02",
+      "sender": "controller",
+      "tick": 12
+    }
+  ],
+  "scenario": "crossing",
+  "ticks_run": 12
+}

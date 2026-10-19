@@ -1,16 +1,21 @@
-# AI-TE-303
+# AI-TE-103
 
-**Warehouse Robot Diagnostics and Dynamic Route Planning**
+**Warehouse Robot Diagnostics, Cooperative Routing, and Fuzzy Control**
 
-[![Python validation](https://github.com/sar1p/AI-TE-303/actions/workflows/tests.yml/badge.svg)](https://github.com/sar1p/AI-TE-303/actions/workflows/tests.yml)
+[![Python validation](https://github.com/sar1p/AI-TE-103/actions/workflows/tests.yml/badge.svg)](https://github.com/sar1p/AI-TE-103/actions/workflows/tests.yml)
 
-Release: [v0.1.2](https://github.com/sar1p/AI-TE-303/releases/tag/v0.1.2).
-Submission / live demonstration: Tuesday, October 13, 2026, Asia/Jakarta.
+Baseline release: [v0.1.2](https://github.com/sar1p/AI-TE-103/releases/tag/v0.1.2).
+The October 19 extension adds multi-agent coordination and fuzzy control to the existing diagnosis/search demonstration.
+Original live demonstration date: Tuesday, October 13, 2026, Asia/Jakarta.
 
 A two-member Artificial Intelligence coursework project. D* Lite repairs a
 warehouse robot's route after map changes and movement. Repeated A* provides a
 baseline. A separate expert system uses external IF-THEN rules and forward
 chaining to explain suspected robot faults and the observations supporting them.
+Two independent robot agents now request next-cell reservations from a traffic
+coordinator. Mamdani or zero-order Sugeno fuzzy control adjusts their movement
+cadence using illustrative clearance and battery readings. Per-robot diagnostic
+stops take priority over both speed proposals and reservation requests.
 
 ## Implementation status
 
@@ -21,6 +26,16 @@ chaining to explain suspected robot faults and the observations supporting them.
   grounded explanations, unknown evidence, corrected observations, and an independent CLI.
 - Diagnostic scope: nine categorical observations, eleven illustrative rules,
   six supported findings, and eight named scenarios.
+- Multi-agent system: independent persistent planners, explicit request/decision
+  messages, deterministic one-tick reservations, fractional cadence, and two-robot demonstration.
+- Fuzzy logic: nine linguistic rules, inspectable memberships, Mamdani max-min
+  inference with centroid approximation, and a zero-order Sugeno comparison.
+
+The four methods meet in **Fleet coordination**. **Fuzzy speed control** explains
+both inference methods using adjustable inputs, rule activations, and real outputs.
+See [FUZZY_LOGIC.md](docs/FUZZY_LOGIC.md),
+[MULTI_AGENT_SYSTEM.md](docs/MULTI_AGENT_SYSTEM.md), and the
+[source-linked architecture review](docs/ARCHITECTURE_REVIEW.md).
 
 See [PROJECT_PLAN.md](docs/PROJECT_PLAN.md) for scope and
 [TEAMMATE_TASKS.md](docs/TEAMMATE_TASKS.md) for contribution history and the review/presentation handoff.
@@ -31,7 +46,7 @@ See [PROJECT_PLAN.md](docs/PROJECT_PLAN.md) for scope and
 
 The app runs locally on 64-bit Windows 10 or 11. You do not need to sign in to
 try this public project. For a new laptop, open PowerShell and paste this whole
-block. It puts the project in your `Downloads\AI-TE-303` folder; when Git is
+block. It puts the project in your `Downloads\AI-TE-103` folder; when Git is
 installed it creates a clone with its history, and when Git is absent it
 downloads a ZIP instead. The installer does not install Git. A valid existing
 project folder is reused without pulling or overwriting it; an unrelated folder
@@ -42,8 +57,8 @@ app automatically.
 & {
     $ErrorActionPreference = 'Stop'
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-    $installer = Join-Path $env:TEMP ('AI-TE-303-install-' + [guid]::NewGuid().ToString() + '.ps1')
-    Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/sar1p/AI-TE-303/main/install.ps1' -OutFile $installer
+    $installer = Join-Path $env:TEMP ('AI-TE-103-install-' + [guid]::NewGuid().ToString() + '.ps1')
+    Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/sar1p/AI-TE-103/main/install.ps1' -OutFile $installer
     & powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File $installer
     if ($LASTEXITCODE -ne 0) { throw 'Setup failed. Check the message above.' }
 }
@@ -68,15 +83,15 @@ See [DEMO_GUIDE.md](docs/DEMO_GUIDE.md) for the live presentation sequence.
 ### Linux and macOS: automatic setup
 
 Open Terminal and paste this whole block. It puts the project in
-`~/Downloads/AI-TE-303`, prepares Python 3.12 and its libraries, and opens the
+`~/Downloads/AI-TE-103`, prepares Python 3.12 and its libraries, and opens the
 local app. Git and Python do not need to be installed first. Git is used when
 available; otherwise the installer downloads the source archive.
 
 ```bash
 (
     set -e
-    installer="$(mktemp "${TMPDIR:-/tmp}/AI-TE-303-install.XXXXXX")"
-    url=https://raw.githubusercontent.com/sar1p/AI-TE-303/main/install.sh
+    installer="$(mktemp "${TMPDIR:-/tmp}/AI-TE-103-install.XXXXXX")"
+    url=https://raw.githubusercontent.com/sar1p/AI-TE-103/main/install.sh
     if command -v curl >/dev/null 2>&1; then
         curl --fail --location --silent --show-error "$url" --output "$installer"
     else
@@ -151,6 +166,12 @@ for runtime provenance, supported platforms, and native verification.
 .\.venv\Scripts\python.exe -m search_algorithm.main --output artifacts/single-replay.json
 .\.venv\Scripts\python.exe tools/replay_demo.py --output artifacts/demo
 .\.venv\Scripts\python.exe tools/combined_demo.py --output artifacts/combined-demo.json
+.\.venv\Scripts\python.exe -m fuzzy_logic --clearance 3 --battery 85 --output artifacts/fuzzy-mamdani.json
+.\.venv\Scripts\python.exe -m fuzzy_logic --method sugeno --clearance 3 --battery 85 --output artifacts/fuzzy-sugeno.json
+.\.venv\Scripts\python.exe -m multi_agent_system --ticks 12 --output artifacts/multi-agent.json
+.\.venv\Scripts\python.exe tools/fleet_demo.py --method mamdani --output artifacts/fleet-mamdani.json
+.\.venv\Scripts\python.exe tools/fleet_demo.py --method sugeno --output artifacts/fleet-sugeno.json
+.\.venv\Scripts\python.exe tools/benchmark_fuzzy.py --repeats 5 --output artifacts/fuzzy-benchmark
 .\.venv\Scripts\python.exe tools/benchmark_search.py --output artifacts/benchmark --repeats 5
 ```
 
@@ -168,6 +189,12 @@ planner. Exports include the raw inputs and knowledge-base provenance/hash.
 Verified running results, source metadata, real screenshots, and clean-clone
 checks are in [docs/evidence/](docs/evidence/README.md).
 
+The [four-method snapshot](docs/evidence/four-method-2026-10-19/README.md)
+records 224 passing tests, six successful CI jobs, both integrated fleet replays,
+121 fuzzy input cases, raw API timing samples, and actual UI exports.
+Its timings include explanation construction; its synthetic scenarios do not
+validate physical robot behavior or controller accuracy.
+
 The [completed-system snapshot](docs/evidence/completed-system-2026-10-11/README.md)
 records 167 passing tests, eight matching diagnostic fixtures, an actual
 pause/correction browser demo, and a silent screen recording from a clean clone.
@@ -183,9 +210,14 @@ The teammate's independent review and laptop rehearsal remain the human handoff.
 | A* | Fresh shortest-path baseline for the current map | Repeats search after each update |
 | UCS / Dijkstra | Independent optimal-cost oracle in tests | Used for correctness, not the interactive planner |
 | Forward-chaining expert system | Explain categorical observations through an inspectable rule chain, including power, drive feedback, and motor connection cases | Limited to declared observations and illustrative rules; no measured diagnostic accuracy |
+| Cooperative robot agents | Keep independent goals and D* Lite planners; exchange next-cell requests and traffic decisions | Conservative discrete reservations can deadlock and are not globally optimal multi-agent pathfinding |
+| Mamdani fuzzy control | Show fuzzification, min-rule firing, clipped/max aggregation, and a centroid speed proposal | Illustrative ranges; numerical quadrature; no calibrated physical speed or braking model |
+| Zero-order Sugeno | Compare singleton weighted-average output using the same input memberships and rule antecedents | Outputs differ from Mamdani; faster arithmetic alone does not establish a better controller |
 
-The grid supports four-neighbor unit-cost movement. Weighted terrain, diagonal
-motion, multiple robots, and physical control are outside this implementation.
+The grid supports four-neighbor unit-cost movement. The single-robot planner
+remains independently usable; the fleet workspace adds multiple robots with
+separate planners. Weighted terrain, diagonal motion, and physical control
+remain outside this implementation.
 See [SEARCH_ALGORITHM.md](docs/SEARCH_ALGORITHM.md) for algorithm details,
 metric definitions, benchmark boundaries, and suitable/unsuitable uses.
 
@@ -199,20 +231,28 @@ certificate. See [EXPERT_SYSTEM.md](docs/EXPERT_SYSTEM.md) for supported
 observations, inference semantics, suitable uses, and limitations.
 
 The interface uses a restrained operations layout with separate route,
-diagnostic, and evidence tabs. A guided observation draft and named presets
+diagnostic, evidence, fleet, and fuzzy-control tabs. A guided observation draft and named presets
 support the live demo; the advanced JSON input rejects ambiguous or non-finite
 data. See [UI_DESIGN.md](docs/UI_DESIGN.md) for the design references and layout decisions.
 
 ## Collaboration
 
-Use feature branches, tested commits, pull requests, and merge commits.
+Group number: **1**. The repository is **AI-TE-103**.
+
+| Role | Member | GitHub account | Branch |
+|---|---|---|---|
+| Dev 1 / lead | Muhammad Syarif Hidayat Hadari | `sar1p` | `dev1/muhammad-syarif-hidayat-hadari` |
+| Dev 2 | Zaedal Musthofa | `zaedalmusthofa` | `dev2/zaedal-musthofa` |
+| Integration | Both members | Shared review | Protected `main` |
+
+Use your member branch, tested commits, pull requests, and merge commits.
 Each member uses their own account for their actual work.
 See [CONTRIBUTING.md](CONTRIBUTING.md) and
 [MODULE_CONTRACTS.md](docs/MODULE_CONTRACTS.md). New GitHub users can follow
 [GITHUB_GUIDE.md](docs/GITHUB_GUIDE.md) for setup, commits, pushes, PRs, and recovery.
 
 Completed expert-system implementation and verification are tracked in the closed
-[issue #3](https://github.com/sar1p/AI-TE-303/issues/3). The teammate's
+[issue #3](https://github.com/sar1p/AI-TE-103/issues/3). The teammate's
 `zaedalmusthofa` account has collaborator access and an attributed starter commit.
 That original commit remains in the main history. The lead completed the rule
 engine expansion, tests, interface, and integration; those later changes use

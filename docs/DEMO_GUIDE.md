@@ -1,6 +1,44 @@
 # Demonstration and evidence guide
 
-Submission / live demonstration: Tuesday, October 13, 2026, Asia/Jakarta.
+Original live demonstration: Tuesday, October 13, 2026, Asia/Jakarta.
+
+## Four-method extension: October 19
+
+Use this sequence after starting the current checkout:
+
+1. Open **Fuzzy speed control**. Change clearance and battery inputs. Identify
+   the active F01–F09 rules, Mamdani aggregation/centroid, and Sugeno weighted
+   singleton contributions. The two proposals can differ; neither is calibrated.
+2. Open **Fleet coordination** and click **Reset fleet**. Both robots have their
+   own goal, position, persistent D* Lite planner, and diagnostic observations.
+3. Keep the healthy presets and advance **Run 12 ticks**. Explain the request,
+   grant, denial, and position-update messages and the reservation-denial count.
+   Run again to let both robots reach their distinct destinations.
+4. Reset the fleet. For **R01**, select **Battery Power-Path Chain**, then
+   **Apply R01 readings**. Advance the fleet. R01 remains at its start while
+   R02 can move: the positive fuzzy proposal is overridden to zero by diagnosis.
+5. Apply **Corrected Baseline Observations** to R01 and advance again. The
+   unsupported findings disappear and movement resumes with the same planner.
+6. Reset and select **Sugeno / weighted average**. Repeat the crossing; compare
+   the computed cadence and actual outputs rather than assuming equivalence.
+7. Download the fleet and fuzzy JSON evidence. **Evidence & methods** also
+   exports both new workspaces together with the independent single-robot session.
+
+The standalone replay verifies the crossing and the pause/correction sequence:
+
+```text
+python tools/fleet_demo.py --method mamdani --output artifacts/fleet-mamdani.json
+python tools/fleet_demo.py --method sugeno --output artifacts/fleet-sugeno.json
+python tools/benchmark_fuzzy.py --repeats 5 --output artifacts/fuzzy-benchmark
+```
+
+The benchmark exports 121 fixed input combinations, alternate-order timing
+samples, source/environment metadata, and limitations. It measures full evaluator
+calls including explanation construction; it does not measure physical accuracy.
+See [FUZZY_LOGIC.md](FUZZY_LOGIC.md), [MULTI_AGENT_SYSTEM.md](MULTI_AGENT_SYSTEM.md),
+and [ARCHITECTURE_REVIEW.md](ARCHITECTURE_REVIEW.md) for method choices and alternatives.
+
+## Original diagnosis and single-robot demonstration
 
 The application is **Warehouse Operations**, a local simulation combining
 external-rule diagnostics with D* Lite route repair. All observation categories,
