@@ -1,8 +1,42 @@
 # GitHub workflow for this two-member project
 
-Repository: [sar1p/AI-TE-303](https://github.com/sar1p/AI-TE-303).
-Both members have their own identities and can work on feature branches in the
+Repository: [sar1p/AI-TE-103](https://github.com/sar1p/AI-TE-103).
+Both members have their own identities and work on member branches in the
 shared repository. A separate fork is optional; it does not replace a backup.
+
+## Group 1 branches
+
+| Member | Account | Persistent working branch |
+|---|---|---|
+| Muhammad Syarif Hidayat Hadari | `sar1p` | `dev1/muhammad-syarif-hidayat-hadari` |
+| Zaedal Musthofa | `zaedalmusthofa` | `dev2/zaedal-musthofa` |
+
+`main` is the protected integration branch. Git branch names cannot contain
+spaces, so member names use lowercase words separated by hyphens. The branch
+label does not change authorship or give one member credit for the other's work.
+
+After a fresh clone, fetch both branches and create only your own local tracking
+branch. Dev 1 runs:
+
+```powershell
+git fetch origin
+git switch --track origin/dev1/muhammad-syarif-hidayat-hadari
+```
+
+Dev 2 runs:
+
+```powershell
+git fetch origin
+git switch --track origin/dev2/zaedal-musthofa
+```
+
+Use `git switch` without `--track origin/` after the local branch already exists.
+For an older clone, update its remote before fetching:
+
+```powershell
+git remote set-url origin https://github.com/sar1p/AI-TE-103.git
+git fetch origin --prune
+```
 
 ## What each action does
 
@@ -11,11 +45,11 @@ shared repository. A separate fork is optional; it does not replace a backup.
 | Clone | Download a working copy and its Git history | Clone this repository once on your laptop |
 | Fetch | Download remote history without changing your files | Inspect new teammate commits |
 | Pull | Fetch and update the current branch | Update local `main` after a merge |
-| Branch | Keep a feature or review separate while it is being developed | `review/diagnostic-explanation` |
+| Branch | Keep each member's work separate while it is being developed | `dev1/muhammad-syarif-hidayat-hadari` or `dev2/zaedal-musthofa` |
 | Fork | Create a personal GitHub copy of another repository | Optional here because both members can use this shared repository |
 | Stage | Select the exact changes for a commit | Stage the rule loader and its tests |
 | Commit | Record a complete local change | Add a validated rule loader |
-| Push | Upload one or more commits to GitHub | Share the tested feature branch |
+| Push | Upload one or more commits to GitHub | Share your tested member branch |
 | Pull request | Present branch changes for review and CI | Explain new rules and actual test results |
 | Merge commit | Join approved feature history into `main` | Retain the teammate's original commits |
 
@@ -72,8 +106,12 @@ Check for existing changes before switching branches:
 git status
 git switch main
 git pull --ff-only origin main
-git switch -c review/diagnostic-explanation
+git switch dev1/muhammad-syarif-hidayat-hadari
+git merge --ff-only origin/main
 ```
+
+The example uses Dev 1. Zaedal uses `dev2/zaedal-musthofa` instead. A member
+branch is reused; do not recreate it for every task or delete it after a merge.
 
 `--ff-only` refuses to create an unexpected local merge. If it fails or you have
 uncommitted work, inspect the difference and preserve the work before proceeding.
@@ -90,7 +128,7 @@ git diff
 git add docs/EXPERT_SYSTEM.md
 git diff --cached
 git commit -m "docs: clarify diagnostic observation examples"
-git push -u origin review/diagnostic-explanation
+git push -u origin dev1/muhammad-syarif-hidayat-hadari
 ```
 
 Open a PR targeting `main`, explain the final behavior and actual validation,
@@ -102,10 +140,11 @@ The lead merges with a normal merge commit after required checks pass. This
 repository protects `main` and uses merge commits to retain actual authorship.
 Both members then update local `main` with `git pull --ff-only origin main`.
 Use `git switch branch-name` to revisit an existing branch; `-c` creates a new one.
+Merge current `main` into your member branch before beginning its next change.
 
 ## Current handoff and contribution credit
 
-[PR #5](https://github.com/sar1p/AI-TE-303/pull/5) merged the original
+[PR #5](https://github.com/sar1p/AI-TE-103/pull/5) merged the original
 `zaedalmusthofa` starter commit together with integration fixes. The original
 commit remains in `main`, and the GitHub contributor API confirmed both
 `sar1p` and `zaedalmusthofa` after the merge. Corrections made by the lead keep
@@ -116,9 +155,10 @@ and integration. That later work uses the lead's identity. The teammate's
 original contribution remains credited without needing an artificial commit.
 Further contributions should describe actual review findings, fixes, or
 documentation work. Read [TEAMMATE_TASKS.md](TEAMMATE_TASKS.md) and
-[the closed issue #3](https://github.com/sar1p/AI-TE-303/issues/3) for the completed
-software record. Review and rehearsal prepare the team for Tuesday, October 13,
-2026. Begin any further change from current `main` on a new branch.
+[the closed issue #3](https://github.com/sar1p/AI-TE-103/issues/3) for the completed
+software record. The original presentation date, October 13, 2026, is historical;
+the current review and rehearsal cover all four methods. Begin any further change
+by updating your member branch from current `main`.
 
 ## Recovery
 

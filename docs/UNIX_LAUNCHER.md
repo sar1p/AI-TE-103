@@ -2,7 +2,7 @@
 
 The [README](../README.md#linux-and-macos-automatic-setup) gives the beginner
 download block and the single `bash run.sh` command for an extracted archive.
-`install.sh` defaults to `~/Downloads/AI-TE-303`, cloning with an existing Git or
+`install.sh` defaults to `~/Downloads/AI-TE-103`, cloning with an existing Git or
 downloading a source archive without Git. An existing complete copy is reused
 without a pull or overwrite; unrelated or incomplete destinations are rejected.
 Failed transfers use unique staging folders so the final location can be retried.
