@@ -30,7 +30,7 @@ def snapshot(name):
     target.mkdir()
     for name in ("app.py", "requirements.txt", "requirements-dev.txt", "constraints.txt", "run.sh", "run.command", "install.sh", "pytest.ini"):
         shutil.copy2(ROOT / name, target / name)
-    for name in (".streamlit", "data", "expert_system", "interface", "search_algorithm", "tests", "tools"):
+    for name in (".streamlit", "data", "expert_system", "fuzzy_logic", "interface", "multi_agent_system", "search_algorithm", "tests", "tools"):
         shutil.copytree(ROOT / name, target / name, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
     return target
 
@@ -66,6 +66,43 @@ class UnixLauncherTests(unittest.TestCase):
     def setUpClass(cls):
         cls.project = snapshot("ZIP project & 100% ready")
 
+    def test_00_snapshot_includes_importable_app_packages(self):
+        packages = ("fuzzy_logic", "multi_agent_system")
+        for package in packages:
+            self.assertTrue((self.project / package / "__init__.py").is_file())
+
+        root = repr(str(self.project.resolve()))
+        code = (
+            "import pathlib, fuzzy_logic, multi_agent_system; "
+            f"root = pathlib.Path({root}).resolve(); "
+            "assert pathlib.Path(fuzzy_logic.__file__).resolve().is_relative_to(root); "
+            "assert pathlib.Path(multi_agent_system.__file__).resolve().is_relative_to(root); "
+            "print('fixture packages imported')"
+        )
+        output = invoke(
+            [sys.executable, "-c", code],
+            "fixture-package-imports",
+            env=dict(os.environ, PYTHONPATH=str(self.project)),
+        )
+        self.assertIn("fixture packages imported", output)
+
+    def test_00_missing_module_stops_before_setup_and_preserves_existing_copy(self):
+        project = snapshot("missing fuzzy package")
+        entry = project / "fuzzy_logic/__init__.py"
+        preserved = entry.with_suffix(".saved")
+        entry.rename(preserved)
+        output = invoke(command(project, "--setup-only"), "missing-module", expected=1)
+        self.assertIn("missing fuzzy_logic/__init__.py", output)
+        self.assertFalse((project / ".venv").exists())
+        output = invoke(
+            ["/bin/bash", str(ROOT / "install.sh"), "--setup-only"],
+            "incomplete-existing-project", expected=1,
+            env=dict(os.environ, AI_TE_103_DIRECTORY=str(project)),
+        )
+        self.assertIn("Nothing was overwritten", output)
+        self.assertTrue(preserved.is_file())
+        self.assertFalse(entry.exists())
+
     def test_01_private_python_first_setup_and_core_suite(self):
         output = invoke(command(self.project, "--managed-python", "--setup-only", "--verify"), "first-setup")
         self.assertRegex(output, r"\d+ passed")
@@ -76,7 +113,7 @@ class UnixLauncherTests(unittest.TestCase):
         self.assertTrue(lock_is_free(self.project))
 
     def test_02_offline_repeat_and_macos_entry_point(self):
-        stamp = self.project / ".venv/.ai-te-303-ready"
+        stamp = self.project / ".venv/.ai-te-103-ready"
         before = stamp.stat().st_mtime_ns
         env = dict(os.environ, PIP_NO_INDEX="1", UV_OFFLINE="1")
         for filename in ("run.sh", "run.command"):
@@ -96,10 +133,10 @@ class UnixLauncherTests(unittest.TestCase):
         self.assertTrue((backups[0] / "original-pyvenv.cfg").is_file())
         requirements = self.project / "requirements-dev.txt"
         original = requirements.read_bytes()
-        stamp = self.project / ".venv/.ai-te-303-ready"
+        stamp = self.project / ".venv/.ai-te-103-ready"
         original_stamp = stamp.read_bytes()
         try:
-            requirements.write_text("ai-te-303-test-missing-package==0.0.0\n")
+            requirements.write_text("ai-te-103-test-missing-package==0.0.0\n")
             output = invoke(command(self.project), "failed-install", env=dict(os.environ, PIP_NO_INDEX="1"), expected=1)
             self.assertIn("Library installation failed", output)
             self.assertNotIn("[3/3] Opening", output)
@@ -111,7 +148,7 @@ class UnixLauncherTests(unittest.TestCase):
     def test_04_installer_preserves_existing_folders(self):
         note = self.project / "my-notes.txt"
         note.write_text("keep this change")
-        env = dict(os.environ, AI_TE_303_DIRECTORY=str(self.project), PIP_NO_INDEX="1")
+        env = dict(os.environ, AI_TE_103_DIRECTORY=str(self.project), PIP_NO_INDEX="1")
         output = invoke(["/bin/bash", str(ROOT / "install.sh"), "--setup-only"], "existing-project", env=env)
         self.assertIn("Using the existing project", output)
         self.assertEqual(note.read_text(), "keep this change")
@@ -119,7 +156,7 @@ class UnixLauncherTests(unittest.TestCase):
         foreign.mkdir()
         note = foreign / "keep.txt"
         note.write_text("original")
-        invoke(["/bin/bash", str(ROOT / "install.sh"), "--setup-only"], "unrelated-folder", env=dict(os.environ, AI_TE_303_DIRECTORY=str(foreign)), expected=1)
+        invoke(["/bin/bash", str(ROOT / "install.sh"), "--setup-only"], "unrelated-folder", env=dict(os.environ, AI_TE_103_DIRECTORY=str(foreign)), expected=1)
         self.assertEqual(list(foreign.iterdir()), [note])
 
     def test_05_incomplete_copy_and_symlink_rejected(self):
@@ -130,7 +167,7 @@ class UnixLauncherTests(unittest.TestCase):
         linked = snapshot("linked environment")
         (linked / ".venv").symlink_to(self.project / ".venv", target_is_directory=True)
         invoke(command(linked, "--setup-only"), "linked-env", expected=1)
-        self.assertTrue((self.project / ".venv/.ai-te-303-ready").is_file())
+        self.assertTrue((self.project / ".venv/.ai-te-103-ready").is_file())
 
     def test_06_busy_port_and_duplicate_launch(self):
         with socket.socket() as occupied:
@@ -211,7 +248,7 @@ class UnixLauncherTests(unittest.TestCase):
         source = snapshot("archive source")
         archive = WORK / "source.tar.gz"
         with tarfile.open(archive, "w:gz") as bundle:
-            bundle.add(source, arcname="AI-TE-303-main")
+            bundle.add(source, arcname="AI-TE-103-main")
         binaries = WORK / "without-git-bin"
         binaries.mkdir()
         # Restrict PATH to ordinary native utilities, excluding Git and Python.
@@ -228,13 +265,13 @@ class UnixLauncherTests(unittest.TestCase):
         bash.write_text("#!/bin/sh\nproject=$(dirname \"$1\")\ncp -R -p " + shell_quote(self.project / ".runtime") + " \"$project/.runtime\"\nexec /bin/bash \"$@\"\n")
         bash.chmod(0o755)
         target = WORK / "archive destination"
-        env = dict(os.environ, PATH=str(binaries), AI_TE_303_DIRECTORY=str(target))
+        env = dict(os.environ, PATH=str(binaries), AI_TE_103_DIRECTORY=str(target))
         output = invoke(["/bin/bash", str(ROOT / "install.sh"), "--managed-python", "--setup-only"], "archive-installer", env=env)
         self.assertIn("Git was not found", output)
         self.assertIn("Setup complete", output)
-        self.assertTrue((target / ".venv/.ai-te-303-ready").is_file())
+        self.assertTrue((target / ".venv/.ai-te-103-ready").is_file())
         self.assertFalse((target / ".git").exists())
-        self.assertEqual(list(WORK.glob(".AI-TE-303-download.*")), [])
+        self.assertEqual(list(WORK.glob(".AI-TE-103-download.*")), [])
         self.assertEqual((target / "run.sh").read_bytes(), (ROOT / "run.sh").read_bytes())
 
 
@@ -242,12 +279,12 @@ if __name__ == "__main__":
     token = uuid.uuid4().hex
     REPORT = ROOT / "artifacts/unix-launcher" / token
     REPORT.mkdir(parents=True)
-    WORK = Path(tempfile.mkdtemp(prefix="ai303-unix-"))
+    WORK = Path(tempfile.mkdtemp(prefix="ai103-unix-"))
     print(f"Native platform: {sys.platform}; logs: {REPORT}", flush=True)
     result = unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(UnixLauncherTests))
     (REPORT / "result.json").write_text(json.dumps({"platform": sys.platform, "tests_run": result.testsRun, "failures": len(result.failures), "errors": len(result.errors), "skipped": len(result.skipped)}, indent=2))
     if result.wasSuccessful():
-        if WORK.resolve().parent != Path(tempfile.gettempdir()).resolve() or not WORK.name.startswith("ai303-unix-"):
+        if WORK.resolve().parent != Path(tempfile.gettempdir()).resolve() or not WORK.name.startswith("ai103-unix-"):
             raise RuntimeError("Refusing to remove a test folder outside its temporary parent")
         shutil.rmtree(WORK)
     sys.exit(0 if result.wasSuccessful() else 1)

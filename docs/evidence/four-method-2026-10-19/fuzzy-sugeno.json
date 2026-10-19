@@ -1,0 +1,109 @@
+{
+  "inputs": {
+    "clearance_cells": 3.0,
+    "battery_percent": 85.0
+  },
+  "memberships": {
+    "clearance": {
+      "near": 0.0,
+      "medium": 0.3333333333333333,
+      "far": 0.2
+    },
+    "battery": {
+      "low": 0.0,
+      "medium": 0.0,
+      "high": 0.5714285714285714
+    }
+  },
+  "rules": [
+    {
+      "id": "F01",
+      "clearance": "near",
+      "battery": "low",
+      "consequent": "slow",
+      "activation": 0.0,
+      "singleton_percent": 13.333333333333334
+    },
+    {
+      "id": "F02",
+      "clearance": "near",
+      "battery": "medium",
+      "consequent": "slow",
+      "activation": 0.0,
+      "singleton_percent": 13.333333333333334
+    },
+    {
+      "id": "F03",
+      "clearance": "near",
+      "battery": "high",
+      "consequent": "slow",
+      "activation": 0.0,
+      "singleton_percent": 13.333333333333334
+    },
+    {
+      "id": "F04",
+      "clearance": "medium",
+      "battery": "low",
+      "consequent": "slow",
+      "activation": 0.0,
+      "singleton_percent": 13.333333333333334
+    },
+    {
+      "id": "F05",
+      "clearance": "medium",
+      "battery": "medium",
+      "consequent": "medium",
+      "activation": 0.0,
+      "singleton_percent": 50.0
+    },
+    {
+      "id": "F06",
+      "clearance": "medium",
+      "battery": "high",
+      "consequent": "medium",
+      "activation": 0.3333333333333333,
+      "singleton_percent": 50.0
+    },
+    {
+      "id": "F07",
+      "clearance": "far",
+      "battery": "low",
+      "consequent": "slow",
+      "activation": 0.0,
+      "singleton_percent": 13.333333333333334
+    },
+    {
+      "id": "F08",
+      "clearance": "far",
+      "battery": "medium",
+      "consequent": "medium",
+      "activation": 0.0,
+      "singleton_percent": 50.0
+    },
+    {
+      "id": "F09",
+      "clearance": "far",
+      "battery": "high",
+      "consequent": "fast",
+      "activation": 0.2,
+      "singleton_percent": 86.66666666666667
+    }
+  ],
+  "output": {
+    "speed_percent": 63.75,
+    "speed_factor": 0.6375
+  },
+  "aggregation": [],
+  "defuzzification": {
+    "method": "Sugeno weighted average",
+    "numerator": 34.0,
+    "denominator": 0.5333333333333333,
+    "sample_step": null
+  },
+  "provenance": {
+    "model": "illustrative",
+    "method": "zero-order Sugeno",
+    "thresholds": "illustrative coursework values; not field-calibrated",
+    "membership_values": "degrees of membership, not probabilities"
+  }
+}

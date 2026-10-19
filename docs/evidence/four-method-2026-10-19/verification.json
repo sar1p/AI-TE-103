@@ -1,0 +1,202 @@
+{
+  "recorded_at_utc": "2026-10-19T09:34:15.740057+00:00",
+  "source_commit": "92edde2007ea5b0bfae90043353e0179a6eb2a90",
+  "source_worktree_dirty_at_runtime_capture": false,
+  "pytest": {
+    "count": 224,
+    "result": "passed",
+    "evidence": "ci-test-summary.txt",
+    "scope": "GitHub Actions pull-request validation for this head commit"
+  },
+  "ci": {
+    "url": "https://github.com/sar1p/AI-TE-303/actions/runs/39230175788",
+    "head_sha": "92edde2007ea5b0bfae90043353e0179a6eb2a90",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "Python tests",
+        "conclusion": "success",
+        "url": "https://github.com/sar1p/AI-TE-303/actions/runs/39230175788/job/117985964930"
+      },
+      {
+        "name": "Unix launcher (ubuntu-24.04-arm)",
+        "conclusion": "success",
+        "url": "https://github.com/sar1p/AI-TE-303/actions/runs/39230175788/job/117985965106"
+      },
+      {
+        "name": "Windows launcher",
+        "conclusion": "success",
+        "url": "https://github.com/sar1p/AI-TE-303/actions/runs/39230175788/job/117985965286"
+      },
+      {
+        "name": "Unix launcher (macos-14)",
+        "conclusion": "success",
+        "url": "https://github.com/sar1p/AI-TE-303/actions/runs/39230175788/job/117985965371"
+      },
+      {
+        "name": "Unix launcher (macos-15-intel)",
+        "conclusion": "success",
+        "url": "https://github.com/sar1p/AI-TE-303/actions/runs/39230175788/job/117985965498"
+      },
+      {
+        "name": "Unix launcher (ubuntu-24.04)",
+        "conclusion": "success",
+        "url": "https://github.com/sar1p/AI-TE-303/actions/runs/39230175788/job/117985965624"
+      }
+    ]
+  },
+  "integrated_replays": {
+    "mamdani": {
+      "checks": {
+        "both_robots_reach_distinct_goals": true,
+        "reservation_contention_is_logged": true,
+        "crossing_transitions_have_no_vertex_collision_or_edge_swap": true,
+        "one_persistent_planner_per_robot": true,
+        "positive_fuzzy_proposal_is_overridden_by_diagnosis": true,
+        "corrected_observations_resume_movement": true
+      },
+      "crossing_ticks": 19,
+      "crossing_robots": [
+        {
+          "id": "R01",
+          "position": [
+            3,
+            7
+          ],
+          "goal": [
+            3,
+            7
+          ],
+          "status": "arrived",
+          "path": [
+            [
+              3,
+              7
+            ]
+          ],
+          "cost": 0,
+          "steps": 6,
+          "waiting_ticks": 4,
+          "speed_factor": 0.3758409964888815,
+          "movement_credit": 0.006727971911051567,
+          "initialization_count": 1
+        },
+        {
+          "id": "R02",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "status": "arrived",
+          "path": [
+            [
+              6,
+              4
+            ]
+          ],
+          "cost": 0,
+          "steps": 6,
+          "waiting_ticks": 0,
+          "speed_factor": 0.3758409964888815,
+          "movement_credit": 0.0134559438221038,
+          "initialization_count": 1
+        }
+      ]
+    },
+    "sugeno": {
+      "checks": {
+        "both_robots_reach_distinct_goals": true,
+        "reservation_contention_is_logged": true,
+        "crossing_transitions_have_no_vertex_collision_or_edge_swap": true,
+        "one_persistent_planner_per_robot": true,
+        "positive_fuzzy_proposal_is_overridden_by_diagnosis": true,
+        "corrected_observations_resume_movement": true
+      },
+      "crossing_ticks": 22,
+      "crossing_robots": [
+        {
+          "id": "R01",
+          "position": [
+            3,
+            7
+          ],
+          "goal": [
+            3,
+            7
+          ],
+          "status": "arrived",
+          "path": [
+            [
+              3,
+              7
+            ]
+          ],
+          "cost": 0,
+          "steps": 6,
+          "waiting_ticks": 4,
+          "speed_factor": 0.3166666666666666,
+          "movement_credit": 0.03333333333333299,
+          "initialization_count": 1
+        },
+        {
+          "id": "R02",
+          "position": [
+            6,
+            4
+          ],
+          "goal": [
+            6,
+            4
+          ],
+          "status": "arrived",
+          "path": [
+            [
+              6,
+              4
+            ]
+          ],
+          "cost": 0,
+          "steps": 6,
+          "waiting_ticks": 0,
+          "speed_factor": 0.3166666666666666,
+          "movement_credit": 0.016666666666665497,
+          "initialization_count": 1
+        }
+      ]
+    }
+  },
+  "fuzzy_comparison": {
+    "case_count": 121,
+    "repeats": 5,
+    "timing_sample_count": 1210,
+    "median_api_elapsed_ns": {
+      "mamdani": 817800,
+      "sugeno": 27300
+    },
+    "measurement_scope": "One full public evaluator call, including memberships and proof construction; excludes file I/O and rendering."
+  },
+  "browser_export": {
+    "path": "session-ui.json",
+    "fleet_tick": 12,
+    "positions": {
+      "R01": [
+        3,
+        4
+      ],
+      "R02": [
+        4,
+        4
+      ]
+    }
+  },
+  "limits": [
+    "Synthetic grid and battery inputs; no measured robot data or physical actuation.",
+    "One-tick reservations may deadlock; checked invariants do not prove general MAPF completeness.",
+    "API timings include proof construction and do not measure controller accuracy.",
+    "Screenshots show the actual narrow browser viewport; no full-page or desktop-width claim."
+  ]
+}
