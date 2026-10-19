@@ -6,11 +6,11 @@
 
 This is a source-informed review for a coursework simulator. It separates current repository facts from recommendations. It is not an adversarial review of the in-progress feature implementation, a physical-robot assessment, or a production-readiness finding.
 
-## Current evidence and constraints
+## Baseline evidence and constraints
 
-The baseline repository already separates the route planner, expert system, and Streamlit integration into importable packages. The module contracts keep the route planner and expert system independently usable; the UI adapts their results. The current dependency files pin Streamlit and pytest. The project runs from a flat repository layout with **pythonpath = .** in **pytest.ini**.
+The baseline repository already separated the route planner, expert system, and Streamlit integration into importable packages. The module contracts keep the route planner and expert system independently usable; the UI adapts their results. The dependency files pin Streamlit and pytest. The project runs from a flat repository layout with **pythonpath = .** in **pytest.ini**.
 
-The existing app has **Route planner**, **Diagnostics**, and **Evidence & methods** tabs. Its integration tests select controls mainly by stable widget keys and assert session/planner persistence, one planner initialization, and no state mutation on invalid or gated movement. They do not select a tab by index. Keep existing control keys and tab order, then append the two new tabs. Streamlit renders each tabs body on reruns, so tab rendering should not create or advance simulations; persistent state belongs in distinct session-state entries and should change only after explicit actions.
+The baseline app had **Route planner**, **Diagnostics**, and **Evidence & methods** tabs. Its integration tests select controls mainly by stable widget keys and assert session/planner persistence, one planner initialization, and no state mutation on invalid or gated movement. They do not select a tab by index. The extension preserves those controls and appends **Fleet coordination** and **Fuzzy speed control**. Streamlit renders each tab's body on reruns, so tab rendering must not create or advance simulations; persistent state belongs in distinct session-state entries and changes only after explicit actions.
 
 The present diagnostic gate fails closed: movement is allowed only when the adapter is ready, the result status is **ok**, recommendations have the validated shape, and none requests **pause_robot**. The gate pauses movement while leaving planning and map edits available. The session API also rejects a disallowed move before consuming its event ID. These are useful contracts to preserve.
 
@@ -32,6 +32,10 @@ These module recommendations are proposals, not claims that every system must us
 
 The review led to a four-method extension. The choices below distinguish source
 capabilities from this repository's actual implementation:
+
+The [recorded running evidence](evidence/four-method-2026-10-19/README.md)
+contains actual replays, CI results, raw measurements, browser exports, and
+screenshots. It documents the checked source revision and simulation limits.
 
 | Method | Implemented choice | More advanced option | Evidence needed before adopting it |
 |---|---|---|---|

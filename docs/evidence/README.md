@@ -1,6 +1,13 @@
 # Verified running evidence
 
-The latest [completed-system snapshot](completed-system-2026-10-11/README.md)
+The latest [four-method snapshot](four-method-2026-10-19/README.md)
+records source `92edde2`, 224 passing tests, six successful CI jobs, Mamdani
+and Sugeno fleet replays, actual browser exports, and 121 fixed fuzzy input
+cases with 1,210 raw API timing samples. It adds independent robot agents
+and fuzzy cadence to the existing diagnosis/search demonstration. Physical
+robot validation and the teammate's independent rehearsal remain unverified.
+
+The earlier [completed-system snapshot](completed-system-2026-10-11/README.md)
 records source `118e95b`, 167 passing tests, eight matching external-rule
 diagnostic fixtures, nine successful clean-clone checks, real UI pause/correction
 exports, a silent browser recording, benchmark results, and preserved teammate

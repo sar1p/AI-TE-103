@@ -189,6 +189,12 @@ planner. Exports include the raw inputs and knowledge-base provenance/hash.
 Verified running results, source metadata, real screenshots, and clean-clone
 checks are in [docs/evidence/](docs/evidence/README.md).
 
+The [four-method snapshot](docs/evidence/four-method-2026-10-19/README.md)
+records 224 passing tests, six successful CI jobs, both integrated fleet replays,
+121 fuzzy input cases, raw API timing samples, and actual UI exports.
+Its timings include explanation construction; its synthetic scenarios do not
+validate physical robot behavior or controller accuracy.
+
 The [completed-system snapshot](docs/evidence/completed-system-2026-10-11/README.md)
 records 167 passing tests, eight matching diagnostic fixtures, an actual
 pause/correction browser demo, and a silent screen recording from a clean clone.

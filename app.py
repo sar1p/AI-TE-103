@@ -495,13 +495,13 @@ with evidence_tab:
             metadata["knowledge_base"] = None
     st.subheader("Operating data")
     st.write(
-        "Download the current map, applied events, route results, planning metrics, "
-        "diagnostic input and result, gate state, and source metadata."
+        "Download route results, diagnostic inputs and traces, fleet positions and "
+        "messages, both fuzzy calculations, gate states, and source metadata."
     )
     payload = {
         "metadata": metadata,
         **session.to_dict(),
-        "scope": "route planning with observation-based diagnostics",
+        "scope": "route planning, observation-based diagnostics, cooperative agents, and fuzzy control",
         "diagnostics": {
             "adapter_status": diagnostic.status,
             "result": diagnostic.result,
